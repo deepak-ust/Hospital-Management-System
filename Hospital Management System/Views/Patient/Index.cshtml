@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <div class="overflow:auto tbl" >
+      
+    <a class="btn btn-success" href="/Patient/Create">Add new patient</a>
+    </div>
+
+    <div class="overflow:auto tbl">
+
+        <table id="PatientTable" class="display table-bordered">
+
+            <thead class="hd">
+
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Date</th>
+                    <th>In-Patient</th>
+                    <th>Action</th>
+
+
+
+                </tr>
+
+            </thead>
+
+
+        </table>
+
+    </div>
+
+
+    <div class="container body-content">
+
+
+    </div>
+    <script>
+
+        $(document).ready(function () {
+
+            $('#PatientTable').DataTable(
+
+                {
+                    "processing": true,
+                    "serverSide": true,
+                    "filter": true,
+                    "bInfo": false,
+                    
+
+                    "ajax": {
+
+                        "url": "/Patient/PatientData",
+
+                        "type": "POST",
+
+                        "datatype": "json"
+
+                    },
+                    
+
+                    "columns": [
+                        
+                        { "data": "Name" },
+                        { "data": "Age" },
+                        { "data": "Gender" },
+                        {
+                            "data": "dateTime",
+                            "type": "DateTime",
+                            "render": function (value) {
+                                if (value === null) return "";
+
+                                var pattern = /Date\(([^)]+)\)/;
+                                var results = pattern.exec(value);
+                                var dt = new Date(parseFloat(results[1]));
+
+                                return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+                            }
+                        },
+                        {
+                            "data": "InPatient",
+                            "type": "bool",
+                            "render": function (value) {
+                                if (value === true) return "Yes";
+                                else return "No";
+                            }
+                        },
+
+                        {
+                            "data": null,
+                            "render": function (patient) {
+                                return ('<div class="col-md-4"><a class="btn btn-info" href="/Patient/Edit/' + patient.Id + '">Edit</a> </div> <a class="btn btn-danger" href="/Patient/Delete/' + patient.Id + '">Delete </a> ');
+                            }
+                        },
+                    ]
+
+                });
+
+        });
+
+    </script>
+    <div class="dt"><i>Updated data as on: @DateTime.Now  </i></div>
+
+</body>
+
+</html>
+

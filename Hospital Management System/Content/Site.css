@@ -1,0 +1,43 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url('../images/pexels-constantin-dorin-adrian-3611882.jpg');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size:auto;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.tbl {
+    padding-left: 50px;
+    padding-top: 60px;
+    margin-right: 50px;
+}
+.dark-mode {
+    background-image:none;
+    background-color: gray;
+    color: black;
+}
+.dt {
+    padding-left: 900px;
+    padding-top: 30px
+}
+.hd{
+    background-color:white;
+}
+.msg{
+    color:green;
+}
+
+
+

@@ -1,0 +1,8 @@
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.dll
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.pdb
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.pdb

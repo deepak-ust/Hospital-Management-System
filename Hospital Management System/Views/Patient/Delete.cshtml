@@ -1,0 +1,73 @@
+﻿@model HospitalManagementLibrary.PatientModel
+
+<div>
+
+    <hr />
+    <div class="alert alert-danger">
+        <h4>  <strong> Delete patient record?  </strong></h4>
+    </div>
+    <br />
+    <br />
+
+    <dl class="dl-horizontal">
+        <dt>
+            Patient ID :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            Date :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateTime)
+        </dd>
+
+        <dt>
+            In-Patient :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InPatient)
+        </dd>
+
+
+
+    </dl>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+             @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
