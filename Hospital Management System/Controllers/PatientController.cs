@@ -33,7 +33,7 @@ namespace Hospital_Management_System.Controllers
                 if (ModelState.IsValid)
                 {
                     PatientDBHandle pdb = new PatientDBHandle();
-                    if (pdb.AddPatient(pmodel))
+                    if (pdb.UpdateDetails(pmodel))
                     {
                         ViewBag.Message = "Patient Details Added Successfully";
                         ModelState.Clear();

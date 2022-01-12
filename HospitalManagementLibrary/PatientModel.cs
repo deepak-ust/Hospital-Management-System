@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementLibrary
 {
+    //public enum operations { Add,Edit,Delete}
     public class PatientModel
     {
         [Display(Name = "Id")]

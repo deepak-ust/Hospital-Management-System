@@ -9,41 +9,19 @@ namespace HospitalManagementLibrary
    public class PatientDBHandle
     {
         private SqlConnection con;
-        private void connection()
+        private void Connection()
         {
             string constring = "Data Source=LAPTOP-5IQ1TLRU;Initial Catalog=Patients;Integrated Security=True";
             con = new SqlConnection(constring);
         }
 
-        //Add new patient
-        public bool AddPatient(PatientModel pmodel)
-        {
-            connection();
-            SqlCommand cmd = new SqlCommand("AddNewPatient", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@Name", pmodel.Name);
-            cmd.Parameters.AddWithValue("@Age", pmodel.Age);
-            cmd.Parameters.AddWithValue("@Gender", pmodel.Gender);
-            cmd.Parameters.AddWithValue("@dateTime", pmodel.dateTime);
-            cmd.Parameters.AddWithValue("@InPatient", pmodel.InPatient);
-            cmd.Parameters.AddWithValue("@Deleted", pmodel.Deleted);
-
-            con.Open();
-            int i = cmd.ExecuteNonQuery();
-            con.Close();
-
-            if (i >= 1)
-                return true;
-            else
-                return false;
-        }
+        
 
         //View patient details
         public List<PatientModel> GetPatient(int pageIndex,int pageSize, string searchValue)
         {
-            
-            connection();
+
+            Connection();
             List<PatientModel> patientlist = new List<PatientModel>();
 
             SqlCommand cmd = new SqlCommand("GetPatients", con);
@@ -80,10 +58,10 @@ namespace HospitalManagementLibrary
             return patientlist;
         }
 
-        //Update patient details
+        //Update or add patient details
         public bool UpdateDetails(PatientModel pmodel)
         {
-            connection();
+            Connection();
             SqlCommand cmd = new SqlCommand("UpdatePatientDetails", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -108,7 +86,7 @@ namespace HospitalManagementLibrary
         //Delete patient details
         public bool DeletePatient(int id)
         {
-            connection();
+            Connection();
             SqlCommand cmd = new SqlCommand("DeletePatient", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -128,7 +106,7 @@ namespace HospitalManagementLibrary
         public PatientModel GetById(int id)
         {
 
-            connection();
+            Connection();
             PatientModel pmodel = new PatientModel();
 
             SqlCommand cmd = new SqlCommand("GetById", con);

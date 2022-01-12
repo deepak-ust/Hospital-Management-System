@@ -45,7 +45,7 @@ namespace HospitalManagementApi.Controllers
             try
             {
                 PatientDBHandle handle = new PatientDBHandle();
-                handle.AddPatient(patient);
+                handle.UpdateDetails(patient);
                 return Created("","Created successfully");
 
             }
