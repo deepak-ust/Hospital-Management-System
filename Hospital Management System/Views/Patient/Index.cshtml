@@ -1,61 +1,47 @@
-﻿<!DOCTYPE html>
+﻿@Html.Partial("_Update")
+@Html.Partial("_Delete")
+<div class="overflow:auto tbl">
 
-<html>
+    <button type="button" id="create" class="btn btn-success btn-rounded mb-4" onClick="addPatient(0)">Add new patient</button>
+</div>
 
-<head>
-</head>
+<div class="overflow:auto tbl">
+    <table id="PatientTable" class="display table-bordered">
+        <thead class="hd">
 
-<body>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Date</th>
+                <th>In-Patient</th>
+                <th>Action</th>
 
-    <div class="overflow:auto tbl" >
-      
-    <button type="button" class="btn btn-success btn-rounded mb-4" data-toggle="modal" data-target="#modalForm" data-url="Url.Action("Create")">Add new patient</button>
-    </div>
+            </tr>
+        </thead>
+    </table>
+</div>
 
-    <div class="overflow:auto tbl">
-
-        <table id="PatientTable" class="display table-bordered">
-
-            <thead class="hd">
-
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Date</th>
-                    <th>In-Patient</th>
-                    <th>Action</th>
-
-
-
-                </tr>
-
-            </thead>
-
-
-        </table>
-
-    </div>
-
-
-    <div class="container body-content">
-
-
-    </div>
-    <script>
+<script>
 
         $(document).ready(function () {
-
+            
             $('#PatientTable').DataTable(
 
                 {
-                    "processing": true,
+                    "ordering":false,
                     "serverSide": true,
                     "filter": true,
                     "bInfo": false,
 
-                    
-
+                    columnDefs: [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        }
+                    ],
                     "ajax": {
 
                         "url": "/Patient/PatientData",
@@ -65,16 +51,26 @@
                         "datatype": "json"
 
                     },
-                    
+
 
                     "columns": [
-                        
-                        { "data": "Name" },
-                        { "data": "Age" },
-                        { "data": "Gender" },
+                        { "data": "Id" },
+                        {
+                            "data": "Name",
+                            "width": "20%"
+                        },
+                        {
+                            "data": "Age",
+                            "width": "5%"
+                        },
+                        {
+                            "data": "Gender",
+                            "width": "10%"
+                        },
                         {
                             "data": "dateTime",
                             "type": "DateTime",
+                            "width": "20%",
                             "render": function (value) {
                                 if (value === null) return "";
 
@@ -87,6 +83,7 @@
                         },
                         {
                             "data": "InPatient",
+                            "width": "15%",
                             "type": "bool",
                             "render": function (value) {
                                 if (value === true) return "Yes";
@@ -95,21 +92,134 @@
                         },
 
                         {
-                            "data": null,
-                            "render": function (patient) {
-                                return ('<div class="col-md-4"><a class="btn btn-info" href="/Patient/Edit/' + patient.Id + '">Edit</a> </div> <a class="btn btn-danger" href="/Patient/Delete/' + patient.Id + '">Delete </a> ');
+                            "data": "Id",
+                            "width": "20%",
+                            "render": function (id) {
+                                return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="viewPatient(' + id + ')">View</a> </div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deletePatient(' + id +')">Delete </a></div> ');
                             }
                         },
                     ]
 
                 });
-
         });
+    
+    function addPatient(id) {
+        $("#RegForm")[0].reset();
+        $("#ModalTitle").html("Add Patient Details");
+        $("#saveRecord").html("Add");
+        $("#modalForm").modal();
+        enable();
+        document.getElementById("editRecord").disabled = true;
+        
+    }
+    function editPatient(id) {
+        var url = "/Patient/Get/" + id;
+        $("#ModalTitle").html("Edit Patient Details");
+        $("#saveRecord").html("Save");
+        document.getElementById("editRecord").disabled = true;
+        $("#modalForm").modal();
+        enable();
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#id").val(obj.Id);
+                $("#name").val(obj.Name);
+                $("#age").val(obj.Age);
+                $("#gender").val(obj.Gender);
+                $("#date").prop('value', obj.dateTime.getDate() + "-" + obj.dateTime.getMonth() + 1 + "-" + obj.dateTime.getFullYear());
+                $("#inpatient").prop('checked', obj.InPatient);
+                
+            }
+        })
+        
 
-    </script>
-    <div class="dt"><i>Updated data as on: @DateTime.Now  </i></div>
+    }
+    function viewPatient(id) {
+        var url = "/Patient/Get/" + id;
+        $("#ModalTitle").html("View Patient Details");
+        $("#saveRecord").html("Save");
+        document.getElementById("editRecord").disabled = false;
+        $("#modalForm").modal();
+        disable();
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#id").val(obj.Id);
+                $("#name").val(obj.Name);
+                $("#age").val(obj.Age);
+                $("#gender").val(obj.Gender);
+                $("#date").prop('value', obj.dateTime.getDate() + "-" + obj.dateTime.getMonth() + 1 + "-" + obj.dateTime.getFullYear());
+                $("#inpatient").prop('checked', obj.InPatient);
+                
+            }
+        })
+    }
+    function deletePatient(id) {
+        var url = "/Patient/Get/"+ id;
+        $("#deleteConfirm").modal();
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#id").val(obj.Id);
+                $("#name").val(obj.Name);
+            }
+        })
+    }
+    function confirmDelete(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Patient/Delete/"+id,
+            
+            success: function () {
+                $('#PatientTable').DataTable().ajax.reload();
+                $("#deleteConfirm").modal("hide");
+                $('#deleteConfirm form')[0].reset();
+            }
+        });
+        
+    }
 
-</body>
+    function disable() {
+        document.getElementById("name").disabled = true;
+        document.getElementById("age").disabled = true;
+        document.getElementById("gender").disabled = true;
+        document.getElementById("date").disabled = true;
+        document.getElementById("inpatient").disabled = true;
+        document.getElementById("saveRecord").disabled = true;
+    }
+    function enable() {
+        document.getElementById("name").disabled = false;
+        document.getElementById("age").disabled = false;
+        document.getElementById("gender").disabled = false;
+        document.getElementById("date").disabled = false;
+        document.getElementById("inpatient").disabled = false;
+        document.getElementById("saveRecord").disabled = false;
+    }
 
-</html>
+    $("#saveRecord").click(function () {
+
+        var myFormData = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "/Patient/Update",
+            data: myFormData,
+            success: function () {
+                $('#PatientTable').DataTable().ajax.reload();
+                $("#modalForm").modal("hide");
+                $('#modalForm form')[0].reset();
+            }
+        });
+        return false;
+    })
+        
+</script>
+
+
+
 

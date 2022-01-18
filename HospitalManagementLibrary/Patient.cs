@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementLibrary
 {
-    public enum operations { Add,Edit,Delete}
-    public class PatientModel
+    public class Patient
     {
         [Display(Name = "Id")]
         public int Id { get; set; }
@@ -19,7 +18,7 @@ namespace HospitalManagementLibrary
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Age is required")]
-        [Range(0, 120, ErrorMessage = "Not valid")]
+        [Range(1, 120, ErrorMessage = "Not valid")]
         public int Age { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]

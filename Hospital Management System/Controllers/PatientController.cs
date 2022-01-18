@@ -1,4 +1,5 @@
 ﻿using HospitalManagementLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,99 +17,60 @@ namespace Hospital_Management_System.Controllers
             return View();
         }
 
-       
 
-        // GET: Patient/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Patient/Create
+        // POST: Patient/Update
         [HttpPost]
-        public ActionResult Create(PatientModel pmodel)
+        public JsonResult Update(Patient pmodel)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    PatientDBHandle pdb = new PatientDBHandle();
-                    if (pdb.UpdateDetails(pmodel))
-                    {
-                        ViewBag.Message = "Patient Details Added Successfully";
-                        ModelState.Clear();
-                    }
-                    return RedirectToAction("Index");
-                }
-                return View();
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Patient/Edit/5
-        public ActionResult Edit(int id)
-        {
-            PatientDBHandle pdb = new PatientDBHandle();
-            return View(pdb.GetById(id));
-        }
-
-        // POST: Patient/Edit/5
-        [HttpPost]
-        public ActionResult Edit(PatientModel pmodel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    PatientDBHandle pdb = new PatientDBHandle();
-                    if (pdb.UpdateDetails(pmodel))
-                    {
-                        ViewBag.Message = "Patient Details Updated Successfully";
-                        ModelState.Clear();
-                    }
-                }
-                 return View();
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        // GET: Patient/Delete/5
-        public ActionResult Delete(int id)
-        {
-            PatientDBHandle pdb = new PatientDBHandle();
-            return View(pdb.GetById(id));
-        }
-        // POST: Patient/Delete/5
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
+            bool result = false;
             try
             {
                 PatientDBHandle pdb = new PatientDBHandle();
-                if (pdb.DeletePatient(id))
-                {
-                    ViewBag.AlertMsg = "Patient Deleted Successfully";
-                }
-                return RedirectToAction("Index");
+                result = pdb.UpdateDetails(pmodel);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                throw ex;
             }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Patient/Get/5
+        public JsonResult Get(int id)
+        {
+            PatientDBHandle pdb = new PatientDBHandle();
+            Patient model = pdb.GetById(id);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
+
+        
+        
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            bool result = false;
+            try
+            {
+                PatientDBHandle pdb = new PatientDBHandle();
+                result = pdb.DeletePatient(id);
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
        //GET: Patient/PatientData
         [HttpPost]
         public ActionResult PatientData()
-
         {
-
             try
             {
                 PatientDBHandle pdb = new PatientDBHandle();
@@ -116,14 +78,13 @@ namespace Hospital_Management_System.Controllers
                 var start = Convert.ToInt32(Request.Form["start"]);
                 var length = Convert.ToInt32(Request.Form["length"]);
                 var searchValue = Request.Form["search[value]"];
-                List<PatientModel> patients = pdb.GetPatient(start, length, searchValue);
+                List<Patient> patients = pdb.GetPatient(start, length, searchValue);
                 return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
                 return View();
             }
-
         }
 
 

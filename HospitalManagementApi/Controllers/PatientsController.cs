@@ -26,12 +26,12 @@ namespace HospitalManagementApi.Controllers
         }
         [HttpGet]
         [ActionName("GetPatient")]
-        public IEnumerable<PatientModel> GetAllPatients(int pageIndex, int pageSize, string searchBy)
+        public IEnumerable<Patient> GetAllPatients(int pageIndex, int pageSize, string searchBy)
         {
             try
             {
                 PatientDBHandle handle = new PatientDBHandle();
-                List<PatientModel> list = (handle.GetPatient(pageIndex, pageSize, searchBy));
+                List<Patient> list = (handle.GetPatient(pageIndex, pageSize, searchBy));
                 return list;
             }
             catch
@@ -40,7 +40,7 @@ namespace HospitalManagementApi.Controllers
             }
         }
         [HttpPost]
-        public IHttpActionResult AddPatient(PatientModel patient)
+        public IHttpActionResult AddPatient(Patient patient)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace HospitalManagementApi.Controllers
         }
         [HttpPut]
         [ActionName("UpdatePatient")]
-        public IHttpActionResult UpdatePatientByID(PatientModel patient)
+        public IHttpActionResult UpdatePatientByID(Patient patient)
         {
             try
             {

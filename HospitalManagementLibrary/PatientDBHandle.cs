@@ -18,11 +18,11 @@ namespace HospitalManagementLibrary
         
 
         //View patient details
-        public List<PatientModel> GetPatient(int pageIndex,int pageSize, string searchValue)
+        public List<Patient> GetPatient(int pageIndex,int pageSize, string searchValue)
         {
 
             Connection();
-            List<PatientModel> patientlist = new List<PatientModel>();
+            List<Patient> patientlist = new List<Patient>();
 
             SqlCommand cmd = new SqlCommand("GetPatients", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -43,7 +43,7 @@ namespace HospitalManagementLibrary
                 foreach (DataRow dr in dt.Rows)
                 {
                     patientlist.Add(
-                        new PatientModel
+                        new Patient
                         {
                             Id = Convert.ToInt32(dr["Id"]),
                             Name = Convert.ToString(dr["Name"]),
@@ -59,7 +59,7 @@ namespace HospitalManagementLibrary
         }
 
         //Update or add patient details
-        public bool UpdateDetails(PatientModel pmodel)
+        public bool UpdateDetails(Patient pmodel)
         {
             Connection();
             SqlCommand cmd = new SqlCommand("UpdatePatientDetails", con);
@@ -103,11 +103,11 @@ namespace HospitalManagementLibrary
         }
 
         //Get patient by id
-        public PatientModel GetById(int id)
+        public Patient GetById(int id)
         {
 
             Connection();
-            PatientModel pmodel = new PatientModel();
+            Patient pmodel = new Patient();
 
             SqlCommand cmd = new SqlCommand("GetById", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -132,6 +132,7 @@ namespace HospitalManagementLibrary
                 pmodel.InPatient = Convert.ToBoolean(dt.Rows[0]["InPatient"]);
                 pmodel.Deleted = Convert.ToBoolean(dt.Rows[0]["Deleted"]);
             }
+
             return pmodel;
         }
 

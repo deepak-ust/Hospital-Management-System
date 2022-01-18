@@ -45,9 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\Operations.cs" />
     <Compile Include="GenderValidation.cs" />
     <Compile Include="PatientDBHandle.cs" />
-    <Compile Include="PatientModel.cs" />
+    <Compile Include="Patient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
