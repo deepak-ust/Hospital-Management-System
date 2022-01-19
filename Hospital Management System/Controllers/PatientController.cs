@@ -20,19 +20,27 @@ namespace Hospital_Management_System.Controllers
 
         // POST: Patient/Update
         [HttpPost]
-        public JsonResult Update(Patient pmodel)
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(Patient pmodel)
         {
             bool result = false;
+            PatientDBHandle pdb = new PatientDBHandle();
             try
             {
-                PatientDBHandle pdb = new PatientDBHandle();
-                result = pdb.UpdateDetails(pmodel);
+                if (ModelState.IsValid)
+                {
+                    result = pdb.UpdateDetails(pmodel);
+                    ModelState.Clear();
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return View();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            
         }
 
         // GET: Patient/Get/5

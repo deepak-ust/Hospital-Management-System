@@ -10,18 +10,17 @@
                 </button>
             </div>
             <div class="modal-body mx-3" id="deletebody">
-                <form id="RegForm">
-                    <fieldset id="SubmitForm">
+                <form>
+                    <fieldset>
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
                             <div class="form-horizontal">
 
-                                <hr />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.Id, new { @id = "id" })
                                 
-                                Are you sure you want to delete this record?
+                            <h5>Are you sure you want to delete <text id="patientName"></text>'s record?</h5>
                                 
 
                             </div>
@@ -35,6 +34,5 @@
                 </form>
             </div>
         </div>
-
     </div>
 </div>

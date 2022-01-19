@@ -1,14 +1,12 @@
 ﻿@Html.Partial("_Update")
 @Html.Partial("_Delete")
 <div class="overflow:auto tbl">
-
     <button type="button" id="create" class="btn btn-success btn-rounded mb-4" onClick="addPatient(0)">Add new patient</button>
 </div>
 
 <div class="overflow:auto tbl">
     <table id="PatientTable" class="display table-bordered">
         <thead class="hd">
-
             <tr>
                 <th>Id</th>
                 <th>Name</th>
@@ -17,7 +15,6 @@
                 <th>Date</th>
                 <th>In-Patient</th>
                 <th>Action</th>
-
             </tr>
         </thead>
     </table>
@@ -25,84 +22,82 @@
 
 <script>
 
-        $(document).ready(function () {
-            
-            $('#PatientTable').DataTable(
+    $(document).ready(function () {
 
-                {
-                    "ordering":false,
-                    "serverSide": true,
-                    "filter": true,
-                    "bInfo": false,
+        $('#PatientTable').DataTable(
 
-                    columnDefs: [
-                        {
-                            "targets": [0],
-                            "visible": false,
-                            "searchable": false
+            {
+                "ordering": false,
+                "serverSide": true,
+                "filter": true,
+                "bInfo": false,
+
+                columnDefs: [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ],
+                "ajax": {
+
+                    "url": "/Patient/PatientData",
+
+                    "type": "POST",
+
+                    "datatype": "json"
+
+                },
+                "columns": [
+                    { "data": "Id" },
+                    {
+                        "data": "Name",
+                        "width": "20%"
+                    },
+                    {
+                        "data": "Age",
+                        "width": "5%"
+                    },
+                    {
+                        "data": "Gender",
+                        "width": "10%"
+                    },
+                    {
+                        "data": "dateTime",
+                        "type": "DateTime",
+                        "width": "20%",
+                        "render": function (value) {
+                            if (value === null) return "";
+
+                            var pattern = /Date\(([^)]+)\)/;
+                            var results = pattern.exec(value);
+                            var dt = new Date(parseFloat(results[1]));
+
+                            return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
                         }
-                    ],
-                    "ajax": {
-
-                        "url": "/Patient/PatientData",
-
-                        "type": "POST",
-
-                        "datatype": "json"
-
+                    },
+                    {
+                        "data": "InPatient",
+                        "width": "15%",
+                        "type": "bool",
+                        "render": function (value) {
+                            if (value === true) return "Yes";
+                            else return "No";
+                        }
                     },
 
+                    {
+                        "data": "Id",
+                        "width": "20%",
+                        "render": function (id) {
+                            return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="viewPatient(' + id + ')">View</a> </div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deletePatient(' + id + ')">Delete </a></div> ');
+                        }
+                    },
+                ]
 
-                    "columns": [
-                        { "data": "Id" },
-                        {
-                            "data": "Name",
-                            "width": "20%"
-                        },
-                        {
-                            "data": "Age",
-                            "width": "5%"
-                        },
-                        {
-                            "data": "Gender",
-                            "width": "10%"
-                        },
-                        {
-                            "data": "dateTime",
-                            "type": "DateTime",
-                            "width": "20%",
-                            "render": function (value) {
-                                if (value === null) return "";
+            });
+    });
 
-                                var pattern = /Date\(([^)]+)\)/;
-                                var results = pattern.exec(value);
-                                var dt = new Date(parseFloat(results[1]));
-
-                                return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
-                            }
-                        },
-                        {
-                            "data": "InPatient",
-                            "width": "15%",
-                            "type": "bool",
-                            "render": function (value) {
-                                if (value === true) return "Yes";
-                                else return "No";
-                            }
-                        },
-
-                        {
-                            "data": "Id",
-                            "width": "20%",
-                            "render": function (id) {
-                                return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="viewPatient(' + id + ')">View</a> </div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deletePatient(' + id +')">Delete </a></div> ');
-                            }
-                        },
-                    ]
-
-                });
-        });
-    
     function addPatient(id) {
         $("#RegForm")[0].reset();
         $("#ModalTitle").html("Add Patient Details");
@@ -110,7 +105,7 @@
         $("#modalForm").modal();
         enable();
         document.getElementById("editRecord").disabled = true;
-        
+
     }
     function editPatient(id) {
         var url = "/Patient/Get/" + id;
@@ -130,10 +125,10 @@
                 $("#gender").val(obj.Gender);
                 $("#date").prop('value', obj.dateTime.getDate() + "-" + obj.dateTime.getMonth() + 1 + "-" + obj.dateTime.getFullYear());
                 $("#inpatient").prop('checked', obj.InPatient);
-                
+
             }
         })
-        
+
 
     }
     function viewPatient(id) {
@@ -154,12 +149,12 @@
                 $("#gender").val(obj.Gender);
                 $("#date").prop('value', obj.dateTime.getDate() + "-" + obj.dateTime.getMonth() + 1 + "-" + obj.dateTime.getFullYear());
                 $("#inpatient").prop('checked', obj.InPatient);
-                
+
             }
         })
     }
     function deletePatient(id) {
-        var url = "/Patient/Get/"+ id;
+        var url = "/Patient/Get/" + id;
         $("#deleteConfirm").modal();
         $.ajax({
             type: "GET",
@@ -167,22 +162,21 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 $("#id").val(obj.Id);
-                $("#name").val(obj.Name);
+                $("#patientName").html(obj.Name);
             }
         })
     }
     function confirmDelete(id) {
         $.ajax({
             type: "POST",
-            url: "/Patient/Delete/"+id,
-            
+            url: "/Patient/Delete/" + id,
+
             success: function () {
                 $('#PatientTable').DataTable().ajax.reload();
                 $("#deleteConfirm").modal("hide");
-                $('#deleteConfirm form')[0].reset();
             }
         });
-        
+
     }
 
     function disable() {
@@ -217,7 +211,7 @@
         });
         return false;
     })
-        
+
 </script>
 
 

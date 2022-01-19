@@ -10,8 +10,9 @@ namespace HospitalManagementLibrary
 {
     public class Patient
     {
+        //[Required(AllowEmptyStrings =true)]
         [Display(Name = "Id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
         [RegularExpression("[A-Za-z ]{1,30}", ErrorMessage = "Give a proper name")]

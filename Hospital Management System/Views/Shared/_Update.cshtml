@@ -17,13 +17,13 @@
                             @Html.AntiForgeryToken()
                             <div class="form-horizontal">
 
-                                <hr />
+                                <br />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.Id, new { @id = "id" })
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @id = "name", @placeholder="Enter name", @name="name" } })
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @id = "name", @placeholder = "Enter name", @name = "name" } })
                                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control", @id = "age", @placeholder = "Enter age", @name="age" } })
+                                        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control", @id = "age", @placeholder = "Enter age", @name = "age" } })
                                         @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -65,21 +65,21 @@
                                         <span style="margin-right:1px">
                                             @Html.EditorFor(model => model.InPatient, new { htmlAttributes = new { @id = "inpatient" } })
                                         </span><b>In-Patient</b>
-                                            @Html.ValidationMessageFor(model => model.InPatient, "", new { @class = "text-danger" })
-                                        
+                                        @Html.ValidationMessageFor(model => model.InPatient, "", new { @class = "text-danger" })
+
                                     </div>
                                 </div>
 
                             </div>
                         }
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-primary" id="editRecord" onclick="editPatient(' + id + ')">Edit</button>
-                        <button type="submit" class="btn btn-success" id="saveRecord"></button>
-                        <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
 
-                    </div>
                     </fieldset>
                 </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-warning" id="editRecord" onclick="editPatient(' + id + ')">Edit</button>
+                <button type="submit" class="btn btn-success" id="saveRecord"></button>
+                <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
             </div>
         </div>
 
