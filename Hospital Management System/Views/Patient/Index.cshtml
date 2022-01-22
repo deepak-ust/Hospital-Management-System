@@ -1,14 +1,53 @@
-﻿@Html.Partial("_Update")
-@Html.Partial("_Delete")
+﻿<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document" id="mainform">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100"><b id="ModalTitle"></b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3" id="mbody">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-warning" id="editRecord" onclick="operation('Edit',$('#id').val())">Edit</button>
+                <button type="submit" class="btn btn-success" id="saveRecord"></button>
+                <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document" id="deleteform">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold" id="ModalTitle"><b>Delete Patient Record</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3" id="deletebody">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-danger" onclick="confirmDelete($('#deleteid').val())">Confirm</button>
+                <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="overflow:auto tbl">
-    <button type="button" id="create" class="btn btn-success btn-rounded mb-4" onClick="addPatient(0)">Add new patient</button>
+    <button type="button" id="create" class="btn btn-success btn-rounded mb-4" onClick="operation('Add',0)">Add new patient</button>
 </div>
 
 <div class="overflow:auto tbl">
     <table id="PatientTable" class="display table-bordered">
         <thead class="hd">
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Age</th>
                 <th>Gender</th>
@@ -35,7 +74,6 @@
                 columnDefs: [
                     {
                         "targets": [0],
-                        "visible": false,
                         "searchable": false
                     }
                 ],
@@ -49,7 +87,12 @@
 
                 },
                 "columns": [
-                    { "data": "Id" },
+                    {
+                        "data": "Id",
+                        "render": function (id) {
+                            return ('HM' + id + 'S');
+                        }
+                    },
                     {
                         "data": "Name",
                         "width": "20%"
@@ -63,7 +106,7 @@
                         "width": "10%"
                     },
                     {
-                        "data": "dateTime",
+                        "data": "Date",
                         "type": "DateTime",
                         "width": "20%",
                         "render": function (value) {
@@ -78,7 +121,7 @@
                     },
                     {
                         "data": "InPatient",
-                        "width": "15%",
+                        "width": "10%",
                         "type": "bool",
                         "render": function (value) {
                             if (value === true) return "Yes";
@@ -90,79 +133,52 @@
                         "data": "Id",
                         "width": "20%",
                         "render": function (id) {
-                            return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="viewPatient(' + id + ')">View</a> </div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deletePatient(' + id + ')">Delete </a></div> ');
+                            return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="operation(`View`,' + id + ')">View</a> </div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deletePatient(' + id + ')">Delete </a></div> ');
                         }
                     },
                 ]
 
             });
     });
-
-    function addPatient(id) {
-        $("#RegForm")[0].reset();
-        $("#ModalTitle").html("Add Patient Details");
-        $("#saveRecord").html("Add");
+    function operation(operation, id) {
+        if (operation == "Add") {
+            $("#ModalTitle").html("Add Patient Details");
+            $("#saveRecord").html("Add");
+            document.getElementById("saveRecord").disabled = false;
+            document.getElementById("editRecord").disabled = true;
+        }
+        else if (operation == "Edit") {
+            $("#ModalTitle").html("Edit Patient Details");
+            $("#saveRecord").html("Save");
+            document.getElementById("saveRecord").disabled = false;
+            document.getElementById("editRecord").disabled = true;
+        }
+        else {
+            $("#ModalTitle").html("View Patient Details");
+            $("#saveRecord").html("Save");
+            document.getElementById("saveRecord").disabled = true;
+            document.getElementById("editRecord").disabled = false;
+        }
+        var url = "/Patient/Get?operation=" + operation + "&id=" + id;
+        removeValidation();
         $("#modalForm").modal();
-        enable();
-        document.getElementById("editRecord").disabled = true;
-
-    }
-    function editPatient(id) {
-        var url = "/Patient/Get/" + id;
-        $("#ModalTitle").html("Edit Patient Details");
-        $("#saveRecord").html("Save");
-        document.getElementById("editRecord").disabled = true;
-        $("#modalForm").modal();
-        enable();
         $.ajax({
             type: "GET",
             url: url,
             success: function (data) {
-                var obj = JSON.parse(data);
-                $("#id").val(obj.Id);
-                $("#name").val(obj.Name);
-                $("#age").val(obj.Age);
-                $("#gender").val(obj.Gender);
-                $("#date").prop('value', obj.dateTime.getDate() + "-" + obj.dateTime.getMonth() + 1 + "-" + obj.dateTime.getFullYear());
-                $("#inpatient").prop('checked', obj.InPatient);
-
-            }
-        })
-
-
-    }
-    function viewPatient(id) {
-        var url = "/Patient/Get/" + id;
-        $("#ModalTitle").html("View Patient Details");
-        $("#saveRecord").html("Save");
-        document.getElementById("editRecord").disabled = false;
-        $("#modalForm").modal();
-        disable();
-        $.ajax({
-            type: "GET",
-            url: url,
-            success: function (data) {
-                var obj = JSON.parse(data);
-                $("#id").val(obj.Id);
-                $("#name").val(obj.Name);
-                $("#age").val(obj.Age);
-                $("#gender").val(obj.Gender);
-                $("#date").prop('value', obj.dateTime.getDate() + "-" + obj.dateTime.getMonth() + 1 + "-" + obj.dateTime.getFullYear());
-                $("#inpatient").prop('checked', obj.InPatient);
-
+                $('#mbody').html(data);
             }
         })
     }
+
     function deletePatient(id) {
-        var url = "/Patient/Get/" + id;
+        var url = "/Patient/Get?operation=Delete&id=" + id;
         $("#deleteConfirm").modal();
         $.ajax({
             type: "GET",
             url: url,
             success: function (data) {
-                var obj = JSON.parse(data);
-                $("#id").val(obj.Id);
-                $("#patientName").html(obj.Name);
+                $('#deletebody').html(data);
             }
         })
     }
@@ -176,28 +192,10 @@
                 $("#deleteConfirm").modal("hide");
             }
         });
-
-    }
-
-    function disable() {
-        document.getElementById("name").disabled = true;
-        document.getElementById("age").disabled = true;
-        document.getElementById("gender").disabled = true;
-        document.getElementById("date").disabled = true;
-        document.getElementById("inpatient").disabled = true;
-        document.getElementById("saveRecord").disabled = true;
-    }
-    function enable() {
-        document.getElementById("name").disabled = false;
-        document.getElementById("age").disabled = false;
-        document.getElementById("gender").disabled = false;
-        document.getElementById("date").disabled = false;
-        document.getElementById("inpatient").disabled = false;
-        document.getElementById("saveRecord").disabled = false;
     }
 
     $("#saveRecord").click(function () {
-
+        validation();
         var myFormData = $("#SubmitForm").serialize();
         $.ajax({
             type: "POST",
@@ -211,9 +209,38 @@
         });
         return false;
     })
-
+    function validation() {
+        var letters = /^[A-za-z]+$/;
+        var dateFormat = /^(0?[1-9]|[1-2][0-9]|3[01])[\/-](0?[1-9]|1[0-2])[\/-]\d{4}$/;
+        if (!$("#name").val().match(letters) || $("#name").val().length >= 31) {
+            $("#namevalidation").html("Give proper name");
+        }
+        else {
+            $("#namevalidation").html("");
+        }
+        if ($("#age").val() == 0 || $("#age").val() >= 121) {
+            $("#agevalidation").html("Give proper age");
+        }
+        else {
+            $("#agevalidation").html("");
+        }
+        if ($("#gender").val() == "Select") {
+            $("#gendervalidation").html("Select gender");
+        }
+        else {
+            $("#gendervalidation").html("");
+        }
+        if (!$("#date").val().match(dateFormat)) {
+            $("#datevalidation").html("Enter proper date");
+        }
+        else {
+            $("#datevalidation").html("");
+        }
+    }
+    function removeValidation() {
+        $("#namevalidation").html("");
+        $("#agevalidation").html("");
+        $("#gendervalidation").html("");
+        $("#datevalidation").html("");
+    }
 </script>
-
-
-
-

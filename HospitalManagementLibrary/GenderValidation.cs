@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HospitalManagementLibrary
 {
-    class GenderValidation:ValidationAttribute
+    public class GenderValidation:ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

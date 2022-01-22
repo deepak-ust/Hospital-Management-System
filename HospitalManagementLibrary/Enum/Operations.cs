@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementLibrary.Enum
 {
-    public class Operations
+    public enum Operations
     {
-        public enum operation { Add, Edit, Delete}
+       Add,
+       View,
+       Edit,
+       Delete
     }
 }

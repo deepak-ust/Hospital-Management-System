@@ -1,8 +1,8 @@
-﻿using HospitalManagementLibrary;
-using Newtonsoft.Json;
+﻿using Hospital_Management_System.Models;
+using Hospital_Management_System.DAL;
+using HospitalManagementLibrary.Enum;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 
@@ -17,19 +17,19 @@ namespace Hospital_Management_System.Controllers
             return View();
         }
 
-
+       
         // POST: Patient/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(Patient pmodel)
+        public ActionResult Update(Patient objPatient)
         {
             bool result = false;
-            PatientDBHandle pdb = new PatientDBHandle();
+            DBHelper helper = new DBHelper();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    result = pdb.UpdateDetails(pmodel);
+                    result = helper.UpdateDetails(objPatient);
                     ModelState.Clear();
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
@@ -44,16 +44,41 @@ namespace Hospital_Management_System.Controllers
         }
 
         // GET: Patient/Get/5
-        public JsonResult Get(int id)
+        public ActionResult Get(string operation, int id)
         {
-            PatientDBHandle pdb = new PatientDBHandle();
-            Patient model = pdb.GetById(id);
-            string value = string.Empty;
-            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            if (id > 0)
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
-            return Json(value, JsonRequestBehavior.AllowGet);
+                DBHelper helper = new DBHelper();
+                Patient objPatient = helper.GetById(id);
+                ViewData["Gender"] = objPatient.Gender;
+                if (operation == Operations.View.ToString())
+                {
+                    objPatient.ActionType = Operations.View;
+                    return PartialView("_Operations", objPatient);
+                }
+                else if (operation == Operations.Edit.ToString())
+                {
+                    objPatient.ActionType = Operations.Edit;
+                    return PartialView("_Operations", objPatient);
+                }
+                else if (operation == Operations.Delete.ToString())
+                {
+                    objPatient.ActionType = Operations.Edit;
+                    ViewData["Name"] = objPatient.Name;
+                    return PartialView("_Delete", objPatient);
+                }
+                else
+                    return View();
+            }
+            else
+            {
+                Patient objPatient = new Patient
+                {
+                    ActionType = Operations.Add
+                };
+                ViewData["Gender"] = "Select";
+                return PartialView("_Operations", objPatient);
+            }
         }
 
         
@@ -64,8 +89,8 @@ namespace Hospital_Management_System.Controllers
             bool result = false;
             try
             {
-                PatientDBHandle pdb = new PatientDBHandle();
-                result = pdb.DeletePatient(id);
+                DBHelper helper = new DBHelper();
+                result = helper.DeletePatient(id);
                 
             }
             catch (Exception ex)
@@ -81,12 +106,12 @@ namespace Hospital_Management_System.Controllers
         {
             try
             {
-                PatientDBHandle pdb = new PatientDBHandle();
+                DBHelper helper = new DBHelper();
 
                 var start = Convert.ToInt32(Request.Form["start"]);
                 var length = Convert.ToInt32(Request.Form["length"]);
                 var searchValue = Request.Form["search[value]"];
-                List<Patient> patients = pdb.GetPatient(start, length, searchValue);
+                List<Patient> patients = helper.GetPatient(start, length, searchValue);
                 return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
             }
             catch

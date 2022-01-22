@@ -110,10 +110,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="DAL\DBHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Validators\GenderValidation.cs" />
+    <Compile Include="Models\Patient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -122,8 +123,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
-    <Content Include="Views\Shared\_Update.cshtml" />
-    <Content Include="Views\Shared\_Delete.cshtml" />
+    <Content Include="Views\Patient\_Operations.cshtml" />
+    <Content Include="Views\Patient\_Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

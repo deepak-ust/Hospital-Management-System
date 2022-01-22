@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital Management System"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagementLibrary", "HospitalManagementLibrary\HospitalManagementLibrary.csproj", "{F3D506D5-6C52-4FD5-8736-7A172062EDAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagementApi", "HospitalManagementApi\HospitalManagementApi.csproj", "{2E1E5717-3615-4167-92D6-7D8A3BAD5FBF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{F3D506D5-6C52-4FD5-8736-7A172062EDAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3D506D5-6C52-4FD5-8736-7A172062EDAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3D506D5-6C52-4FD5-8736-7A172062EDAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E1E5717-3615-4167-92D6-7D8A3BAD5FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E1E5717-3615-4167-92D6-7D8A3BAD5FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E1E5717-3615-4167-92D6-7D8A3BAD5FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E1E5717-3615-4167-92D6-7D8A3BAD5FBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
