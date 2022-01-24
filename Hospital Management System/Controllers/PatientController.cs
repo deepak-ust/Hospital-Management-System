@@ -17,7 +17,7 @@ namespace Hospital_Management_System.Controllers
             return View();
         }
        
-        // POST: Patient/Update/Patient
+        // POST: Patient/Update/obj
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(Patient obj)
@@ -68,6 +68,7 @@ namespace Hospital_Management_System.Controllers
                     ActionType = Operations.Add
                 };
                 ViewData["Gender"] = "Select";
+                ViewData["Date"] = DateTime.Today;
                 return PartialView("_Operations", obj);
             }
         }

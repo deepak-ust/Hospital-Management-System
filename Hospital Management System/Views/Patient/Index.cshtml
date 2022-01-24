@@ -190,7 +190,6 @@
             success: function () {
                 $("#modalForm").modal("hide");
                 $('#PatientTable').DataTable().ajax.reload();
-                $('#modalForm form')[0].reset();
             },
             error: function (error) {
                 validation();
