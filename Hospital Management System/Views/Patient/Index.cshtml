@@ -11,12 +11,11 @@
             <div class="modal-body mx-3" id="mbody">
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn btn-warning" id="editRecord" onclick="operation('Edit',$('#id').val())">Edit</button>
+                <button type="button" class="btn btn-warning" id="editRecord">Edit</button>
                 <button type="submit" class="btn btn-success" id="saveRecord"></button>
                 <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
             </div>
         </div>
-
     </div>
 </div>
 <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
@@ -34,7 +33,6 @@
             <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-danger" onclick="confirmDelete($('#deleteid').val())">Confirm</button>
                 <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
-
             </div>
         </div>
     </div>
@@ -42,7 +40,6 @@
 <div class="overflow:auto tbl">
     <button type="button" id="create" class="btn btn-success btn-rounded mb-4" onClick="operation('Add',0)">Add new patient</button>
 </div>
-
 <div class="overflow:auto tbl">
     <table id="PatientTable" class="display table-bordered">
         <thead class="hd">
@@ -58,19 +55,14 @@
         </thead>
     </table>
 </div>
-
 <script>
-
     $(document).ready(function () {
-
         $('#PatientTable').DataTable(
-
             {
                 "ordering": false,
                 "serverSide": true,
                 "filter": true,
                 "bInfo": false,
-
                 columnDefs: [
                     {
                         "targets": [0],
@@ -111,11 +103,9 @@
                         "width": "20%",
                         "render": function (value) {
                             if (value === null) return "";
-
                             var pattern = /Date\(([^)]+)\)/;
                             var results = pattern.exec(value);
                             var dt = new Date(parseFloat(results[1]));
-
                             return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
                         }
                     },
@@ -140,16 +130,10 @@
 
             });
     });
-    function operation(operation, id) {
-        if (operation == "Add") {
+    function operation(op, id) {
+        if (op == "Add") {
             $("#ModalTitle").html("Add Patient Details");
             $("#saveRecord").html("Add");
-            document.getElementById("saveRecord").disabled = false;
-            document.getElementById("editRecord").disabled = true;
-        }
-        else if (operation == "Edit") {
-            $("#ModalTitle").html("Edit Patient Details");
-            $("#saveRecord").html("Save");
             document.getElementById("saveRecord").disabled = false;
             document.getElementById("editRecord").disabled = true;
         }
@@ -159,18 +143,22 @@
             document.getElementById("saveRecord").disabled = true;
             document.getElementById("editRecord").disabled = false;
         }
-        var url = "/Patient/Get?operation=" + operation + "&id=" + id;
-        removeValidation();
+        var url = "/Patient/Get?operation=" + op + "&id=" + id;
         $("#modalForm").modal();
         $.ajax({
             type: "GET",
             url: url,
             success: function (data) {
                 $('#mbody').html(data);
+                $('#editRecord').click(function () {
+                    $('.disable').attr('disabled', false);
+                    $('#editRecord').attr('disabled', true);
+                    $('#saveRecord').attr('disabled', false);
+                    $('#ModalTitle').html("Edit Patient Details");
+                })
             }
         })
     }
-
     function deletePatient(id) {
         var url = "/Patient/Get?operation=Delete&id=" + id;
         $("#deleteConfirm").modal();
@@ -186,40 +174,47 @@
         $.ajax({
             type: "POST",
             url: "/Patient/Delete/" + id,
-
             success: function () {
                 $('#PatientTable').DataTable().ajax.reload();
                 $("#deleteConfirm").modal("hide");
             }
         });
     }
-
     $("#saveRecord").click(function () {
-        validation();
+        
         var myFormData = $("#SubmitForm").serialize();
         $.ajax({
             type: "POST",
             url: "/Patient/Update",
             data: myFormData,
             success: function () {
-                $('#PatientTable').DataTable().ajax.reload();
                 $("#modalForm").modal("hide");
+                $('#PatientTable').DataTable().ajax.reload();
                 $('#modalForm form')[0].reset();
+            },
+            error: function (error) {
+                validation();
             }
         });
         return false;
     })
     function validation() {
         var letters = /^[A-za-z]+$/;
-        var dateFormat = /^(0?[1-9]|[1-2][0-9]|3[01])[\/-](0?[1-9]|1[0-2])[\/-]\d{4}$/;
-        if (!$("#name").val().match(letters) || $("#name").val().length >= 31) {
+        var dateFormat = /^(?<!\d)(\d{2}|\d{4})(?!\d)[\/-](0?[1-9]|1[0-2])[\/-](0?[1-9]|[1-2][0-9]|3[01])/;
+        if (!$("#name").val().match(letters)) {
             $("#namevalidation").html("Give proper name");
+        }
+        else if ($("#name").val().length >= 31) {
+            $("#namevalidation").html("Cannot contain more than 30 characters");
         }
         else {
             $("#namevalidation").html("");
         }
-        if ($("#age").val() == 0 || $("#age").val() >= 121) {
+        if ($("#age").val() == "" || $("#age").val() < 0) {
             $("#agevalidation").html("Give proper age");
+        }
+        else if ($("#age").val() >= 121) {
+            $("#agevalidation").html("Cannot exceed 120");
         }
         else {
             $("#agevalidation").html("");
@@ -236,11 +231,5 @@
         else {
             $("#datevalidation").html("");
         }
-    }
-    function removeValidation() {
-        $("#namevalidation").html("");
-        $("#agevalidation").html("");
-        $("#gendervalidation").html("");
-        $("#datevalidation").html("");
     }
 </script>

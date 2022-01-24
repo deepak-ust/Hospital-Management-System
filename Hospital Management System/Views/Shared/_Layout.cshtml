@@ -13,7 +13,6 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
-   
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,7 +22,6 @@
             </div>
         </div>
     </div>
-   
     <div class="container body-content">
         <div>
             @RenderBody()
@@ -32,26 +30,19 @@
         <button onclick="myFunction()">Reading mode</button>
         <hr />
         <footer>
-
             <p>&copy; @DateTime.Now.Year - Hospital Management System</p>
-
         </footer>
     </div>
-
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
-
     <script>
-
         function myFunction() {
             var element = document.body;
             element.classList.toggle("dark-mode");
-
-        }</script>
-
+        }
+    </script>
 </body>
 </html>

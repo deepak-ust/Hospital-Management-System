@@ -16,7 +16,7 @@ namespace Hospital_Management_System.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Age is required")]
-        [Range(1, 120, ErrorMessage = "Not valid")]
+        [Range(0, 120, ErrorMessage = "Not valid")]
         public int Age { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]

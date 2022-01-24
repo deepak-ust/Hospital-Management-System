@@ -16,13 +16,13 @@ namespace Hospital_Management_System.DAL
         }
 
         //View patient details
-        public List<Patient> GetPatient(int pageIndex, int pageSize, string searchValue)
+        public List<Patient> GetData(int pageIndex, int pageSize, string searchValue)
         {
 
             Connection();
-            List<Patient> patientlist = new List<Patient>();
+            List<Patient> datalist = new List<Patient>();
 
-            SqlCommand cmd = new SqlCommand("GetPatients", con)
+            SqlCommand cmd = new SqlCommand("GetData", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -42,7 +42,7 @@ namespace Hospital_Management_System.DAL
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    patientlist.Add(
+                    datalist.Add(
                         new Patient
                         {
                             Id = Convert.ToInt32(dr["Id"]),
@@ -55,14 +55,14 @@ namespace Hospital_Management_System.DAL
                         });
                 }
             }
-            return patientlist;
+            return datalist;
         }
 
         //Update or add patient details
         public bool UpdateDetails(Patient obj)
         {
             Connection();
-            SqlCommand cmd = new SqlCommand("UpdatePatientDetails", con)
+            SqlCommand cmd = new SqlCommand("UpdateData", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -86,10 +86,10 @@ namespace Hospital_Management_System.DAL
         }
 
         //Delete patient details
-        public bool DeletePatient(int id)
+        public bool DeleteData(int id)
         {
             Connection();
-            SqlCommand cmd = new SqlCommand("DeletePatient", con)
+            SqlCommand cmd = new SqlCommand("DeleteData", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -109,38 +109,29 @@ namespace Hospital_Management_System.DAL
         //Get patient by id
         public Patient GetById(int id)
         {
-
             Connection();
-            Patient pmodel = new Patient();
-
+            Patient obj = new Patient();
             SqlCommand cmd = new SqlCommand("GetById", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
             cmd.Parameters.AddWithValue("@id", id);
-
-
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-
             con.Open();
             if (con.State == ConnectionState.Open)
             {
-
                 sd.Fill(dt);
                 con.Close();
-
-                pmodel.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
-                pmodel.Name = Convert.ToString(dt.Rows[0]["Name"]);
-                pmodel.Age = Convert.ToInt32(dt.Rows[0]["Age"]);
-                pmodel.Gender = Convert.ToString(dt.Rows[0]["Gender"]);
-                pmodel.Date = Convert.ToDateTime(dt.Rows[0]["dateTime"]);
-                pmodel.InPatient = Convert.ToBoolean(dt.Rows[0]["InPatient"]);
-                pmodel.Deleted = Convert.ToBoolean(dt.Rows[0]["Deleted"]);
+                obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+                obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                obj.Age = Convert.ToInt32(dt.Rows[0]["Age"]);
+                obj.Gender = Convert.ToString(dt.Rows[0]["Gender"]);
+                obj.Date = Convert.ToDateTime(dt.Rows[0]["dateTime"]);
+                obj.InPatient = Convert.ToBoolean(dt.Rows[0]["InPatient"]);
+                obj.Deleted = Convert.ToBoolean(dt.Rows[0]["Deleted"]);
             }
-
-            return pmodel;
+            return obj;
         }
-
     }
 }

@@ -16,12 +16,11 @@ namespace Hospital_Management_System.Controllers
         {
             return View();
         }
-
        
-        // POST: Patient/Update
+        // POST: Patient/Update/Patient
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(Patient objPatient)
+        public ActionResult Update(Patient obj)
         {
             bool result = false;
             DBHelper helper = new DBHelper();
@@ -29,7 +28,7 @@ namespace Hospital_Management_System.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    result = helper.UpdateDetails(objPatient);
+                    result = helper.UpdateDetails(obj);
                     ModelState.Clear();
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
@@ -40,49 +39,40 @@ namespace Hospital_Management_System.Controllers
             {
                 throw ex;
             }
-            
         }
 
-        // GET: Patient/Get/5
+        // GET: Patient/Get?operation&id
         public ActionResult Get(string operation, int id)
         {
             if (id > 0)
             {
                 DBHelper helper = new DBHelper();
-                Patient objPatient = helper.GetById(id);
-                ViewData["Gender"] = objPatient.Gender;
+                Patient obj = helper.GetById(id);
                 if (operation == Operations.View.ToString())
                 {
-                    objPatient.ActionType = Operations.View;
-                    return PartialView("_Operations", objPatient);
-                }
-                else if (operation == Operations.Edit.ToString())
-                {
-                    objPatient.ActionType = Operations.Edit;
-                    return PartialView("_Operations", objPatient);
-                }
-                else if (operation == Operations.Delete.ToString())
-                {
-                    objPatient.ActionType = Operations.Edit;
-                    ViewData["Name"] = objPatient.Name;
-                    return PartialView("_Delete", objPatient);
+                    ViewData["Gender"] = obj.Gender;
+                    ViewData["Date"] = obj.Date;
+                    obj.ActionType = Operations.View;
+                    return PartialView("_Operations", obj);
                 }
                 else
-                    return View();
+                {
+                    ViewData["Name"] = obj.Name;
+                    return PartialView("_Delete", obj);
+                }
             }
             else
             {
-                Patient objPatient = new Patient
+                Patient obj = new Patient
                 {
                     ActionType = Operations.Add
                 };
                 ViewData["Gender"] = "Select";
-                return PartialView("_Operations", objPatient);
+                return PartialView("_Operations", obj);
             }
         }
 
-        
-        
+        //POST: Patient/Delete/id
         [HttpPost]
         public JsonResult Delete(int id)
         {
@@ -90,8 +80,7 @@ namespace Hospital_Management_System.Controllers
             try
             {
                 DBHelper helper = new DBHelper();
-                result = helper.DeletePatient(id);
-                
+                result = helper.DeleteData(id);
             }
             catch (Exception ex)
             {
@@ -100,7 +89,7 @@ namespace Hospital_Management_System.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-       //GET: Patient/PatientData
+       //POST: Patient/PatientData
         [HttpPost]
         public ActionResult PatientData()
         {
@@ -111,7 +100,7 @@ namespace Hospital_Management_System.Controllers
                 var start = Convert.ToInt32(Request.Form["start"]);
                 var length = Convert.ToInt32(Request.Form["length"]);
                 var searchValue = Request.Form["search[value]"];
-                List<Patient> patients = helper.GetPatient(start, length, searchValue);
+                List<Patient> patients = helper.GetData(start, length, searchValue);
                 return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -119,7 +108,5 @@ namespace Hospital_Management_System.Controllers
                 return View();
             }
         }
-
-
     }
 }

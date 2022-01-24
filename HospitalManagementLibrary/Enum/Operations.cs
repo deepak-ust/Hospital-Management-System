@@ -10,7 +10,6 @@ namespace HospitalManagementLibrary.Enum
     {
        Add,
        View,
-       Edit,
        Delete
     }
 }
