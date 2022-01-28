@@ -181,20 +181,26 @@
     function validation() {
         var letters = /^[A-za-z]+$/;
         var dateFormat = /^(?<!\d)(\d{2}|\d{4})(?!\d)[\/-](0?[1-9]|1[0-2])[\/-](0?[1-9]|[1-2][0-9]|3[01])/;
-        if (!$("#name").val().match(letters)) {
+        if (!$("#name").val().match(letters) && $("#name").val() != "") {
             $("#namevalidation").html("Give proper name");
         }
         else if ($("#name").val().length >= 31) {
             $("#namevalidation").html("Cannot contain more than 30 characters");
         }
+        else if ($("#name").val() == "") {
+            $("#namevalidation").html("Name cannot be empty");
+        }
         else {
             $("#namevalidation").html("");
         }
-        if ($("#age").val() == "" || $("#age").val() < 0) {
+        if ($("#age").val() < 0 && $("#age").val() != "") {
             $("#agevalidation").html("Give proper age");
         }
         else if ($("#age").val() >= 121) {
             $("#agevalidation").html("Cannot exceed 120");
+        }
+        else if ($("#age").val() == "") {
+            $("#agevalidation").html("Age cannot be empty");
         }
         else {
             $("#agevalidation").html("");
