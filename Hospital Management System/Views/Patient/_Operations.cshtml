@@ -59,9 +59,9 @@
 </form>
 <script>
     $(document).ready(function () {
-        var gender = '@ViewData["Gender"].ToString()';
+        var gender = '@ViewData["Gender"].ToString()';/*For setting the value of "Gender" drop-down*/
         var operation = '@Model.ActionType.ToString()';
-        $('#date').val('@ViewData["Date"].ToString().Split('-')[2].Split(' ')[0]-@ViewData["Date"].ToString().Split('-')[1]-@ViewData["Date"].ToString().Split('-')[0]');
+        $('#date').val('@ViewData["Date"].ToString().Split('-')[2].Split(' ')[0]-@ViewData["Date"].ToString().Split('-')[1]-@ViewData["Date"].ToString().Split('-')[0]');/*For input type "date", the format should be (yyyy-mm-dd)*/
         if (operation == '@Operations.View') {
             $("#ModalTitle").html('@Titles.ViewTitle');
             $("#saveRecord").html("Save");
