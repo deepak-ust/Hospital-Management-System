@@ -63,7 +63,7 @@ namespace Hospital_Management_System.Controllers
             }
             else
             {
-                Patient obj = new Patient
+                Patient obj = new Patient 
                 {
                     ActionType = Operations.Add
                 };

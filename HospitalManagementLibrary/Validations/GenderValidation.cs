@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace HospitalManagementLibrary
+namespace HospitalManagementLibrary.Validations
 {
     public class GenderValidation:ValidationAttribute
     {

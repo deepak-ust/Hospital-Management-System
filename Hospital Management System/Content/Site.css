@@ -23,14 +23,9 @@ textarea {
     padding-top: 60px;
     margin-right: 50px;
 }
-.dark-mode {
-    background-image:none;
-    background-color: gray;
-    color: black;
-}
 .dt {
     padding-left: 900px;
-    padding-top: 30px
+    padding-top: 30px;
 }
 .hd{
     background-color:white;

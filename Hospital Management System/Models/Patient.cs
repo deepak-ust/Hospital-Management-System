@@ -1,4 +1,4 @@
-﻿using HospitalManagementLibrary;
+﻿using HospitalManagementLibrary.Validations;
 using HospitalManagementLibrary.Enum;
 using System;
 using System.ComponentModel.DataAnnotations;

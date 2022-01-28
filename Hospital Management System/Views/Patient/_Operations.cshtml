@@ -1,5 +1,7 @@
 ﻿@model Hospital_Management_System.Models.Patient
 @using HospitalManagementLibrary.Enum;
+@using HospitalManagementLibrary.Constants;
+
 <form id="RegForm">
     <fieldset id="SubmitForm">
         @using (Html.BeginForm())
@@ -63,16 +65,29 @@
     $(document).ready(function () {
         var gender = '@ViewData["Gender"].ToString()';
         var operation = '@Model.ActionType.ToString()';
+        $('#date').val('@ViewData["Date"].ToString().Split('-')[2].Split(' ')[0]-@ViewData["Date"].ToString().Split('-')[1]-@ViewData["Date"].ToString().Split('-')[0]');
         if (operation == '@Operations.View') {
-            $('#date').val('@ViewData["Date"].ToString().Split('-')[2].Split(' ')[0]-@ViewData["Date"].ToString().Split('-')[1]-@ViewData["Date"].ToString().Split('-')[0]');
+            $("#ModalTitle").html('@Titles.ViewTitle');
+            $("#saveRecord").html("Save");
+            $("#saveRecord").attr('disabled', true);
+            $("#editRecord").attr('disabled', false);
             $('#select').attr('hidden', true);
             $('.disable').attr('disabled', true);
             $('#gender').val(gender);
         }
         else {
+            $("#ModalTitle").html('@Titles.AddTitle');
+            $("#saveRecord").html("Add");
+            $("#saveRecord").attr('disabled', false);
+            $("#editRecord").attr('disabled', true);
             $('.disable').attr('disabled', false);
-            $('#date').val('@DateTime.Today.Year-@DateTime.Today.Month.ToString("D2")-@DateTime.Today.Day');
             $('.form-control').attr('value', null);
         }
+        $('#editRecord').click(function () {
+            $('.disable').attr('disabled', false);
+            $('#editRecord').attr('disabled', true);
+            $('#saveRecord').attr('disabled', false);
+            $('#ModalTitle').html('@Titles.EditTitle');
+        })
         });
 </script>

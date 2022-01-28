@@ -1,4 +1,5 @@
-﻿<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+﻿@using HospitalManagementLibrary.Constants
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document" id="mainform">
         <div class="modal-content">
@@ -23,7 +24,7 @@
     <div class="modal-dialog" role="document" id="deleteform">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold" id="ModalTitle"><b>Delete Patient Record</b></h4>
+                <h4 class="modal-title w-100 font-weight-bold" id="ModalTitle"><b>@Titles.DeleteTitle</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -38,10 +39,10 @@
     </div>
 </div>
 <div class="overflow:auto tbl">
-    <button type="button" id="create" class="btn btn-success btn-rounded mb-4" onClick="operation('Add',0)">Add new patient</button>
+    <button type="button" id="create" class="btn btn-success btn-rounded mb-4" onClick="operation('Add',0)">Add Patient</button>
 </div>
 <div class="overflow:auto tbl">
-    <table id="PatientTable" class="display table-bordered">
+    <table id="PatientTable" class="display table-bordered" style="width:100%">
         <thead class="hd">
             <tr>
                 <th>ID</th>
@@ -67,6 +68,10 @@
                     {
                         "targets": [0],
                         "searchable": false
+                    },
+                    {
+                        "targets": [2, 3, 4, 5, 6],
+                        className: 'dt-head-center dt-body-center'
                     }
                 ],
                 "ajax": {
@@ -118,50 +123,31 @@
                             else return "No";
                         }
                     },
-
                     {
                         "data": "Id",
                         "width": "20%",
                         "render": function (id) {
-                            return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="operation(`View`,' + id + ')">View</a> </div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deletePatient(' + id + ')">Delete </a></div> ');
+                            return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="operation(`View`,' + id + ')">View</a> </div><div> <a class="btn btn-danger btn-rounded mb-4" onclick="deleteData(' + id + ')">Delete </a></div> ');
                         }
                     },
                 ]
 
             });
-    });
+    }); 
     function operation(op, id) {
-        if (op == "Add") {
-            $("#ModalTitle").html("Add Patient Details");
-            $("#saveRecord").html("Add");
-            document.getElementById("saveRecord").disabled = false;
-            document.getElementById("editRecord").disabled = true;
-        }
-        else {
-            $("#ModalTitle").html("View Patient Details");
-            $("#saveRecord").html("Save");
-            document.getElementById("saveRecord").disabled = true;
-            document.getElementById("editRecord").disabled = false;
-        }
         var url = "/Patient/Get?operation=" + op + "&id=" + id;
-        $("#modalForm").modal();
+        $("#modalForm").modal('show');
         $.ajax({
             type: "GET",
             url: url,
             success: function (data) {
                 $('#mbody').html(data);
-                $('#editRecord').click(function () {
-                    $('.disable').attr('disabled', false);
-                    $('#editRecord').attr('disabled', true);
-                    $('#saveRecord').attr('disabled', false);
-                    $('#ModalTitle').html("Edit Patient Details");
-                })
             }
         })
     }
-    function deletePatient(id) {
+    function deleteData(id) {
         var url = "/Patient/Get?operation=Delete&id=" + id;
-        $("#deleteConfirm").modal();
+        $("#deleteConfirm").modal('show');
         $.ajax({
             type: "GET",
             url: url,
