@@ -1,7 +1,6 @@
 ﻿@model Hospital_Management_System.Models.Patient
 @using HospitalManagementLibrary.Enum;
 @using HospitalManagementLibrary.Constants;
-
 <form id="RegForm">
     <fieldset id="SubmitForm">
         @using (Html.BeginForm())
@@ -13,40 +12,40 @@
                 @Html.HiddenFor(model => model.Id, new { @id = "id" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-5">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @placeholder = "Enter name", @name = "name" } })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @id= "namevalidation" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @placeholder = "Enter name", @name = "name", @onkeyup="nameValidation()" } })
+                        <small style="position:absolute">@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @id = "namevalidation" })</small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group form-gap">
                     @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-5">
-                        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control disable", @id = "age", @placeholder = "Enter age", @name = "age" } })
-                        @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger", @id = "agevalidation" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control disable", @id = "age", @placeholder = "Enter age", @name = "age", @onkeyup = "ageValidation()" } })
+                      <small style="position:absolute">@Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger", @id = "agevalidation"})</small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group form-gap">
                     @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-5">
-                        <select class="form-control disable" name="Gender" id="gender">
-                            <option value="Select" id="select">Select</option>
+                    <div class="col-md-8">
+                        <select class="form-control disable" name="Gender" id="gender" onchange="genderValidation()">
+                            <option value="Select" hidden>Select</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
                         </select>
-                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger", @id = "gendervalidation" })
+                        <small style="position:absolute">@Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger", @id = "gendervalidation" })</small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group form-gap">
                     @Html.LabelFor(model => model.Date, "Date (D-M-Y)", htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-5">
-                        @Html.TextBoxFor(model => model.Date, new { @type = "date", @class = "form-control disable", @id = "date" })
-                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger", @id = "datevalidation" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Date, new { @type = "date", @class = "form-control disable", @id = "date", @Value = Model.Date.ToString("yyyy/MM/dd"), @onkeyup = "dateValidation()",@max=DateTime.Today.ToString("yyyy/MM/dd") })
+                        <small style="position:absolute">@Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger", @id = "datevalidation" })</small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group form-gap">
                     <div class="control-label col-md-3"></div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <span style="margin-right:1px">
                             @Html.EditorFor(model => model.InPatient, new { htmlAttributes = new { @id = "inpatient", @class = "disable" } })
                         </span><b>In-Patient</b>
@@ -58,32 +57,43 @@
     </fieldset>
 </form>
 <script>
+    var message = "";
     $(document).ready(function () {
-        var gender = '@ViewData["Gender"].ToString()';/*For setting the value of "Gender" drop-down*/
         var operation = '@Model.ActionType.ToString()';
-        $('#date').val('@ViewData["Date"].ToString().Split('-')[2].Split(' ')[0]-@ViewData["Date"].ToString().Split('-')[1]-@ViewData["Date"].ToString().Split('-')[0]');/*For input type "date", the format should be (yyyy-mm-dd)*/
         if (operation == '@Operations.View') {
             $("#ModalTitle").html('@Titles.ViewTitle');
             $("#saveRecord").html("Save");
             $("#saveRecord").attr('disabled', true);
             $("#editRecord").attr('disabled', false);
-            $('#select').attr('hidden', true);
             $('.disable').attr('disabled', true);
-            $('#gender').val(gender);
+            $('#gender').val('@Model.Gender');
+        }
+        else if (operation == '@Operations.Edit') {
+            $('#ModalTitle').html('@Titles.EditTitle');
+            $("#saveRecord").html("Save");
+            $('.disable').attr('disabled', false);
+            $('#editRecord').attr('disabled', true);
+            $('#saveRecord').attr('disabled', false);
+            $('#gender').val('@Model.Gender');
+            message = "Patient Updated";
         }
         else {
+            var today = '@DateTime.Today.ToString("yyyy/MM/dd")';
             $("#ModalTitle").html('@Titles.AddTitle');
             $("#saveRecord").html("Add");
             $("#saveRecord").attr('disabled', false);
             $("#editRecord").attr('disabled', true);
             $('.disable').attr('disabled', false);
             $('.form-control').attr('value', null);
+            $("#date").val(today);
+            message = "Patient Added";
         }
         $('#editRecord').click(function () {
+            $('#ModalTitle').html('@Titles.EditTitle');
             $('.disable').attr('disabled', false);
             $('#editRecord').attr('disabled', true);
             $('#saveRecord').attr('disabled', false);
-            $('#ModalTitle').html('@Titles.EditTitle');
+            message = "Patient Updated";
         })
         });
 </script>

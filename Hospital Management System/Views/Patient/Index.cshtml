@@ -1,39 +1,40 @@
 ﻿@using HospitalManagementLibrary.Constants
-<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog" role="document" id="mainform">
-        <div class="modal-content">
+        <div class="modal-content" style="width:90%">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100"><b id="ModalTitle"></b></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h4 class="modal-title w-100">
+                    <b id="ModalTitle"></b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h4>
             </div>
             <div class="modal-body mx-3" id="mbody">
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-warning" id="editRecord">Edit</button>
                 <button type="submit" class="btn btn-success" id="saveRecord"></button>
-                <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document" id="deleteform">
+<div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" id="deleteform">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold" id="ModalTitle"><b>@Titles.DeleteTitle</b></h4>
+                <h4 class="modal-title w-100 font-weight-bold" id="ModalTitle"><b>@Titles.DeleteTitle</b>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                </h4>
             </div>
             <div class="modal-body mx-3" id="deletebody">
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-danger" onclick="confirmDelete($('#deleteid').val())">Confirm</button>
-                <a class="btn btn-primary" data-dismiss="modal">Cancel</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
@@ -49,7 +50,7 @@
                 <th>Name</th>
                 <th>Age</th>
                 <th>Gender</th>
-                <th>Date</th>
+                <th>Date (D/M/Y)</th>
                 <th>In-Patient</th>
                 <th>Action</th>
             </tr>
@@ -60,7 +61,6 @@
     $(document).ready(function () {
         $('#PatientTable').DataTable(
             {
-                "ordering": false,
                 "serverSide": true,
                 "filter": true,
                 "bInfo": false,
@@ -68,6 +68,10 @@
                     {
                         "targets": [0],
                         "searchable": false
+                    },
+                    {
+                        "targets": [6],
+                        "orderable":false,
                     },
                     {
                         "targets": [2, 3, 4, 5, 6],
@@ -121,14 +125,14 @@
                     },
                     {
                         "data": "Id",
-                        "width": "20%",
+                        "width": "25%",
                         "render": function (id) {
-                            return ('<div class="col-md-4"><a class="btn btn-primary btn-rounded mb-4" onclick="operation(`View`,' + id + ')">View</a> </div><div> <a class="btn btn-danger btn-rounded mb-4" onclick="deleteData(' + id + ')">Delete </a></div> ');
+                            return ('<div class="col-md-3"><a class="btn btn-primary btn-rounded mb-4" onclick="operation(`View`,' + id + ')">View</a> </div><div class="col-md-3" style="padding-left:18px"><a class="btn btn-warning btn-rounded mb-4" onclick="operation(`Edit`,' + id + ')">Edit</a></div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deleteData(' + id + ')">Delete </a></div> ');
                         }
                     },
                 ]
             });
-    }); 
+    });
     function operation(op, id) {
         var url = "/Patient/Get?operation=" + op + "&id=" + id;
         $("#modalForm").modal('show');
@@ -158,11 +162,11 @@
             success: function () {
                 $('#PatientTable').DataTable().ajax.reload();
                 $("#deleteConfirm").modal("hide");
+                swal("Deleted!","","success");
             }
         });
     }
     $("#saveRecord").click(function () {
-        
         var myFormData = $("#SubmitForm").serialize();
         $.ajax({
             type: "POST",
@@ -171,16 +175,19 @@
             success: function () {
                 $("#modalForm").modal("hide");
                 $('#PatientTable').DataTable().ajax.reload();
+                swal("Success!", message , "success");
             },
             error: function (error) {
-                validation();
+                nameValidation();
+                ageValidation();
+                genderValidation();
+                dateValidation();
             }
         });
         return false;
     })
-    function validation() {
-        var letters = /^[A-za-z]+$/;
-        var dateFormat = /^(?<!\d)(\d{2}|\d{4})(?!\d)[\/-](0?[1-9]|1[0-2])[\/-](0?[1-9]|[1-2][0-9]|3[01])/;
+    function nameValidation() {
+        var letters = /^[A-z a-z]+$/;
         if (!$("#name").val().match(letters) && $("#name").val() != "") {
             $("#namevalidation").html("Give proper name");
         }
@@ -193,6 +200,8 @@
         else {
             $("#namevalidation").html("");
         }
+    }
+    function ageValidation() {
         if ($("#age").val() < 0 && $("#age").val() != "") {
             $("#agevalidation").html("Give proper age");
         }
@@ -205,12 +214,17 @@
         else {
             $("#agevalidation").html("");
         }
+    }
+    function genderValidation() {
         if ($("#gender").val() == "Select") {
             $("#gendervalidation").html("Select gender");
         }
         else {
             $("#gendervalidation").html("");
         }
+    }
+    function dateValidation() {
+        var dateFormat = /^(?<!\d)(\d{2}|\d{4})(?!\d)[\/-](0?[1-9]|1[0-2])[\/-](0?[1-9]|[1-2][0-9]|3[01])/;
         if (!$("#date").val().match(dateFormat)) {
             $("#datevalidation").html("Enter proper date");
         }

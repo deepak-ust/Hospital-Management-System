@@ -3,6 +3,7 @@
     public enum Operations
     {
        Add,
+       Edit,
        View,
        Delete
     }

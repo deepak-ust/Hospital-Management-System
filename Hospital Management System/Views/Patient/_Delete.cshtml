@@ -7,7 +7,7 @@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.Id, new { @id = "deleteid" })
-                <h4>Are you sure you want to delete @ViewData["Name"].ToString()'s record?</h4>
+                <h5>Are you sure you want to delete @Model.Name's record?</h5>
             </div>
         }
     </fieldset>

@@ -4,7 +4,8 @@ using HospitalManagementLibrary.Enum;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-
+using System.Linq.Dynamic;
+using System.Linq;
 
 namespace Hospital_Management_System.Controllers
 {
@@ -20,7 +21,7 @@ namespace Hospital_Management_System.Controllers
         // POST: Patient/Update/obj
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(Patient obj)
+        public ActionResult Update(Patient objPatient)
         {
             bool result = false;
             DBHelper helper = new DBHelper();
@@ -28,7 +29,7 @@ namespace Hospital_Management_System.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    result = helper.UpdateDetails(obj);
+                    result = helper.UpdateDetails(objPatient);
                     ModelState.Clear();
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
@@ -47,29 +48,29 @@ namespace Hospital_Management_System.Controllers
             if (id > 0)
             {
                 DBHelper helper = new DBHelper();
-                Patient obj = helper.GetById(id);
+                Patient objPatient = helper.GetById(id);
                 if (operation == Operations.View.ToString())
                 {
-                    ViewData["Gender"] = obj.Gender;
-                    ViewData["Date"] = obj.Date;
-                    obj.ActionType = Operations.View;
-                    return PartialView("_Operations", obj);
+                    objPatient.ActionType = Operations.View;
+                    return PartialView("_Operations", objPatient);
+                }
+               else if (operation == Operations.Edit.ToString())
+                {
+                    objPatient.ActionType = Operations.Edit;
+                    return PartialView("_Operations", objPatient);
                 }
                 else
                 {
-                    ViewData["Name"] = obj.Name;
-                    return PartialView("_Delete", obj);
+                    return PartialView("_Delete", objPatient);
                 }
             }
             else
             {
-                Patient obj = new Patient 
+                Patient objPatient = new Patient 
                 {
                     ActionType = Operations.Add
                 };
-                ViewData["Gender"] = "Select";
-                ViewData["Date"] = DateTime.Today;
-                return PartialView("_Operations", obj);
+                return PartialView("_Operations", objPatient);
             }
         }
 
@@ -101,7 +102,10 @@ namespace Hospital_Management_System.Controllers
                 var start = Convert.ToInt32(Request.Form["start"]);
                 var length = Convert.ToInt32(Request.Form["length"]);
                 var searchValue = Request.Form["search[value]"];
+                string sortColumnName = Request["columns[" + Request["order[0][column]"] + "][data]"];
+                string sortDirection = Request["order[0][dir]"];
                 List<Patient> patients = helper.GetData(start, length, searchValue);
+                patients = patients.OrderBy(sortColumnName + " " + sortDirection).ToList();
                 return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
             }
             catch

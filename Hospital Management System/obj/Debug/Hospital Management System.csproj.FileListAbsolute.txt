@@ -80,3 +80,4 @@ C:\Users\user\Desktop\New folder\Hospital Management System (1)\Hospital Managem
 C:\Users\user\Desktop\New folder\Hospital Management System (1)\Hospital Management System\obj\Debug\Hospital Management System.csproj.CopyComplete
 C:\Users\user\Desktop\New folder\Hospital Management System (1)\Hospital Management System\obj\Debug\Hospital Management System.dll
 C:\Users\user\Desktop\New folder\Hospital Management System (1)\Hospital Management System\obj\Debug\Hospital Management System.pdb
+C:\Users\user\Desktop\New folder\Hospital Management System (1)\Hospital Management System\bin\System.Linq.Dynamic.dll
