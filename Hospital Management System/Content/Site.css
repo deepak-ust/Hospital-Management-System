@@ -36,6 +36,12 @@ textarea {
 .form-gap {
     margin-top:4%;
 }
-
+.modal-dialog{
+    margin-top:10%;
+    margin-left:32%;
+}
+.modal-content{
+    width:80%;
+}
 
 

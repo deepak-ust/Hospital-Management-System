@@ -13,7 +13,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @placeholder = "Enter name", @name = "name", @onkeyup="nameValidation()",@autocomplete="off" } })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @placeholder = "Enter name", @name = "name", @onkeyup = "nameValidation()", @autocomplete = "off" } })
                         <small style="position:absolute">@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @id = "namevalidation" })</small>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control disable", @id = "age", @placeholder = "Enter age", @name = "age", @onkeyup = "ageValidation()", @autocomplete = "off" } })
-                      <small style="position:absolute">@Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger", @id = "agevalidation"})</small>
+                        <small style="position:absolute">@Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger", @id = "agevalidation" })</small>
                     </div>
                 </div>
                 <div class="form-group form-gap">
@@ -39,7 +39,7 @@
                 <div class="form-group form-gap">
                     @Html.LabelFor(model => model.Date, "Date (D-M-Y)", htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-8">
-                        @Html.TextBoxFor(model => model.Date, new { @type = "date", @class = "form-control disable", @id = "date", @Value = Model.Date.ToString("yyyy/MM/dd"), @onkeyup = "dateValidation()",@max=DateTime.Today.ToString("yyyy/MM/dd") })
+                        @Html.TextBoxFor(model => model.Date, new { @type = "date", @class = "form-control disable", @id = "date", @Value = Model.Date.ToString("yyyy/MM/dd"), @onkeyup = "dateValidation()", @max = DateTime.Today.ToString("yyyy/MM/dd") })
                         <small style="position:absolute">@Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger", @id = "datevalidation" })</small>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
             $('.form-control').attr('value', null);
             $("#date").val(today);
             message = "Patient Added";
-        }
+            }
         $('#editRecord').click(function () {
             $('#ModalTitle').html('@Titles.EditTitle');
             $('.disable').attr('disabled', false);
@@ -95,5 +95,5 @@
             $('#saveRecord').attr('disabled', false);
             message = "Patient Updated";
         })
-        });
+    });
 </script>

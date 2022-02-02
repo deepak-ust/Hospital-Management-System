@@ -1,7 +1,7 @@
 ﻿@using HospitalManagementLibrary.Constants
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog" role="document" id="mainform">
-        <div class="modal-content" style="width:90%">
+        <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 class="modal-title w-100">
                     <b id="ModalTitle"></b>
@@ -24,10 +24,11 @@
     <div class="modal-dialog modal-dialog-centered" role="document" id="deleteform">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold" id="ModalTitle"><b>@Titles.DeleteTitle</b>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h4 class="modal-title w-100 font-weight-bold" id="ModalTitle">
+                    <b>@Titles.DeleteTitle</b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </h4>
             </div>
             <div class="modal-body mx-3" id="deletebody">
@@ -64,7 +65,7 @@
                 "serverSide": true,
                 "filter": true,
                 "bInfo": false,
-                "order":[[0,"desc"]],
+                "order": [[0, "desc"]],
                 columnDefs: [
                     {
                         "targets": [0],
@@ -72,7 +73,7 @@
                     },
                     {
                         "targets": [6],
-                        "orderable":false,
+                        "orderable": false,
                     },
                     {
                         "targets": [2, 3, 4, 5, 6],
@@ -132,7 +133,8 @@
                         }
                     },
                 ]
-            });
+            }
+        );
     });
     function operation(op, id) {
         var url = "/Patient/Get?operation=" + op + "&id=" + id;
@@ -163,7 +165,7 @@
             success: function () {
                 $('#PatientTable').DataTable().ajax.reload();
                 $("#deleteConfirm").modal("hide");
-                swal("Deleted!","","success");
+                swal("Deleted!", "", "success");
             }
         });
     }
@@ -176,7 +178,7 @@
             success: function () {
                 $("#modalForm").modal("hide");
                 $('#PatientTable').DataTable().ajax.reload();
-                swal("Success!", message , "success");
+                swal("Success!", message, "success");
             },
             error: function (error) {
                 nameValidation();
