@@ -95,5 +95,11 @@
             $('#saveRecord').attr('disabled', false);
             message = "Patient Updated";
         })
+        $(function () {
+            $('#date').keypress(function (event){
+                event.preventDefault();
+                return false;
+            });
+        })
     });
 </script>
