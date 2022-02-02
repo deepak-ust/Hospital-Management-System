@@ -64,6 +64,7 @@
                 "serverSide": true,
                 "filter": true,
                 "bInfo": false,
+                "order":[[0,"desc"]],
                 columnDefs: [
                     {
                         "targets": [0],
@@ -184,7 +185,6 @@
                 dateValidation();
             }
         });
-        return false;
     })
     function nameValidation() {
         var letters = /^[A-z a-z]+$/;
