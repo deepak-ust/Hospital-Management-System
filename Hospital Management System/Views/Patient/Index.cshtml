@@ -131,10 +131,26 @@
                         "render": function (id) {
                             return ('<div class="col-md-3"><a class="btn btn-primary btn-rounded mb-4" onclick="operation(`View`,' + id + ')">View</a> </div><div class="col-md-3" style="padding-left:18px"><a class="btn btn-warning btn-rounded mb-4" onclick="operation(`Edit`,' + id + ')">Edit</a></div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deleteData(' + id + ')">Delete </a></div> ');
                         }
-                    },
-                ]
+                    }
+                ],
+                drawCallback: function () {
+                    $('.ellipsis').addClass('hidden');
+                    $('#PatientTable_next').addClass('customdisable');
+                    $('#PatientTable_previous').addClass('customdisable');
+                    var a = 1;
+                    for (a = 1; a <= $('#PatientTable').DataTable().page.info().page+1; a++) {
+                        $('.paginate_button:contains("' + a + '")').addClass('customdisable');
+                    }
+                    if ($('#PatientTable tbody tr').length < 10) {
+                        $('#PatientTable_next').addClass('disabled');
+                        $('.paginate_button:not(.customdisable)').addClass('disabled');
+                        $('.paginate_button:not(.customdisable)').attr('tabindex', -1);
+                        $('.paginate_button:not(.customdisable)').off('click');
+                    }
+                }
             }
         );
+       
     });
     function operation(op, id) {
         var url = "/Patient/Get?operation=" + op + "&id=" + id;

@@ -98,7 +98,6 @@ namespace Hospital_Management_System.Controllers
             try
             {
                 DBHelper helper = new DBHelper();
-
                 var start = Convert.ToInt32(Request.Form["start"]);
                 var length = Convert.ToInt32(Request.Form["length"]);
                 var searchValue = Request.Form["search[value]"];

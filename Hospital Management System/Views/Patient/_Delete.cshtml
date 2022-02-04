@@ -4,10 +4,10 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <div class="form-horizontal">
+            <div class="form-horizontal text-center">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.Id, new { @id = "deleteid" })
-                <h5>Are you sure you want to delete @Model.Name's record?</h5>
+                Are you sure you want to delete @Model.Name's record?
             </div>
         }
     </fieldset>
