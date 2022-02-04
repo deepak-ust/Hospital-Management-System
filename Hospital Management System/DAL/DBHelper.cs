@@ -47,6 +47,7 @@ namespace Hospital_Management_System.DAL
                         {
                             Id = Convert.ToInt32(dr["Id"]),
                             Name = Convert.ToString(dr["Name"]),
+                            LastName = Convert.ToString(dr["LastName"]),
                             Age = Convert.ToInt32(dr["Age"]),
                             Gender = Convert.ToString(dr["Gender"]),
                             Date = Convert.ToDateTime(dr["dateTime"]),
@@ -69,6 +70,7 @@ namespace Hospital_Management_System.DAL
 
             cmd.Parameters.AddWithValue("@PatId", obj.Id);
             cmd.Parameters.AddWithValue("@Name", obj.Name);
+            cmd.Parameters.AddWithValue("@LastName", obj.LastName);
             cmd.Parameters.AddWithValue("@Age", obj.Age);
             cmd.Parameters.AddWithValue("@Gender", obj.Gender);
             cmd.Parameters.AddWithValue("@Date", obj.Date);
@@ -125,6 +127,7 @@ namespace Hospital_Management_System.DAL
                 con.Close();
                 obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
                 obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                obj.LastName = Convert.ToString(dt.Rows[0]["LastName"]);
                 obj.Age = Convert.ToInt32(dt.Rows[0]["Age"]);
                 obj.Gender = Convert.ToString(dt.Rows[0]["Gender"]);
                 obj.Date = Convert.ToDateTime(dt.Rows[0]["dateTime"]);
@@ -132,6 +135,29 @@ namespace Hospital_Management_System.DAL
                 obj.Deleted = Convert.ToBoolean(dt.Rows[0]["Deleted"]);
             }
             return obj;
+        }
+        public int GetFullCount()
+        {
+            int count = 0;
+            Connection();
+            SqlCommand cmd = new SqlCommand("GetFullCount", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                sd.Fill(dt);
+                con.Close();
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    count = Convert.ToInt32(row["Column1"]);
+                }
+            }
+            return count;
         }
     }
 }

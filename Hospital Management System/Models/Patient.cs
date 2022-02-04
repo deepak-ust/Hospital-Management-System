@@ -15,6 +15,10 @@ namespace Hospital_Management_System.Models
         [RegularExpression("[A-Za-z ]{1,30}", ErrorMessage = "Give a proper name")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Last Name is required")]
+        [RegularExpression("[A-Za-z ]{1,30}", ErrorMessage = "Give a proper name")]
+        public string LastName { get; set; }
+
         [Required(ErrorMessage = "Age is required")]
         [Range(0, 120, ErrorMessage = "Not valid")]
         public int Age { get; set; }

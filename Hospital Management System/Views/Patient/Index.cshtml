@@ -64,7 +64,6 @@
             {
                 "serverSide": true,
                 "filter": true,
-                "bInfo": false,
                 "order": [[0, "desc"]],
                 columnDefs: [
                     {
@@ -88,24 +87,32 @@
                 "columns": [
                     {
                         "data": "Id",
+                        "name": "Id",
                         "render": function (id) {
                             return ('HM' + id + 'S');
                         }
                     },
                     {
-                        "data": "Name",
+                        "data": { Name: "Name", LastName: "LastName" },
+                        "name":"Name",
+                        "render": function (data) {
+                            return data.Name + " " + data.LastName;
+                        },
                         "width": "20%"
                     },
                     {
                         "data": "Age",
+                        "name": "Age",
                         "width": "5%"
                     },
                     {
                         "data": "Gender",
+                        "name": "Gender",
                         "width": "10%"
                     },
                     {
                         "data": "Date",
+                        "name": "Date",
                         "type": "DateTime",
                         "width": "20%",
                         "render": function (value) {
@@ -118,6 +125,7 @@
                     },
                     {
                         "data": "InPatient",
+                        "name": "InPatient",
                         "width": "10%",
                         "type": "bool",
                         "render": function (value) {
@@ -132,25 +140,9 @@
                             return ('<div class="col-md-3"><a class="btn btn-primary btn-rounded mb-4" onclick="operation(`View`,' + id + ')">View</a> </div><div class="col-md-3" style="padding-left:18px"><a class="btn btn-warning btn-rounded mb-4" onclick="operation(`Edit`,' + id + ')">Edit</a></div><div class="col-md-3"> <a class="btn btn-danger btn-rounded mb-4" onclick="deleteData(' + id + ')">Delete </a></div> ');
                         }
                     }
-                ],
-                drawCallback: function () {
-                    $('.ellipsis').addClass('hidden');
-                    $('#PatientTable_next').addClass('customdisable');
-                    $('#PatientTable_previous').addClass('customdisable');
-                    var a = 1;
-                    for (a = 1; a <= $('#PatientTable').DataTable().page.info().page+1; a++) {
-                        $('.paginate_button:contains("' + a + '")').addClass('customdisable');
-                    }
-                    if ($('#PatientTable tbody tr').length < 10) {
-                        $('#PatientTable_next').addClass('disabled');
-                        $('.paginate_button:not(.customdisable)').addClass('disabled');
-                        $('.paginate_button:not(.customdisable)').attr('tabindex', -1);
-                        $('.paginate_button:not(.customdisable)').off('click');
-                    }
-                }
+                ]
             }
         );
-       
     });
     function operation(op, id) {
         var url = "/Patient/Get?operation=" + op + "&id=" + id;
@@ -198,6 +190,7 @@
             },
             error: function (error) {
                 nameValidation();
+                lastnameValidation();
                 ageValidation();
                 genderValidation();
                 dateValidation();
@@ -205,7 +198,7 @@
         });
     })
     function nameValidation() {
-        var letters = /^[A-z a-z]+$/;
+        var letters = /^[A-za-z]+$/;
         if (!$("#name").val().match(letters) && $("#name").val() != "") {
             $("#namevalidation").html("Give proper name");
         }
@@ -213,10 +206,25 @@
             $("#namevalidation").html("Cannot contain more than 30 characters");
         }
         else if ($("#name").val() == "") {
-            $("#namevalidation").html("Name cannot be empty");
+            $("#namevalidation").html("Please provide First Name");
         }
         else {
             $("#namevalidation").html("");
+        }
+    }
+    function lastnameValidation() {
+        var letters = /^[A-za-z]+$/;
+        if (!$("#lastname").val().match(letters) && $("#lastname").val() != "") {
+            $("#lastnamevalidation").html("Give proper name");
+        }
+        else if ($("#lastname").val().length >= 31) {
+            $("#lastnamevalidation").html("Cannot contain more than 30 characters");
+        }
+        else if ($("#lastname").val() == "") {
+            $("#lastnamevalidation").html("Please provide Last Name");
+        }
+        else {
+            $("#lastnamevalidation").html("");
         }
     }
     function ageValidation() {
