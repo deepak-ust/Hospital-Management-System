@@ -101,10 +101,10 @@ namespace Hospital_Management_System.Controllers
                 var start = Convert.ToInt32(Request.Form["start"]);
                 var length = Convert.ToInt32(Request.Form["length"]);
                 var searchValue = Request.Form["search[value]"];
-                string sortColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
-                string sortDirection = Request["order[0][dir]"];
-                List<Patient> patients = helper.GetData(start, length, searchValue);
-                patients = patients.OrderBy(sortColumnName + " " + sortDirection).ToList();
+                string columnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
+                string direction = Request["order[0][dir]"];
+                List<Patient> patients = helper.GetData(start, length, searchValue, columnName, direction);
+                patients = patients.OrderBy(columnName + " " + direction).ToList();
                 int count = helper.GetFullCount();
                 return Json(new { data = patients,recordsTotal=count,recordsFiltered=count }, JsonRequestBehavior.AllowGet);
             }

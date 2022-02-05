@@ -16,7 +16,7 @@ namespace Hospital_Management_System.DAL
         }
 
         //View patient details
-        public List<Patient> GetData(int pageIndex, int pageSize, string searchValue)
+        public List<Patient> GetData(int pageIndex, int pageSize, string searchValue, string column, string order)
         {
 
             Connection();
@@ -29,6 +29,8 @@ namespace Hospital_Management_System.DAL
             cmd.Parameters.AddWithValue("@PageIndex", pageIndex);
             cmd.Parameters.AddWithValue("@PageSize", pageSize);
             cmd.Parameters.AddWithValue("@SearchValue", searchValue);
+            cmd.Parameters.AddWithValue("@ColumnName", column);
+            cmd.Parameters.AddWithValue("@Order", order);
 
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
