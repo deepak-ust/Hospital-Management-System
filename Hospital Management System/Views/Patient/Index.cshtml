@@ -171,7 +171,7 @@
             type: "POST",
             url: "/Patient/Delete/" + id,
             success: function () {
-                $('#PatientTable').DataTable().ajax.reload();
+                $('#PatientTable').DataTable().ajax.reload(null,false);
                 $("#deleteConfirm").modal("hide");
                 swal("Deleted!", "", "success");
             }
@@ -184,8 +184,8 @@
             url: "/Patient/Update",
             data: myFormData,
             success: function () {
+                $('#PatientTable').DataTable().ajax.reload(null, false);
                 $("#modalForm").modal("hide");
-                $('#PatientTable').DataTable().ajax.reload();
                 swal("Success!", message, "success");
             },
             error: function (error) {
@@ -200,7 +200,7 @@
     function nameValidation() {
         var letters = /^[A-za-z]+$/;
         if (!$("#name").val().match(letters) && $("#name").val() != "") {
-            $("#namevalidation").html("Give proper name");
+            $("#namevalidation").html("Cannot contain spaces, numbers or special characters");
         }
         else if ($("#name").val().length >= 31) {
             $("#namevalidation").html("Cannot contain more than 30 characters");
@@ -215,7 +215,7 @@
     function lastnameValidation() {
         var letters = /^[A-za-z]+$/;
         if (!$("#lastname").val().match(letters) && $("#lastname").val() != "") {
-            $("#lastnamevalidation").html("Give proper name");
+            $("#lastnamevalidation").html("Cannot contain spaces, numbers or special characters");
         }
         else if ($("#lastname").val().length >= 31) {
             $("#lastnamevalidation").html("Cannot contain more than 30 characters");
