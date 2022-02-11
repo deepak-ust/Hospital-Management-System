@@ -55,25 +55,6 @@ textarea {
     color: whitesmoke;
     font-weight: bold;
 }
-.swal-overlay {
-    background: none;
-    padding-left: 37%;
-    padding-bottom: 70%;
-    overflow-y: hidden;
-    opacity: 97%;
-}
-.swal-width {
-    width: 70%;
-}
-.swal-title {
-    opacity: 100%;
-    font-size: 20px;
-}
-.swal-modal {
-    width: 30%;
-    position: absolute;
-    padding-bottom: 2%;
-}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
