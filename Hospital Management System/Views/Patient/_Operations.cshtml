@@ -70,8 +70,8 @@
         if (operation == '@Operations.View') {
             $("#ModalTitle").html('@Titles.ViewTitle');
             $("#saveRecord").html("Save");
-            $("#saveRecord").attr('disabled', true);
-            $("#editRecord").attr('disabled', false);
+            $('#saveRecord').hide();
+            $('#editRecord').show();
             $('.disable').attr('disabled', true);
             $('#gender').val('@Model.Gender');
         }
@@ -79,8 +79,8 @@
             $('#ModalTitle').html('@Titles.EditTitle');
             $("#saveRecord").html("Save");
             $('.disable').attr('disabled', false);
-            $('#editRecord').attr('disabled', true);
-            $('#saveRecord').attr('disabled', false);
+            $('#editRecord').hide();
+            $('#saveRecord').show();
             $('#gender').val('@Model.Gender');
             message = "Patient Updated";
         }
@@ -89,7 +89,7 @@
             $("#ModalTitle").html('@Titles.AddTitle');
             $("#saveRecord").html("Add");
             $("#saveRecord").attr('disabled', false);
-            $("#editRecord").attr('disabled', true);
+            $('#editRecord').hide();
             $('.disable').attr('disabled', false);
             $('.form-control').attr('value', null);
             $("#date").val(today);
@@ -98,8 +98,8 @@
         $('#editRecord').click(function () {
             $('#ModalTitle').html('@Titles.EditTitle');
             $('.disable').attr('disabled', false);
-            $('#editRecord').attr('disabled', true);
-            $('#saveRecord').attr('disabled', false);
+            $('#editRecord').hide();
+            $('#saveRecord').show();
             message = "Patient Updated";
         })
         $(function () {

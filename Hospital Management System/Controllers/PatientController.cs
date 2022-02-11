@@ -105,7 +105,7 @@ namespace Hospital_Management_System.Controllers
                 string direction = Request["order[0][dir]"];
                 List<Patient> patients = helper.GetData(start, length, searchValue, columnName, direction);
                 patients = patients.OrderBy(columnName + " " + direction).ToList();
-                int count = helper.GetFullCount();
+                int count = helper.GetFullCount(searchValue);
                 return Json(new { data = patients,recordsTotal=count,recordsFiltered=count }, JsonRequestBehavior.AllowGet);
             }
             catch

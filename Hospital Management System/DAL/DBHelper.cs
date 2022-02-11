@@ -138,7 +138,7 @@ namespace Hospital_Management_System.DAL
             }
             return obj;
         }
-        public int GetFullCount()
+        public int GetFullCount(string searchValue)
         {
             int count = 0;
             Connection();
@@ -146,6 +146,7 @@ namespace Hospital_Management_System.DAL
             {
                 CommandType = CommandType.StoredProcedure
             };
+            cmd.Parameters.AddWithValue("@SearchValue", searchValue);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             con.Open();
