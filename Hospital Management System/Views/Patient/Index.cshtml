@@ -40,7 +40,6 @@
         </div>
     </div>
 </div>
-
 <div class="overflow:auto tbl">
     <button type="button" id="create" class="btn btn-success btn-position btn-rounded mb-4" onClick="operation('Add',0)">Add Patient</button>
     <table id="PatientTable" class="display table-bordered" style="width:100%">
@@ -65,14 +64,15 @@
                 "filter": true,
                 "order": [[0, "desc"]],
                 "dom": '<"top"f>rt<"bottom"ilp><"clear">',
+                "scrollY": "330px",
+                "scrollCollapse": false,
+                "initComplete": function (settings, json) {
+                    $('body').find('.dataTables_scrollBody').addClass("scrollbar");
+                },
                 columnDefs: [
                     {
                         "targets": [0],
                         "searchable": false
-                    },
-                    {
-                        "targets": [6],
-                        "orderable": false,
                     },
                     {
                         "targets": [2, 3, 4, 5, 6],
@@ -88,7 +88,7 @@
                     {
                         "data": "Id",
                         "name": "Id",
-                        "width": "10%",
+                        "width": "5%",
                         "render": function (id) {
                             return ('HM' + id + 'S');
                         }
@@ -115,7 +115,7 @@
                         "data": "Date",
                         "name": "Date",
                         "type": "DateTime",
-                        "width": "15%",
+                        "width": "14%",
                         "render": function (value) {
                             if (value === null) return "";
                             var pattern = /Date\(([^)]+)\)/;
@@ -127,7 +127,7 @@
                     {
                         "data": "InPatient",
                         "name": "InPatient",
-                        "width": "10%",
+                        "width": "8%",
                         "type": "bool",
                         "render": function (value) {
                             if (value === true) return "Yes";
@@ -136,9 +136,9 @@
                     },
                     {
                         "data": "Id",
-                        "width": "15%",
+                        "width": "9%",
                         "render": function (id) {
-                            return ('<button class="btn btn-primary btn-rounded mb-4" style="width:40px" title="View" onclick="operation(`View`,' + id + ')"><span class="glyphicon glyphicon-eye-open"></span></button><button class="btn btn-warning btn-rounded mb-4" style="margin-left:3px; width:40px;" title="Edit" onclick="operation(`Edit`,' + id + ')"><span class="glyphicon glyphicon-pencil"></span></button><button style="margin-left:3px; width:40px;" class="btn btn-danger btn-rounded mb-4" title="Delete" onclick="deleteData(' + id + ')"><span class="glyphicon glyphicon-trash"></span></button>');
+                            return ('<a class="view" title="View" onclick="operation(`View`,' + id + ')"><span class="glyphicon glyphicon-zoom-in"></span></a><a class="edit" title="Edit" onclick="operation(`Edit`,' + id + ')"><span class="glyphicon glyphicon-edit"></span></a><a class="delete" title="Delete" onclick="deleteData(' + id + ')"><span class="glyphicon glyphicon-trash"></span></a>');
                         }
                     }
                 ]
@@ -177,13 +177,13 @@
                 toastr.options = {
                     "closeButton": false,
                     "newestOnTop": false,
-                    "positionClass": "toast-top-right",
+                    "positionClass": "toast-bottom-right",
                     "preventDuplicates": false,
                     "onclick": null,
-                    "showDuration": "200",
-                    "hideDuration": "1000",
-                    "timeOut": "3000",
-                    "extendedTimeOut": "1000",
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
                     "showEasing": "swing",
                     "hideEasing": "linear",
                     "showMethod": "fadeIn",
@@ -200,13 +200,13 @@
                 toastr.options = {
                     "closeButton": false,
                     "newestOnTop": false,
-                    "positionClass": "toast-top-right",
+                    "positionClass": "toast-bottom-right",
                     "preventDuplicates": false,
                     "onclick": null,
-                    "showDuration": "200",
-                    "hideDuration": "1000",
-                    "timeOut": "3000",
-                    "extendedTimeOut": "1000",
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
                     "showEasing": "swing",
                     "hideEasing": "linear",
                     "showMethod": "fadeIn",
@@ -228,13 +228,13 @@
                 toastr.options = {
                     "closeButton": false,
                     "newestOnTop": false,
-                    "positionClass": "toast-top-right",
+                    "positionClass": "toast-bottom-right",
                     "preventDuplicates": false,
                     "onclick": null,
-                    "showDuration": "200",
-                    "hideDuration": "1000",
-                    "timeOut": "3000",
-                    "extendedTimeOut": "1000",
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
                     "showEasing": "swing",
                     "hideEasing": "linear",
                     "showMethod": "fadeIn",
@@ -251,13 +251,13 @@
                 toastr.options = {
                     "closeButton": false,
                     "newestOnTop": false,
-                    "positionClass": "toast-top-right",
+                    "positionClass": "toast-bottom-right",
                     "preventDuplicates": false,
                     "onclick": null,
-                    "showDuration": "200",
-                    "hideDuration": "1000",
-                    "timeOut": "3000",
-                    "extendedTimeOut": "1000",
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
                     "showEasing": "swing",
                     "hideEasing": "linear",
                     "showMethod": "fadeIn",

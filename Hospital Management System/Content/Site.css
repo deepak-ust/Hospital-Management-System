@@ -8,9 +8,8 @@
 }
 
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-    
+    /*padding-left: 15px;
+    padding-right: 15px;*/
 }
 
 input,
@@ -70,29 +69,32 @@ input[type=number] {
 }
 .scroll{
     -ms-overflow-style:none;
-    scrollbar-width:none;
+    overflow:hidden;
 }
 .footer {
-    border-top:solid;
-    border-color:black;
+    border-top: solid;
+    border-color: lightgreen;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    height:30px;
-    background-color: dimgray;
+    height: 30px;
+    background-color: black;
     color: white;
-    text-align:center;
-    font-weight:bold;
+    text-align: center;
 }
 .dataTables_length {
     margin-top: 11px;
-    margin-left: 50px;
+    margin-left: 250px;
     font-size: 15px;
     font-family: Calibri;
 }
+.dataTables_length:hover, .dataTables_length:active {
+   color:darkslategrey !important;
+}
 .dataTables_info{
     margin-top:1px;
+    position:fixed;
 }
 .btn-position{
     margin-bottom:15px;
@@ -110,14 +112,65 @@ input[type=number] {
     margin-top: -40px;
 }
 .navbar {
-    background-color: dimgray;
-    border-bottom:solid;
-    height:75px;
+    background-color: black;
+    border-bottom: solid;
+    border-color: lightgreen;
 }
 .toast-message{
     color:white;
     font-weight:bold;
 }
 #toast-container{
-    width:297px;
+    margin-bottom:20px !important;
+}
+.toast-success{
+    width:180px !important;
+}
+.toast-error {
+    width: 110px !important;
+}
+.view{
+    font-size:20px;
+}
+.glyphicon-zoom-in:hover, .glyphicon-zoom-in:active {
+    color: midnightblue;
+    transform: scale(1.3);
+}
+.edit {
+    font-size: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    color: orange;
+}
+.glyphicon-edit:hover, .glyphicon-edit:active {
+    color: orangered;
+    transform:scale(1.3);
+}
+.delete {
+    font-size: 20px;
+    color: red;
+}
+.glyphicon-trash:hover, .glyphicon-trash:active {
+    color: darkred;
+    transform: scale(1.3);
+}
+
+.dataTables_scrollBody {
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+    transform:scale(1.001);
+    margin-left:0.133mm;
+    border-top:solid;
+    border-top-color:transparent;
+}
+.dataTables_scrollBody::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-thumb {
+    background-color: #777;
+    border-radius: 5px;
+}
+.btn:hover, .btn:active {
+    transform: scale(1.1);
 }
