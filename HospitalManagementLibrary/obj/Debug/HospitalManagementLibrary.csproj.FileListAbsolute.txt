@@ -6,3 +6,11 @@ C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManageme
 C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
 C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll
 C:\Users\user\Desktop\New folder\Hospital Management System (1)\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.pdb
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.dll
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.pdb
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.AssemblyReference.cache
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CoreCompileInputs.cache
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll
+C:\Users\91623\Desktop\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.pdb
