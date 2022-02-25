@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq.Dynamic;
 using System.Linq;
+using System.Data;
+using ArrayToPdf;
 
 namespace Hospital_Management_System.Controllers
 {
@@ -91,7 +93,58 @@ namespace Hospital_Management_System.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-       //POST: Patient/PatientData
+        //[HttpGet]
+        //public ActionResult Print()
+        //{
+
+        //    DBHelper objdbhandle = new DBHelper();
+        //    List<Patient> objpatient = objdbhandle.GetAll();
+
+        //    var table = new DataTable("Example Table");
+        //    table.Columns.Add("Name", typeof(string));
+        //    table.Columns.Add("LastName", typeof(string));
+        //    table.Columns.Add("Age", typeof(int));
+        //    table.Columns.Add("Gender", typeof(string));
+        //    table.Columns.Add("dateTime", typeof(DateTime));
+        //    table.Columns.Add("InPatient", typeof(Boolean));
+
+
+        //    foreach (Patient patient in objpatient)
+        //        table.Rows.Add(patient.Name,patient.LastName,patient.Age,patient.Gender, patient.Date,patient.InPatient);
+
+        //    var pdf = table.ToPdf();
+        //    System.IO.File.WriteAllBytes(@"C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\PdfViewer\report.pdf", pdf);
+        //    return PartialView("_Operations");
+
+        //}
+
+        [HttpGet]
+        public ActionResult Print()
+        {
+
+            DBHelper objdbhandle = new DBHelper();
+            List<Patient> patientList = objdbhandle.GetAll();
+
+            var table = new DataTable("Report");
+            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("lastName", typeof(string));
+            table.Columns.Add("Age", typeof(int));
+            table.Columns.Add("Gender", typeof(string));
+            table.Columns.Add("Date", typeof(DateTime));
+            table.Columns.Add("In-Patient", typeof(bool));
+
+
+            foreach (Patient patient in patientList)
+                table.Rows.Add(patient.Name, patient.LastName, patient.Age, patient.Gender, patient.Date, patient.InPatient);
+
+            var pdf = table.ToPdf();
+            System.IO.File.WriteAllBytes(@"C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\PdfViewer\result.pdf",pdf);
+            return PartialView("_PrintPreview");
+
+        }
+
+
+        //POST: Patient/PatientData
         [HttpPost]
         public ActionResult PatientData()
         {

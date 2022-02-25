@@ -178,3 +178,12 @@ input[type=number] {
 {
     display:none;
 }
+.dropdown-toggle {
+    height:34px !important;
+}
+#btnPrint{
+    margin-bottom:14px;
+}
+.drop {
+    margin-top: -13px;
+}

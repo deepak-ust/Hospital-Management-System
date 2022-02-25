@@ -138,6 +138,47 @@ namespace Hospital_Management_System.DAL
             }
             return obj;
         }
+
+        public List<Patient> GetAll()
+        {
+            Connection();
+            List<Patient> PatientList = new List<Patient>();
+
+            SqlCommand cmd = new SqlCommand("GetAll", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                con.Open();
+                sd.Fill(dt);
+                con.Close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    PatientList.Add(
+                        new Patient
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Name = Convert.ToString(dr["Name"]),
+                            LastName = Convert.ToString(dr["LastName"]),
+                            Age= Convert.ToInt32(dr["Age"]),
+                            Gender = Convert.ToString(dr["Gender"]),
+                            Date = Convert.ToDateTime(dr["dateTime"]),
+                           InPatient= Convert.ToBoolean(dr["InPatient"]),
+                            
+
+                        });
+                }
+            }
+            catch (Exception )
+            {
+                throw;
+            }
+            return PatientList;
+        }
+
         public int GetFullCount(string searchValue)
         {
             int count = 0;
