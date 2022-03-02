@@ -46,10 +46,10 @@
 </div>
 
 
-<div class="modal fade  bd-example-modal-lg " id="PrintPreview" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" id="printform">
-        <div class="modal-content">
-        </div>
+<div class="modal fade  bd-example-modal-lg " id="PrintPreview" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true" style="margin-top:-73px">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="margin-left:50px" role="document" id="printform">
+        
+       
     </div>
 </div>
 
@@ -59,8 +59,8 @@
 
     <!-- Example split danger button -->
     <div class="btn-group">
-        <button type="button" class="btn btn-danger" onclick="PrintAll()">Print</button>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-danger"  style="margin-top: -13px"; onclick="PrintAll()">Print</button>
+        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" style=" margin-top: -13px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-caret-down" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu drop">
@@ -93,6 +93,11 @@
             $("#printform").html(res);
             $('#PrintPreview').modal('show');
         })
+       
+    }
+    function getprint() {
+        window.frames["print_frames"].window.focus();
+        window.frames["print_frames"].window.print();
     }
         function currentpage() {
             $("#PatientTable").DataTable().page.len(length).draw();
@@ -237,9 +242,14 @@
             );
         });
 
-        function PrintAll() {
-            $.get("/Patient/Print", function (res) {
-            });
+    function PrintAll() {
+        $.get("/Patient/Print", function (res) {
+            $("#printform").html(res);
+            $('#PrintPreview').modal('show');
+        });
+        setTimeout(getprint, 1000)
+    }
+    function getprint() {
             window.frames["print_frame"].window.focus();
             window.frames["print_frame"].window.print();
         }

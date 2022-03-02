@@ -216,10 +216,16 @@ C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Man
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\roslyn\vbc.rsp
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\roslyn\VBCSCompiler.exe
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\ArrayToPdf.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\HospitalManagementLibrary.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.DocumentObjectModel-gdi.dll
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.Rendering-gdi.dll
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.RtfRendering-gdi.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\Newtonsoft.Json.dll
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp-gdi.dll
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp.Charting-gdi.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Linq.Dynamic.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Net.Http.Formatting.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Web.Helpers.dll
@@ -231,7 +237,12 @@ C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Man
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Web.Webpages.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Web.Webpages.Razor.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\HospitalManagementLibrary.pdb
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.DocumentObjectModel-gdi.xml
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.Rendering-gdi.xml
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.RtfRendering-gdi.xml
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\Newtonsoft.Json.xml
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp-gdi.xml
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp.Charting-gdi.xml
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Net.Http.Formatting.xml
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Web.Http.xml
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Web.Http.WebHost.xml
@@ -242,24 +253,13 @@ C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Man
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Web.Helpers.xml
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\System.Web.Mvc.xml
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.csproj.AssemblyReference.cache
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.csproj.CoreCompileInputs.cache
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.csproj.CopyComplete
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.dll
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.pdb
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\ArrayToPdf.dll
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.DocumentObjectModel-gdi.dll
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.Rendering-gdi.dll
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.RtfRendering-gdi.dll
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp-gdi.dll
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp.Charting-gdi.dll
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.DocumentObjectModel-gdi.xml
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.Rendering-gdi.xml
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\MigraDoc.RtfRendering-gdi.xml
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp-gdi.xml
-C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\PdfSharp.Charting-gdi.xml
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\de\MigraDoc.DocumentObjectModel-gdi.resources.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\de\MigraDoc.Rendering-gdi.resources.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\de\MigraDoc.RtfRendering-gdi.resources.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\de\PdfSharp-gdi.resources.dll
 C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\bin\de\PdfSharp.Charting-gdi.resources.dll
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.csproj.AssemblyReference.cache
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.csproj.CoreCompileInputs.cache
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.csproj.CopyComplete
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.dll
+C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\obj\Debug\Hospital Management System.pdb
