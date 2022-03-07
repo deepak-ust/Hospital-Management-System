@@ -138,7 +138,7 @@ namespace Hospital_Management_System.Controllers
                 table.Rows.Add(patient.Name, patient.LastName, patient.Age, patient.Gender, patient.Date, patient.InPatient);
 
             var pdf = table.ToPdf();
-            System.IO.File.WriteAllBytes(@"C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\PdfViewer\result.pdf",pdf);
+            System.IO.File.WriteAllBytes(@"D:\Assingnment\Deepak\Hospital-Management-System\Hospital Management System\PdfViewer\result.pdf", pdf);
             return PartialView("_PrintPreview");
 
         }

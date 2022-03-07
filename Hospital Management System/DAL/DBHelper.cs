@@ -11,7 +11,7 @@ namespace Hospital_Management_System.DAL
         private SqlConnection con;
         private void Connection()
         {
-            string constring = "Data Source=ASUSX515;Initial Catalog=Patients;Integrated Security=True";
+            string constring = "Data Source=DESKTOP-46PCH8R;Initial Catalog=Patients;Integrated Security=True";
             con = new SqlConnection(constring);
         }
 

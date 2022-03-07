@@ -1,22 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Management System</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
-   
+    @Styles.Render("~/Content/MyCSS")
 
-    <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @Scripts.Render("~/Scripts/MyScript")
+
 </head>
 <body class="scroll">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,13 +23,6 @@
     <footer class="footer">
         <div style="padding-top:3px">&copy; @DateTime.Now.Year - Hospital Management System</div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src=" https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src=" https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-    <script src=" https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    
 </body>
 </html>
