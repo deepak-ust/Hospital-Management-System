@@ -62,3 +62,27 @@ D:\Assingnment\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\D
 D:\Assingnment\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
 D:\Assingnment\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll
 D:\Assingnment\Deepak\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.pdb
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.pdb
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\ArrayToPdf.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\MigraDoc.DocumentObjectModel-gdi.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\MigraDoc.Rendering-gdi.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\MigraDoc.RtfRendering-gdi.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\PdfSharp-gdi.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\PdfSharp.Charting-gdi.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\MigraDoc.DocumentObjectModel-gdi.xml
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\MigraDoc.Rendering-gdi.xml
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\MigraDoc.RtfRendering-gdi.xml
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\PdfSharp-gdi.xml
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\PdfSharp.Charting-gdi.xml
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\de\MigraDoc.DocumentObjectModel-gdi.resources.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\de\MigraDoc.Rendering-gdi.resources.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\de\MigraDoc.RtfRendering-gdi.resources.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\de\PdfSharp-gdi.resources.dll
+E:\Hospital Management System\HospitalManagementLibrary\bin\Debug\de\PdfSharp.Charting-gdi.resources.dll
+E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.AssemblyReference.cache
+E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CoreCompileInputs.cache
+E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
+E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll
+E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.pdb
