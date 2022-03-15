@@ -163,7 +163,7 @@ input[type=number] {
 }*/
 
 .dataTables_scrollBody {
-    overflow-x: scroll !important;
+    overflow-x: hidden !important;
     overflow-y: scroll !important;
     transform:scale(1.001);
     margin-left:0.133mm;
@@ -196,5 +196,13 @@ input[type=number] {
 }
 #close
 {
-    margin-bottom:50px;c
+    margin-bottom:50px;
+}
+
+.glyphicon-plus-sign {
+    color: green;
+}
+
+.glyphicon-minus-sign {
+    color: red;
 }

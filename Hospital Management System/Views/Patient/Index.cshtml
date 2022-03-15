@@ -74,6 +74,7 @@
     <table id="PatientTable" class="display table-bordered" style="width:100%">
         <thead class="hd">
             <tr>
+                <th></th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Age</th>
@@ -88,50 +89,63 @@
 
 <script>
 
-    function printall() {
+        function printall() {
         $.get("/Patient/Print", function (res) {
             $("#printform").html(res);
             $('#PrintPreview').modal('show');
         })
        
     }
-    function getprint() {
+
+        function getprint() {
         window.frames["print_frames"].window.focus();
         window.frames["print_frames"].window.print();
     }
+
         function currentpage() {
             $("#PatientTable").DataTable().page.len(length).draw();
-        }
+    }
+
         $(document).on('click', '#btnExcel', function () {
             var info = $("#PatientTable").DataTable().page.info();
             length = info.length;
             $("#PatientTable").DataTable().page.len(info.recordsTotal).draw();
             setTimeout(excelFunction, 2000);
         });
+
         function excelFunction() {
 
             $(".buttons-excel")[0].click();
             setTimeout(currentpage, 2000);
 
-        }
+    }
+
         $(document).on('click', '#btnPdf', function () {
             var info = $("#PatientTable").DataTable().page.info();
             length = info.length;
             $("#PatientTable").DataTable().page.len(info.recordsTotal).draw();
             setTimeout(pdfFunction, 2000);
         });
+
+
+        function changeGliphiconColour(x) {
+            x.classList.toggle("glyphicon-minus-sign");
+        }
+
+
         function pdfFunction() {
 
             $(".buttons-pdf")[0].click();
             setTimeout(currentpage, 2000);
 
-        }
+    }
+
         $(document).ready(function () {
             $('#PatientTable').DataTable(
                 {
                     "serverSide": true,
                     "filter": true,
-                    "order": [[0, "desc"]],
+                    "order": [[1, "desc"]],
                     "dom": '<"top"Bf>rt<"bottom"ilp><"clear">',
                     
                     buttons:
@@ -139,41 +153,37 @@
                             {
                                 extend: 'excel',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5]
+                                    columns: [ 1, 2, 3, 4, 5 , 6]
                                 }
-                            },
-                            {
-                                extend: 'pdf',
-                                download: 'open',
-                                exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5]
-                                }
-                            },
-                            {
-                                extend: 'print',
-                                exportOptions: {
-
-                                    columns: [0, 1, 2, 3, 4, 5]
-                                }
-
                             }
+                            
 
                         ],
 
                     "scrollY": "350px",
-                    "scrollX": "400px",
+                    
                     "scrollCollapse": false,
                     "initComplete": function (settings, json) {
                         $('body').find('.dataTables_scrollBody').addClass("scrollbar");
                     },
+                    "responsive": {
+                        details: {
+                            type: 'column'
+                        }
+                    },
                     columnDefs: [
                         {
-                            "targets": [0],
+                            "className": 'dtr-control',
+                            "orderable": false,
+                            "targets": 0
+                        },
+                        {
+                            "targets": [1],
                             "searchable": false
                         },
                         {
-                            "targets": [2, 3, 4, 5, 6],
-                            className: 'dt-head-center dt-body-center'
+                            "targets": [3, 4, 5, 6, 7],
+                            "className": 'dt-head-center dt-body-center'
                         }
                     ],
                     "ajax": {
@@ -182,6 +192,11 @@
                         "datatype": "json"
                     },
                     "columns": [
+                        {
+                            "data": null,
+                            "width": "3%",
+                            "defaultContent": '<i onclick="changeGliphiconColour(this)" class = "glyphicon glyphicon-plus-sign"> </ i>',
+                        },
                         {
                             "data": "Id",
                             "name": "Id",
@@ -243,17 +258,19 @@
             );
         });
 
-    function PrintAll() {
+        function PrintAll() {
         $.get("/Patient/Print", function (res) {
             $("#printform").html(res);
             $('#PrintPreview').modal('show');
         });
         setTimeout(getprint, 1000)
     }
-    function getprint() {
+
+        function getprint() {
             window.frames["print_frame"].window.focus();
             window.frames["print_frame"].window.print();
-        }
+    }
+
         function operation(op, id) {
             var url = "/Patient/Get?operation=" + op + "&id=" + id;
             $("#modalForm").modal('show');
@@ -264,7 +281,8 @@
                     $('#mbody').html(data);
                 }
             })
-        }
+    }
+
         function deleteData(id) {
             var url = "/Patient/Get?operation=Delete&id=" + id;
             $("#deleteConfirm").modal('show');
@@ -275,7 +293,8 @@
                     $('#deletebody').html(data);
                 }
             })
-        }
+    }
+
         function confirmDelete(id) {
             $.ajax({
                 type: "POST",
@@ -324,7 +343,8 @@
                     toastr["error"]("Error")
                 }
             });
-        }
+    }
+
         $("#saveRecord").click(function () {
             var myFormData = $("#SubmitForm").serialize();
             $.ajax({
@@ -376,6 +396,7 @@
                 }
             });
         })
+
         function nameValidation() {
             var letters = /^[A-za-z]+$/;
             if (!$("#name").val().match(letters) && $("#name").val() != "") {
@@ -390,7 +411,8 @@
             else {
                 $("#namevalidation").html("");
             }
-        }
+    }
+
         function lastnameValidation() {
             var letters = /^[A-za-z]+$/;
             if (!$("#lastname").val().match(letters) && $("#lastname").val() != "") {
@@ -405,7 +427,8 @@
             else {
                 $("#lastnamevalidation").html("");
             }
-        }
+    }
+
         function ageValidation() {
             if ($("#age").val() < 0 && $("#age").val() != "") {
                 $("#agevalidation").html("Give proper age");
@@ -419,7 +442,8 @@
             else {
                 $("#agevalidation").html("");
             }
-        }
+    }
+
         function genderValidation() {
             if ($("#gender").val() == "Select") {
                 $("#gendervalidation").html("Select gender");
@@ -427,7 +451,8 @@
             else {
                 $("#gendervalidation").html("");
             }
-        }
+    }
+
         function dateValidation() {
             var dateFormat = /^(?<!\d)(\d{2}|\d{4})(?!\d)[\/-](0?[1-9]|1[0-2])[\/-](0?[1-9]|[1-2][0-9]|3[01])/;
             if (!$("#date").val().match(dateFormat)) {
@@ -436,5 +461,6 @@
             else {
                 $("#datevalidation").html("");
             }
-        }
+    }
+
 </script>
