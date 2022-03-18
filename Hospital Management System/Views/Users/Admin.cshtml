@@ -1,0 +1,112 @@
+﻿
+<h2 style="color: white; font-size: xx-large; font-weight: 800; font-family: Lucida Console;margin-left:5%; ">ADMIN PANEL</h2>
+
+<button type="button" class="btn btn-color" style="width: 80px; margin-left: 90%; margin-top: -7%;"><a href="Logout" style="text-decoration: none; color: white;">LogOut</a></button>
+<div class="grid-container" style="display: flex;justify-content:center;Margin-top:7%;">
+    <div class="grid-item">
+        @*<div class="card">
+            <div class="card2" style="display: flex;justify-content:center;">*@
+                <button style="margin:auto;" onclick="Register()">
+                    REGISTER
+                </button>
+            @*</div>
+        </div>*@
+    </div>
+    <div class="grid-item">
+        @*<div class="card">
+            <div class="card2" style="display: flex; justify-content: center;">*@
+                <button style="margin:auto;">
+                    USER INFO
+                </button>
+            @*</div>
+        </div>*@
+    </div>
+    <div class="grid-item">
+        @*<div class="card">
+            <div class="card2" style="display: flex; justify-content: center;">*@ 
+                <button style="margin:auto;">
+                    PATIENTS TAB
+                </button>
+            @*</div>
+        </div>*@
+    </div>
+    @*<div class="grid-item">
+        <div class="card" >
+            <div class="card2" style="display: flex; justify-content: center;">
+                <button style="margin:auto;">
+                    Button
+                </button>
+            </div>
+        </div>
+    </div>*@
+</div>
+
+<div class="modal fade  bd-example-modal-lg " id="RegUser" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true" style="margin-top:-73px">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" id="Regform" style="width:94%;margin-left:3%;margin-right:3%">
+
+
+    </div>
+</div>
+
+
+<script>
+    function Register() {
+        $.get("/Users/CreateUsers", function (res) {
+            $("#Regform").html(res);
+            $('#RegUser').modal('show');
+        })
+
+    }
+</script>
+
+<style>
+    .grid-item{
+        display:flex;
+        margin-left:2%;
+    }
+
+    button {
+        padding: 0.8em 1.8em;
+        border: 2px solid #17C3B2;
+        position: relative;
+        overflow: hidden;
+        background-color: transparent;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 16px;
+        transition: .3s;
+        z-index: 1;
+        font-family: inherit;
+        color: #17C3B2;
+    }
+
+        button::before {
+            content: '';
+            width: 0;
+            height: 300%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            background: #17C3B2;
+            transition: .5s ease;
+            display: block;
+            z-index: -1;
+        }
+
+        button:hover::before {
+            width: 105%;
+        }
+
+        button:hover {
+            color: #111;
+        }
+    .container {
+        background-color: black;
+        height: 70vh;
+        border-radius: 50px 10px;
+    }
+    .btn-color {
+        background-color: #9B59B6;
+    }
+</style>

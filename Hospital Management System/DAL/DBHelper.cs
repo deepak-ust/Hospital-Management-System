@@ -11,7 +11,7 @@ namespace Hospital_Management_System.DAL
         private SqlConnection con;
         private void Connection()
         {
-            string constring = "Data Source=DESKTOP-UFPJD7F;Initial Catalog=Patients;Integrated Security=True";
+            string constring = "Data Source=DESKTOP-BC5TS1F\\MSSQLSERVER2019;Initial Catalog=Patient;Integrated Security=True";
             con = new SqlConnection(constring);
         }
 
@@ -202,6 +202,124 @@ namespace Hospital_Management_System.DAL
                 }
             }
             return count;
+        }
+
+
+        public int GetRegister(string Username, string Password)
+        {
+            Connection();
+            SqlCommand cmd = new SqlCommand("User_Login", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@Password", Password);
+            SqlParameter objLogin = new SqlParameter();
+            objLogin.ParameterName = "@IsValid";
+            objLogin.Direction = ParameterDirection.Output;
+            objLogin.SqlDbType = SqlDbType.Bit;
+            cmd.Parameters.Add(objLogin);
+                
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            int result = Convert.ToInt32(objLogin.Value);
+            con.Close();
+            return result;
+            
+            //if (i >= 1)
+            //    return true;
+            //else
+            //    return false;
+        }
+        public int IsAdminCheck(string Username, string Password)
+        {
+            Connection();
+            SqlCommand cmd = new SqlCommand("IsAdminUser", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@Password", Password);
+            SqlParameter objLogin = new SqlParameter();
+            objLogin.ParameterName = "@IsValid";
+            objLogin.Direction = ParameterDirection.Output;
+            objLogin.SqlDbType = SqlDbType.Bit;
+            cmd.Parameters.Add(objLogin);
+
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            int result = Convert.ToInt32(objLogin.Value);
+            con.Close();
+            return result;
+        }
+
+        public Registration GetByUsername(string Username)
+        {
+            Connection();
+            Registration obj = new Registration();
+            SqlCommand cmd = new SqlCommand("GetByUserName", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@userName", Username);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                sd.Fill(dt);
+                con.Close();
+                if (dt.Rows.Count > 0)
+                {
+                    obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+                    obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                    obj.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
+                    obj.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
+                    obj.PhoneNumber = Convert.ToString(dt.Rows[0]["PhoneNumber"]);
+                    obj.Password = Convert.ToString(dt.Rows[0]["Password"]);
+                    obj.IsAdmin = Convert.ToInt32(dt.Rows[0]["IsAdmin"]);
+                }
+                
+            }
+            return obj;
+        }
+
+        public bool AddUser(Registration smodel)
+        {
+            try
+            {
+                Connection();
+                SqlCommand cmd = new SqlCommand("RegUsers", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@StdId", smodel.Id);
+                cmd.Parameters.AddWithValue("@Name", smodel.Name);
+                cmd.Parameters.AddWithValue("@UserName", smodel.UserName);
+                cmd.Parameters.AddWithValue("@Designation", smodel.Designation);
+                cmd.Parameters.AddWithValue("@PhoneNumber", smodel.PhoneNumber);
+                cmd.Parameters.AddWithValue("@Password", smodel.Password);        
+                cmd.Parameters.AddWithValue("@IsAdmin", 0);
+
+                con.Open();
+                int i = cmd.ExecuteNonQuery();
+                con.Close();
+
+                if (i >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                string excep = ex.Message;
+                return false;
+            }
+            finally
+            {
+                Console.WriteLine("finally executed");
+            }
         }
     }
 }

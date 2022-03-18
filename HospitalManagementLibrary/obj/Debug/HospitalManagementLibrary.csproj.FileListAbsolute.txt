@@ -86,3 +86,26 @@ E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManage
 E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
 E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll
 E:\Hospital Management System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.pdb
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\HospitalManagementLibrary.pdb
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\ArrayToPdf.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\MigraDoc.DocumentObjectModel-gdi.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\MigraDoc.Rendering-gdi.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\MigraDoc.RtfRendering-gdi.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\PdfSharp-gdi.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\PdfSharp.Charting-gdi.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\MigraDoc.DocumentObjectModel-gdi.xml
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\MigraDoc.Rendering-gdi.xml
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\MigraDoc.RtfRendering-gdi.xml
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\PdfSharp-gdi.xml
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\PdfSharp.Charting-gdi.xml
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\MigraDoc.DocumentObjectModel-gdi.resources.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\MigraDoc.Rendering-gdi.resources.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\MigraDoc.RtfRendering-gdi.resources.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\PdfSharp-gdi.resources.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\PdfSharp.Charting-gdi.resources.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CoreCompileInputs.cache
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.pdb

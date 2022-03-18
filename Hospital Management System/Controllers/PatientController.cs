@@ -15,6 +15,7 @@ namespace Hospital_Management_System.Controllers
     {
        
         // GET: Patient
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -138,7 +139,7 @@ namespace Hospital_Management_System.Controllers
                 table.Rows.Add(patient.Name, patient.LastName, patient.Age, patient.Gender, patient.Date, patient.InPatient);
 
             var pdf = table.ToPdf();
-            System.IO.File.WriteAllBytes(@"E:\Hospital Management System\Hospital Management System\PdfViewer\result.pdf", pdf);
+            System.IO.File.WriteAllBytes(@"G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management System\PdfViewer\result.pdf", pdf);
             return PartialView("_PrintPreview");
 
         }
@@ -166,5 +167,7 @@ namespace Hospital_Management_System.Controllers
                 return View();
             }
         }
+
+
     }
 }
