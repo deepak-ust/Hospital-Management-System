@@ -25,16 +25,16 @@
                     <div class="form-group" style="margin-left:8%">
                         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @name = "name", @onkeyup = "nameValidation()", @autocomplete = "off", @style = "margin-left:6%" } })
+                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @id = "namevalidation" })</small>
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-left:8%">
                         @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
-                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control disable", @id = "username", @name = "username", @onkeyup = "UsernameValidation()", @autocomplete = "off", @style = "margin-left:6%" } })
+                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", @id = "usernamevalidation" })</small>
                         </div>
                     </div>
 
@@ -55,23 +55,23 @@
                                 <option value="Doctor">Doctor</option>
                                 <option value="Receptionist">Receptionist</option>
                             </select>
-                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })</small>
+                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger", @id = "des" })</small>
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-left:8%">
                         @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
-                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control disable", @id = "phoneNumber", @name = "phoneNumber", @onkeyup = "phoneNumberValidation()", @style = "margin-left:6%" } })
+                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger", @id = "phoneNumbervalidation" })</small>
                         </div>
                     </div>
 
                     <div id="pwd" class="form-group" style="margin-left:8%">
                         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control disable", @id = "password", @name = "password", @onkeyup = "passwordValidation()", @style = "margin-left:6%" } })
+                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @id = "passwordvalidation" })</small>
                         </div>
                     </div>
 
@@ -126,9 +126,9 @@
        
     });
 
-
     $("#saveUsr").click(function () {
         var myFormData = $("#SubmitUser").serialize();
+       
         $.ajax({
             type: "POST",
             url: "/Users/UpdateUser",
@@ -155,10 +155,10 @@
             },
             error: function (error) {
                 nameValidation();
-                lastnameValidation();
-                ageValidation();
-                genderValidation();
-                dateValidation();
+                UsernameValidation();
+                phoneNumberValidation();
+                validateDesignation();
+                passwordValidation();
                 toastr.options = {
                     "closeButton": false,
                     "newestOnTop": false,
@@ -178,6 +178,81 @@
             }
         });
     })
+
+    function nameValidation() {
+        var letters = /^[A-za-z]+$/;
+        if (!$("#name").val().match(letters) && $("#name").val() != "") {
+            $("#namevalidation").html("Cannot contain spaces, numbers or special characters");
+        }
+        else if ($("#name").val().length >= 31) {
+            $("#namevalidation").html("Cannot contain more than 30 characters");
+        }
+        else if ($("#name").val() == "") {
+            $("#namevalidation").html("Please provide Name");
+        }
+        else {
+            $("#namevalidation").html("");
+        }
+    }
+
+    function UsernameValidation() {
+        
+        if ($("#username").val().length >= 21) {
+            $("#usernamevalidation").html("Cannot contain more than 30 characters");
+        }
+        else if ($("#username").val() == "") {
+            $("#usernamevalidation").html("Please provide UserName");
+        }
+        else {
+            $("#usernamevalidation").html("");
+        }
+    }
+
+    function phoneNumberValidation() {
+      
+     var phoneno = /^\d{10}$/;
+        if (!$("#phoneNumber").val().match(phoneno) && $("#phoneNumber").val() != "") {
+            $("#phoneNumbervalidation").html("Cannot contain spaces, special characters");
+        }
+        else if ($("#phoneNumber").val().length >= 11) {
+            $("#phoneNumbervalidation").html("Cannot contain more than 10 numbers");
+        }
+        else if ($("#phoneNumber").val() == "") {
+            $("#phoneNumbervalidation").html("Please provide phoneNumber");
+        }
+        else {
+            $("#phoneNumbervalidation").html("");
+        }
+        
+    }
+
+    function passwordValidation() {
+
+        if ($("#password").val().length < 6) {
+            $("#passwordvalidation").html("Please enter password of length 6");
+        }
+        else if ($("#password").val() == "") {
+            $("#passwordvalidation").html("Please provide password");
+        }
+        else {
+            $("#passwordvalidation").html("");
+        }
+    }
+
+    function validateDesignation() {
+        var standard = $("#Designation").val();
+        if (standard == "Select") {
+            $("#des").html("Please select a Designation");
+        }
+        if (standard.length <= 0) {
+            $("#des").html("Please select a Designation");
+            
+            return false;
+        } else {
+            $("#des").html("");
+           
+        }
+    }
 </script>
 
 

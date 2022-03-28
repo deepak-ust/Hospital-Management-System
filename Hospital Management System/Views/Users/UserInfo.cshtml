@@ -22,6 +22,7 @@
         </div>
     </div>
 </div>
+<button type="button" class="btn" style="background-color:black;width: 80px; margin-left:102%; margin-top: -5%;color:white;" onclick="Logout()">LogOut</button>
 
 <div class="modal fade  bd-example-modal-lg " id="RegUser" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true" style="margin-top:-73px">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document" id="Regform" style="width:94%;margin-left:3%;margin-right:3%">
@@ -234,6 +235,11 @@
             $('#PrintPreview').modal('show');
         })
 
+    }
+
+       function Logout() {
+        $.get("/Users/Logout");
+        location.reload();
     }
 
     function printAll() {

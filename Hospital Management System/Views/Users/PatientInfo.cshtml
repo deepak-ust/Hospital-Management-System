@@ -22,7 +22,7 @@
     </div>
 </div>
 
-
+<button type="button" class="btn" style="background-color:black;width: 80px; margin-left:102%; margin-top: -5%;color:white;" onclick="Logout()">LogOut</button>
 
 <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" id="deleteform">
@@ -83,9 +83,9 @@
                 <th>Date (D/M/Y)</th>
                 <th>In-Patient</th>
                 @*<th>Created By</th>
-                <th>Created Date</th>
-                <th>Modified By</th>
-                <th>Modified Date</th>*@
+                    <th>Created Date</th>
+                    <th>Modified By</th>
+                    <th>Modified Date</th>*@
                 <th>Action</th>
             </tr>
         </thead>
@@ -93,7 +93,10 @@
 </div>
 
 <script>
-
+    function Logout() {
+        $.get("/Users/Logout");
+        location.reload();
+    }
     function printall() {
         $.get("/Users/PrintPatients", function (res) {
             $("#printform").html(res);
@@ -163,7 +166,7 @@
     }
     var PatTable
     $(document).ready(function () {
-        PatTable =$('#PatientTable').DataTable(
+        PatTable = $('#PatientTable').DataTable(
             {
                 "serverSide": true,
                 "filter": true,
