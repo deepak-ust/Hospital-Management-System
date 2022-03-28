@@ -54,12 +54,17 @@ namespace Hospital_Management_System.DAL
                             Gender = Convert.ToString(dr["Gender"]),
                             Date = Convert.ToDateTime(dr["dateTime"]),
                             InPatient = Convert.ToBoolean(dr["InPatient"]),
-                            Deleted = Convert.ToBoolean(dr["Deleted"])
+                            Deleted = Convert.ToBoolean(dr["Deleted"]),
+                            Created_by = Convert.ToString(dr["Created_by"]),
+                            Created_date = Convert.ToString(dr["Created_date"]),
+                            Modified_by = Convert.ToString(dr["Modified_by"]),
+                            Modified_date = Convert.ToString(dr["Modified_date"]),
                         });
                 }
             }
             return datalist;
         }
+
 
         //Update or add patient details
         public bool UpdateDetails(Patient obj)
@@ -78,6 +83,10 @@ namespace Hospital_Management_System.DAL
             cmd.Parameters.AddWithValue("@Date", obj.Date);
             cmd.Parameters.AddWithValue("@InPatient", obj.InPatient);
             cmd.Parameters.AddWithValue("@Deleted", obj.Deleted);
+            cmd.Parameters.AddWithValue("@Created_by", obj.Created_by);
+            cmd.Parameters.AddWithValue("@Created_date", obj.Created_date);
+            cmd.Parameters.AddWithValue("@Modified_by", obj.Modified_by);
+            cmd.Parameters.AddWithValue("@Modified_date", obj.Modified_date);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -99,6 +108,26 @@ namespace Hospital_Management_System.DAL
             };
 
             cmd.Parameters.AddWithValue("@PatId", id);
+
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (i >= 1)
+                return true;
+            else
+                return false;
+        }
+
+        public bool DeleteUser(int id)
+        {
+            Connection();
+            SqlCommand cmd = new SqlCommand("DeleteUser", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.AddWithValue("@Id", id);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -135,6 +164,10 @@ namespace Hospital_Management_System.DAL
                 obj.Date = Convert.ToDateTime(dt.Rows[0]["dateTime"]);
                 obj.InPatient = Convert.ToBoolean(dt.Rows[0]["InPatient"]);
                 obj.Deleted = Convert.ToBoolean(dt.Rows[0]["Deleted"]);
+                obj.Created_by = Convert.ToString(dt.Rows[0]["Created_by"]);
+                obj.Created_date = Convert.ToString(dt.Rows[0]["Created_date"]);
+                obj.Modified_by = Convert.ToString(dt.Rows[0]["Modified_by"]);
+                obj.Modified_date = Convert.ToString(dt.Rows[0]["Modified_date"]);           
             }
             return obj;
         }
@@ -166,8 +199,11 @@ namespace Hospital_Management_System.DAL
                             Age= Convert.ToInt32(dr["Age"]),
                             Gender = Convert.ToString(dr["Gender"]),
                             Date = Convert.ToDateTime(dr["dateTime"]),
-                           InPatient= Convert.ToBoolean(dr["InPatient"]),
-                            
+                            InPatient= Convert.ToBoolean(dr["InPatient"]),
+                            Created_by = Convert.ToString(dr["Created_by"]),
+                            Created_date = Convert.ToString(dr["Created_date"]),
+                            Modified_by = Convert.ToString(dr["Modified_by"]),
+                            Modified_date = Convert.ToString(dr["Modified_date"]),
 
                         });
                 }
@@ -204,6 +240,30 @@ namespace Hospital_Management_System.DAL
             return count;
         }
 
+        public int GetFullCountOfUsers(string searchValue)
+        {
+            int count = 0;
+            Connection();
+            SqlCommand cmd = new SqlCommand("GetFullCountOfUser", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@SearchValue", searchValue);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                sd.Fill(dt);
+                con.Close();
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    count = Convert.ToInt32(row["Column1"]);
+                }
+            }
+            return count;
+        }
 
         public int GetRegister(string Username, string Password)
         {
@@ -286,21 +346,25 @@ namespace Hospital_Management_System.DAL
             return obj;
         }
 
-        public bool AddUser(Registration smodel)
+        public bool AddUser(Registration rmodel)
         {
             try
             {
                 Connection();
-                SqlCommand cmd = new SqlCommand("RegUsers", con);
+                SqlCommand cmd = new SqlCommand("AddUsers", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@StdId", smodel.Id);
-                cmd.Parameters.AddWithValue("@Name", smodel.Name);
-                cmd.Parameters.AddWithValue("@UserName", smodel.UserName);
-                cmd.Parameters.AddWithValue("@Designation", smodel.Designation);
-                cmd.Parameters.AddWithValue("@PhoneNumber", smodel.PhoneNumber);
-                cmd.Parameters.AddWithValue("@Password", smodel.Password);        
+                cmd.Parameters.Clear();
+             
+                cmd.Parameters.AddWithValue("@Name", rmodel.Name);
+                cmd.Parameters.AddWithValue("@UserName", rmodel.UserName);
+                cmd.Parameters.AddWithValue("@Designation", rmodel.Designation);
+                cmd.Parameters.AddWithValue("@PhoneNumber", rmodel.PhoneNumber);
+                cmd.Parameters.AddWithValue("@Password", rmodel.Password);        
                 cmd.Parameters.AddWithValue("@IsAdmin", 0);
+                cmd.Parameters.AddWithValue("@Created_by", rmodel.Created_by);
+                cmd.Parameters.AddWithValue("@Created_date", rmodel.Created_date);
+                cmd.Parameters.AddWithValue("@Modified_by", rmodel.Modified_by);
+                cmd.Parameters.AddWithValue("@Modified_date", rmodel.Modified_date);
 
                 con.Open();
                 int i = cmd.ExecuteNonQuery();
@@ -320,6 +384,183 @@ namespace Hospital_Management_System.DAL
             {
                 Console.WriteLine("finally executed");
             }
+        }
+
+
+        public List<Registration> GetReg(int offsetValue, int PagingSize, string search)
+        {
+            Connection();
+            List<Registration> reglist = new List<Registration>();
+
+            SqlCommand cmd = new SqlCommand("GetRegisters", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@offsetValue", offsetValue);
+            cmd.Parameters.AddWithValue("@PagingSize", PagingSize);
+            cmd.Parameters.AddWithValue("@search", search);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                reglist.Add(
+                    new Registration
+                    {
+                        Id = Convert.ToInt32(dr["Id"]),
+                        Name = Convert.ToString(dr["Name"]),
+                        UserName = Convert.ToString(dr["UserName"]),
+                        Designation = Convert.ToString(dr["Designation"]),
+                        PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
+                        IsAdmin = Convert.ToInt32(dr["IsAdmin"]),
+                        Created_by = Convert.ToString(dr["Created_by"]),
+                        Created_date = Convert.ToString(dr["Created_date"]),
+                        Modified_by = Convert.ToString(dr["Modified_by"]),
+                        Modified_date = Convert.ToString(dr["Modified_date"]),
+                    });
+            }
+            return reglist;
+        }
+        public List<Registration> GetUserInfo(int pageIndex, int pageSize, string searchValue)
+        {
+
+            Connection();
+            List<Registration> datalists = new List<Registration>();
+
+            SqlCommand cmd = new SqlCommand("GetRegisters", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@PageIndex", pageIndex);
+            cmd.Parameters.AddWithValue("@PageSize", pageSize);
+            cmd.Parameters.AddWithValue("@SearchValue", searchValue);
+           
+
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+
+                sd.Fill(dt);
+                con.Close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    datalists.Add(
+                        new Registration
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Name = Convert.ToString(dr["Name"]),
+                            UserName = Convert.ToString(dr["UserName"]),
+                            Designation = Convert.ToString(dr["Designation"]),
+                            PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
+                            IsAdmin = Convert.ToInt32(dr["IsAdmin"]),
+                            
+                        });
+                }
+            }
+            return datalists;
+        }
+
+        
+        public Registration GetByIdOfUser(int id)
+        {
+            Connection();
+            Registration obj = new Registration();
+            SqlCommand cmd = new SqlCommand("GetByIdOfUser", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@Id", id);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                sd.Fill(dt);
+                con.Close();
+                obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+                obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                obj.UserName = Convert.ToString(dt.Rows[0]["UserName"]);              
+                obj.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
+                obj.PhoneNumber = Convert.ToString(dt.Rows[0]["PhoneNumber"]);
+                obj.Password = Convert.ToString(dt.Rows[0]["Password"]);
+                obj.IsAdmin = Convert.ToInt32(dt.Rows[0]["IsAdmin"]);
+                obj.Created_by = Convert.ToString(dt.Rows[0]["Created_by"]);
+                obj.Created_date = Convert.ToString(dt.Rows[0]["Created_date"]);
+               
+            }
+            return obj;
+        }
+
+        public bool UpdateUserDetails(Registration obj)
+        {
+            Connection();
+            SqlCommand cmd = new SqlCommand("UpdateUserDetails", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.AddWithValue("@Id", obj.Id);
+            cmd.Parameters.AddWithValue("@Name", obj.Name);
+            cmd.Parameters.AddWithValue("@UserName", obj.UserName);
+            cmd.Parameters.AddWithValue("@Designation", obj.Designation);
+            cmd.Parameters.AddWithValue("@PhoneNumber", obj.PhoneNumber);
+            cmd.Parameters.AddWithValue("@Password", obj.Password);
+            cmd.Parameters.AddWithValue("@IsAdmin", 0);
+            cmd.Parameters.AddWithValue("@Created_by", obj.Created_by);
+            cmd.Parameters.AddWithValue("@Created_date", obj.Created_date);
+            cmd.Parameters.AddWithValue("@Modified_by", obj.Modified_by);
+            cmd.Parameters.AddWithValue("@Modified_date", obj.Modified_date);
+
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (i >= 1)
+                return true;
+            else
+                return false;
+        }
+        public List<Registration> GetAllUSers()
+        {
+            Connection();
+            List<Registration> registredList = new List<Registration>();
+
+            SqlCommand cmd = new SqlCommand("GetAllUsers", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                con.Open();
+                sd.Fill(dt);
+                con.Close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    registredList.Add(
+                        new Registration
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Name = Convert.ToString(dr["Name"]),
+                            UserName = Convert.ToString(dr["UserName"]),
+                            Designation = Convert.ToString(dr["Designation"]),
+                            PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
+                            IsAdmin = Convert.ToInt32(dr["IsAdmin"]),
+                        });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return registredList;
         }
     }
 }

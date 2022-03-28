@@ -8,6 +8,7 @@ using System.Linq.Dynamic;
 using System.Linq;
 using System.Data;
 using ArrayToPdf;
+using System.Web.Security;
 
 namespace Hospital_Management_System.Controllers
 {
@@ -30,6 +31,12 @@ namespace Hospital_Management_System.Controllers
             DBHelper helper = new DBHelper();
             try
             {
+                bool authenticated = Request.IsAuthenticated;
+                var AdminUser = User.Identity.Name;
+                objPatient.Created_by = AdminUser;
+                objPatient.Created_date = DateTime.Now.ToString();
+                objPatient.Modified_by = AdminUser;
+                objPatient.Modified_date = DateTime.Now.ToString();
                 if (ModelState.IsValid)
                 {
                     result = helper.UpdateDetails(objPatient);
@@ -144,7 +151,11 @@ namespace Hospital_Management_System.Controllers
 
         }
 
-
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Users");
+        }
         //POST: Patient/PatientData
         [HttpPost]
         public ActionResult PatientData()

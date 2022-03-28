@@ -1,79 +1,183 @@
 ﻿@model Hospital_Management_System.Models.Registration
+@using HospitalManagementLibrary.Enum;
+@using HospitalManagementLibrary.Constants;
 
 <div class="modal-content" style="width: 40%;">
-
-    <div class="modal-header text-center" style="background-color:white" margin-top:-73px">
-        <h4 class="modal-title" style=" display:flex;justify-content:center"> REGISTER USER</h4>
-        <b id="ModalTitle"></b>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
-    <div class="modal-body" style="background-color: white">
+    <fieldset id="SubmitUser">
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-horizontal" >
-            
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group" style="margin-left:8%">
-                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@style="margin-left:6%" }  })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="modal-header text-center" style="background-color:white" margin-top:-73px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style=" display:flex;justify-content:center" id="heading"> REGISTER USER</h4>
+                <b id="ModalTitle"></b>
 
-                <div class="form-group" style="margin-left:8%">
-                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:6%" } })
-                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            </div>
 
-                <div class="form-group" style="margin-left:8%">
-                    @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:6%" } })
-                        @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="modal-body" style="background-color: white">
+                <div class="form-horizontal">
 
-                <div class="form-group" style="margin-left:8%">
-                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:6%" } })
-                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
+                    <div class="form-group" style="margin-left:8%">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group" style="margin-left:8%">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:6%" } })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <div class="form-group" style="margin-left:8%">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                
+                    @*<div class="form-group" style="margin-left:8%">
+                        @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
+                            @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                    <div class="form-group form-gap" style="margin-left:8%">
+                        @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8" style="margin-left:5%">
+                            <select class="form-control disable" style="width:104%" id="Designation" name="Designation">
+                                <option value="Select" hidden>Select</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Receptionist">Receptionist</option>
+                            </select>
+                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-left:8%">
+                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div id="pwd" class="form-group" style="margin-left:8%">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color: white">
+                <input type="submit" id="RegUsers" value="REGISTER" class="btn btn-primary" />
+                <button type="button" class="btn btn-warning" id="editUsr" style="width:70px">Edit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         }
-
-    </div>
-    <div class="modal-footer" style="background-color: white">
-        
-           
-                <input type="submit" value="Register" class="btn btn-primary" />
-           
-      
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-    </div>
+            <button type="submit" class="btn btn-success" id="saveUsr" style="width: 70px; margin-top: -17%; margin-left: 69%;">Add</button>
+    </fieldset>
 </div>
 
 
+<script>
+    $(document).ready(function () {
+        $('#saveUsr').hide();
+        var operation = '@Model.ActionType.ToString()';
+        console.log(operation);
+        if (operation == 'View') {
+            document.getElementById("heading").innerHTML = "VIEW USERS";
+            $("#saveUsr").html("Save");
+            $('#saveUsr').hide();
+            $('#RegUsers').hide();
+            $('#pwd').hide();
+            $('#editUsr').show();
+            $('.disable').attr('disabled', true);
+        }
+        else if (operation == '@Operations.Edit') {
+            document.getElementById("heading").innerHTML = "EDIT USERS";
+            $("#saveUsr").html("Save");
+            $('.disable').attr('disabled', false);
+            $('#editUsr').hide();
+            $('#RegUsers').hide();
+            $('#pwd').hide();
+            $('#saveUsr').show();
+        }
+        else {
+            $("#saveUsr").html("Add");          
+            $("#saveUsr").attr('disabled', false);
+            $('#editUsr').hide();
+            $('.disable').attr('disabled', false);
+            $('.form-control').attr('value', null);
+            }
+        $('#editUsr').click(function () {
+            $('.disable').attr('disabled', false);
+            $('#editUsr').hide();
+            $('#saveUsr').show();
+        })
+       
+    });
+
+
+    $("#saveUsr").click(function () {
+        var myFormData = $("#SubmitUser").serialize();
+        $.ajax({
+            type: "POST",
+            url: "/Users/UpdateUser",
+            data: myFormData,
+            success: function () {
+                $('#UsersTable').DataTable().ajax.reload(null, false);
+                $("#RegUser").modal("hide");
+                toastr.options = {
+                    "closeButton": false,
+                    "newestOnTop": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["success"](message)
+            },
+            error: function (error) {
+                nameValidation();
+                lastnameValidation();
+                ageValidation();
+                genderValidation();
+                dateValidation();
+                toastr.options = {
+                    "closeButton": false,
+                    "newestOnTop": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["error"]("Error")
+            }
+        });
+    })
+</script>
 
 

@@ -105,6 +105,7 @@ G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManag
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\MigraDoc.RtfRendering-gdi.resources.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\PdfSharp-gdi.resources.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\bin\Debug\de\PdfSharp.Charting-gdi.resources.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.AssemblyReference.cache
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CoreCompileInputs.cache
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.csproj.CopyComplete
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\HospitalManagementLibrary\obj\Debug\HospitalManagementLibrary.dll

@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "020767c9-1590-42ff-a423-6649cfbe4830",
+		"name": "Hospital Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44361/api/Employee/GetData?start=1&length=10&searchValue=A",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44361",
+					"path": [
+						"api",
+						"Employee",
+						"GetData"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "1"
+						},
+						{
+							"key": "length",
+							"value": "10"
+						},
+						{
+							"key": "searchValue",
+							"value": "A"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Franklin\",\r\n    \"UserName\": \"Franks\",\r\n    \"Designation\":\"Manager\",\r\n    \"PhoneNumber\":\"9656487845\",\r\n    \"Password\":\"abc@123\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44361/api/Employee/CreateUsers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44361",
+					"path": [
+						"api",
+						"Employee",
+						"CreateUsers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"Id\":12,\r\n    \"Name\": \"Fanks\",\r\n    \"UserName\":\"FranksJisno\",\r\n    \"Designation\":\"Manager\",\r\n    \"PhoneNumber\":\"9656245145\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44361/api/Employee/UpdateUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44361",
+					"path": [
+						"api",
+						"Employee",
+						"UpdateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44361/api/Employee/Delete?Id=10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44361",
+					"path": [
+						"api",
+						"Employee",
+						"Delete"
+					],
+					"query": [
+						{
+							"key": "Id",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44361/api/Employee/Get?id=11",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44361",
+					"path": [
+						"api",
+						"Employee",
+						"Get"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
