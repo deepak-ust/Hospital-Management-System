@@ -100,12 +100,13 @@ namespace Hospital_Management_System.Controllers
         }
 
 
-        
+        [Authorize]
         public ActionResult UserInfo()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult PatientInfo()
         {
             return View();

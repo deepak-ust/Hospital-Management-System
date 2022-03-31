@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<button type="button" class="btn" style="background-color:black;width: 80px; margin-left: 92%; margin-top: -2%;color:white;" onclick="Logout()">LogOut</button>
+@*<button type="button" class="btn" style="background-color:black;width: 80px; margin-left: 92%; margin-top: -2%;color:white;" onclick="Logout()">LogOut</button>*@
 
 <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" id="deleteform">
@@ -463,5 +463,9 @@
                 $("#datevalidation").html("");
             }
     }
+
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
 
 </script>

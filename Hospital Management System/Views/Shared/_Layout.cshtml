@@ -13,9 +13,33 @@
 </head>
 <body class="scroll">
     <div class="navbar navbar-inverse navbar-static-top">
+
         <div class="container-fluid">
             <h2 class="centre-heading">Hospital Management System</h2>
         </div>
+        @if (Request.IsAuthenticated)
+        {
+
+    <div class="dropdown" style="float:right;margin-right:2%;color:white">
+        <strong> @Html.ViewContext.HttpContext.User.Identity.Name</strong>
+        @if (@Html.ViewContext.HttpContext.User.Identity.Name == "DevAdmin")
+        {
+            <div class="dropdown-content" style="width:25%">
+                <a href="Logout" style="background-color: #A93226; color: white; text-align: center">Logout</a>
+            </div>
+        }
+        else
+        {
+            <div class="dropdown-content" style="width:25%">
+                <a href="Users/Logout" style="background-color: #A93226; color: white; text-align: center">Logout</a>
+            </div>
+        }
+
+    </div>
+            <strong style="color: white;float:right;margin-right:1%;">Logged User :</strong>
+        }
+        
+
     </div>
     <div class="container body-content">
         @RenderBody()
@@ -23,6 +47,49 @@
     <footer class="footer ">
         <div >&copy; @DateTime.Now.Year - Hospital Management System</div>
     </footer>
-    
+    <style>
+        .dropbtn {
+            background-color: #273746   ;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
 </body>
 </html>

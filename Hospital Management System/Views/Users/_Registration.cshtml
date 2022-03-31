@@ -4,8 +4,8 @@
 
 <div class="modal-content" style="width: 40%;">
     <fieldset id="SubmitUser">
-        @using (Html.BeginForm())
-        {
+        @*@using (Html.BeginForm())
+        {*@
             @Html.AntiForgeryToken()
 
             <div class="modal-header text-center" style="background-color:white" margin-top:-73px">
@@ -22,18 +22,18 @@
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id, new { @Id = "Id" })
-                    <div class="form-group" style="margin-left:8%">
-                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="form-group" style="margin-left:5%">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" , @style = "margin-left:-2%" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @name = "name", @onkeyup = "nameValidation()", @autocomplete = "off", @style = "margin-left:6%" } })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @name = "name", @onkeyup = "nameValidation()", @autocomplete = "off", @style = "margin-left:10%" } })
                             <small style="position:absolute">@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @id = "namevalidation" })</small>
                         </div>
                     </div>
 
-                    <div class="form-group" style="margin-left:8%">
+                    <div class="form-group" style="margin-left:5%">
                         @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control disable", @id = "username", @name = "username", @onkeyup = "UsernameValidation()", @autocomplete = "off", @style = "margin-left:6%" } })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control disable", @id = "username", @name = "username", @onkeyup = "UsernameValidation()", @autocomplete = "off", @style = "margin-left:8%" } })
                             <small style="position:absolute">@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", @id = "usernamevalidation" })</small>
                         </div>
                     </div>
@@ -46,12 +46,12 @@
                         </div>
                     </div>*@
 
-                    <div class="form-group form-gap" style="margin-left:8%">
-                        @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-8" style="margin-left:5%">
+                    <div class="form-group form-gap" style="margin-left:5%">
+                        @Html.LabelFor(model => model.Designation, "Designation", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8" style="margin-left:6.5%">
                             <select class="form-control disable" style="width:104%" id="Designation" name="Designation">
-                                <option value="Select" hidden>Select</option>
-                                <option value="Manager">Manager</option>
+                                <option value="Select" hidden>--Select--</option>
+                                <option value="Nurse">Nurse</option>
                                 <option value="Doctor">Doctor</option>
                                 <option value="Receptionist">Receptionist</option>
                             </select>
@@ -59,18 +59,18 @@
                         </div>
                     </div>
 
-                    <div class="form-group" style="margin-left:8%">
-                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control disable", @id = "phoneNumber", @name = "phoneNumber", @onkeyup = "phoneNumberValidation()", @style = "margin-left:6%" } })
+                    <div class="form-group" style="margin-left:5%">
+                        @Html.LabelFor(model => model.PhoneNumber,"Phone Number", htmlAttributes: new { @class = "control-label col-md-2" ,@style="width:auto;"})
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control disable", @id = "phoneNumber", @name = "phoneNumber", @onkeyup = "phoneNumberValidation()", @style = "margin-left:-8%" } })
                             <small style="position:absolute">@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger", @id = "phoneNumbervalidation" })</small>
                         </div>
                     </div>
 
-                    <div id="pwd" class="form-group" style="margin-left:8%">
+                    <div id="pwd" class="form-group" style="margin-left:5%">
                         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control disable", @id = "password", @name = "password", @onkeyup = "passwordValidation()", @style = "margin-left:6%" } })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control disable", @id = "password", @name = "password", @onkeyup = "passwordValidation()", @style = "margin-left:8%" } })
                             <small style="position:absolute">@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @id = "passwordvalidation" })</small>
                         </div>
                     </div>
@@ -82,14 +82,20 @@
                 <button type="button" class="btn btn-warning" id="editUsr" style="width:70px">Edit</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
-        }
+        @*}*@
             <button type="submit" class="btn btn-success" id="saveUsr" style="width: 70px; margin-top: -17%; margin-left: 69%;">Add</button>
     </fieldset>
 </div>
 
 
 <script>
+
+    $("#Designation").change(function () {
+        var stud = $("#Designation").val();
+        $("#Designation").val(stud);
+    });
     $(document).ready(function () {
+         $("#Designation").val('@Model.Designation');
         $('#saveUsr').hide();
         var operation = '@Model.ActionType.ToString()';
         console.log(operation);
@@ -112,7 +118,7 @@
             $('#saveUsr').show();
         }
         else {
-            $("#saveUsr").html("Add");          
+            $("#saveUsr").html("Add");
             $("#saveUsr").attr('disabled', false);
             $('#editUsr').hide();
             $('.disable').attr('disabled', false);
@@ -123,12 +129,69 @@
             $('#editUsr').hide();
             $('#saveUsr').show();
         })
-       
+
     });
+
+    $("#RegUsers").click(function () {
+        var myFormData = $("#SubmitUser").serialize();
+        nameValidation();
+        UsernameValidation();
+        phoneNumberValidation();
+        validateDesignation();
+        passwordValidation();
+        $.ajax({
+            type: "POST",
+            url: "/Users/CreateUsers",
+            data: myFormData,
+            success: function () {
+                $('#UsersTable').DataTable().ajax.reload(null, false);
+                $("#RegUser").modal("hide");
+                toastr.options = {
+                    "closeButton": false,
+                    "newestOnTop": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["success"]("patient added successfully")
+            },
+            error: function (error) {
+
+                toastr.options = {
+                    "closeButton": false,
+                    "newestOnTop": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "500",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["error"]("Error")
+            }
+        });
+    })
 
     $("#saveUsr").click(function () {
         var myFormData = $("#SubmitUser").serialize();
-       
+        nameValidation();
+        UsernameValidation();
+        phoneNumberValidation();
+        validateDesignation();
+        passwordValidation();
         $.ajax({
             type: "POST",
             url: "/Users/UpdateUser",
@@ -154,11 +217,6 @@
                 toastr["success"](message)
             },
             error: function (error) {
-                nameValidation();
-                UsernameValidation();
-                phoneNumberValidation();
-                validateDesignation();
-                passwordValidation();
                 toastr.options = {
                     "closeButton": false,
                     "newestOnTop": false,
@@ -196,7 +254,7 @@
     }
 
     function UsernameValidation() {
-        
+
         if ($("#username").val().length >= 21) {
             $("#usernamevalidation").html("Cannot contain more than 30 characters");
         }
@@ -209,7 +267,7 @@
     }
 
     function phoneNumberValidation() {
-      
+
      var phoneno = /^\d{10}$/;
         if (!$("#phoneNumber").val().match(phoneno) && $("#phoneNumber").val() != "") {
             $("#phoneNumbervalidation").html("Cannot contain spaces, special characters");
@@ -223,7 +281,7 @@
         else {
             $("#phoneNumbervalidation").html("");
         }
-        
+
     }
 
     function passwordValidation() {
@@ -246,11 +304,11 @@
         }
         if (standard.length <= 0) {
             $("#des").html("Please select a Designation");
-            
+
             return false;
         } else {
             $("#des").html("");
-           
+
         }
     }
 </script>

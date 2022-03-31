@@ -439,6 +439,7 @@
     <Content Include="Views\Users\_DeleteUser.cshtml" />
     <Content Include="Views\Users\_PrintPreview.cshtml" />
     <Content Include="Views\Users\PatientInfo.cshtml" />
+    <Content Include="Views\Users\AdminDemo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

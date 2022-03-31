@@ -6,39 +6,39 @@
     <div class="grid-item">
         @*<div class="card">
             <div class="card2" style="display: flex;justify-content:center;">*@
-                <button style="margin:auto;" onclick="Register()">
-                    REGISTER
-                </button>
-            @*</div>
-        </div>*@
+        <button style="margin:auto;" onclick="Register()">
+            REGISTER
+        </button>
+        @*</div>
+            </div>*@
     </div>
     <div class="grid-item">
         @*<div class="card">
             <div class="card2" style="display: flex; justify-content: center;">*@
-                <button style="margin:auto;" onclick="location.href='@Url.Action("UserInfo", "Users")'">
-                    USER INFO
-                </button>
-            @*</div>
-        </div>*@
+        <button style="margin:auto;" onclick="location.href='@Url.Action("UserInfo", "Users")'">
+            USER INFO
+        </button>
+        @*</div>
+            </div>*@
     </div>
     <div class="grid-item">
         @*<div class="card">
-            <div class="card2" style="display: flex; justify-content: center;">*@ 
-                <button style="margin:auto;" onclick="location.href='@Url.Action("PatientInfo", "Users")'">
-                    PATIENTS TAB
-                </button>
-            @*</div>
-        </div>*@
+            <div class="card2" style="display: flex; justify-content: center;">*@
+        <button style="margin:auto;" onclick="location.href='@Url.Action("PatientInfo", "Users")'">
+            PATIENTS TAB
+        </button>
+        @*</div>
+            </div>*@
     </div>
     @*<div class="grid-item">
-        <div class="card" >
-            <div class="card2" style="display: flex; justify-content: center;">
-                <button style="margin:auto;">
-                    Button
-                </button>
+            <div class="card" >
+                <div class="card2" style="display: flex; justify-content: center;">
+                    <button style="margin:auto;">
+                        Button
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 </div>
 
 <div class="modal fade  bd-example-modal-lg " id="RegUser" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true" style="margin-top:-73px">
@@ -52,20 +52,20 @@
 <script>
 
     function Register() {
-     
-        $.get("/Users/CreateUsers", function (res) {      
+
+        $.get("/Users/CreateUsers", function (res) {
             $("#Regform").html(res);
             $('#RegUser').modal('show');
-                  
+
         })
     }
 
 </script>
 
 <style>
-    .grid-item{
-        display:flex;
-        margin-left:2%;
+    .grid-item {
+        display: flex;
+        margin-left: 2%;
     }
 
     button {
@@ -104,11 +104,13 @@
         button:hover {
             color: #111;
         }
+
     .container {
         background-color: black;
         height: 70vh;
         border-radius: 50px 10px;
     }
+
     .btn-color {
         background-color: #9B59B6;
     }
