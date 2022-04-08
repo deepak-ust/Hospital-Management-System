@@ -24,11 +24,11 @@ namespace Hospital_Management_WebAPI.Controllers
           
             var AdminUser = User.Identity.Name;
             DBHelper helper = new DBHelper();
-            registration.Created_by = AdminUser;
+            registration.Created_by = 1;
             registration.Created_date = DateTime.Now.ToString();
-            registration.Modified_by = AdminUser;
+            registration.Modified_by = 1;
             registration.Modified_date = DateTime.Now.ToString();
-            var isRegExist = helper.GetByUsername(registration.UserName);
+            var isRegExist = helper.GetByUsername(registration.Email);
             if (isRegExist.Id == 0)
             {
                 if (ModelState.IsValid)
@@ -102,7 +102,7 @@ namespace Hospital_Management_WebAPI.Controllers
                 objRegistration.IsAdmin = dataresult.IsAdmin;
                 objRegistration.Created_by = dataresult.Created_by;
                 objRegistration.Created_date = dataresult.Created_date;
-                objRegistration.Modified_by = AdminUser;
+                objRegistration.Modified_by = 1;
                 objRegistration.Modified_date = DateTime.Now.ToString();
                 result = helper.UpdateUserDetails(objRegistration);
                 ModelState.Clear();

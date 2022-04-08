@@ -47,7 +47,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Name\": \"Franklin\",\r\n    \"UserName\": \"Franks\",\r\n    \"Designation\":\"Manager\",\r\n    \"PhoneNumber\":\"9656487845\",\r\n    \"Password\":\"abc@123\"\r\n\r\n}",
+					"raw": "{\r\n    \"Name\": \"Franklin\",\r\n    \"Email\": \"Franks@gmail.com\",\r\n    \"Designation\":\"Manager\",\r\n    \"PhoneNumber\":\"9656487845\",\r\n    \"Password\":\"abc@123\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,7 +87,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"Id\":12,\r\n    \"Name\": \"Fanks\",\r\n    \"UserName\":\"FranksJisno\",\r\n    \"Designation\":\"Manager\",\r\n    \"PhoneNumber\":\"9656245145\"\r\n}",
+					"raw": "{\r\n   \"Id\":9,\r\n    \"Name\": \"Fanks\",\r\n    \"Email\":\"FranksJisno@gmail.com\",\r\n    \"Designation\":\"Manager\",\r\n    \"PhoneNumber\":\"9656245145\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -155,7 +155,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:44361/api/Employee/Get?id=11",
+					"raw": "https://localhost:44361/api/Employee/Get?id=9",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -169,7 +169,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "11"
+							"value": "9"
 						}
 					]
 				}

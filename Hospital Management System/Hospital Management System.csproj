@@ -76,6 +76,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -300,6 +301,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\details_close.png" />
     <Content Include="Images\details_open.png" />
+    <Content Include="Images\hsm.jpg" />
     <Content Include="Images\pexels-constantin-dorin-adrian-3611882.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -439,7 +441,7 @@
     <Content Include="Views\Users\_DeleteUser.cshtml" />
     <Content Include="Views\Users\_PrintPreview.cshtml" />
     <Content Include="Views\Users\PatientInfo.cshtml" />
-    <Content Include="Views\Users\AdminDemo.cshtml" />
+    <Content Include="Views\Users\ForgotPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

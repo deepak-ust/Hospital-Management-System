@@ -22,7 +22,7 @@
 
     <div class="dropdown" style="float:right;margin-right:2%;color:white">
         <strong> @Html.ViewContext.HttpContext.User.Identity.Name</strong>
-        @if (@Html.ViewContext.HttpContext.User.Identity.Name == "DevAdmin")
+        @if (@Html.ViewContext.HttpContext.User.Identity.Name == "dev@gmail.com" || @Html.ViewContext.HttpContext.User.Identity.Name == "vyshakh.dev@gmail.com")
         {
             <div class="dropdown-content" style="width:25%">
                 <a href="Logout" style="background-color: #A93226; color: white; text-align: center">Logout</a>
@@ -31,7 +31,7 @@
         else
         {
             <div class="dropdown-content" style="width:25%">
-                <a href="Users/Logout" style="background-color: #A93226; color: white; text-align: center">Logout</a>
+                <a href="Logout" style="background-color: #A93226; color: white; text-align: center">Logout</a>
             </div>
         }
 

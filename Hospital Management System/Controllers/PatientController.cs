@@ -33,9 +33,10 @@ namespace Hospital_Management_System.Controllers
             {
                 bool authenticated = Request.IsAuthenticated;
                 var AdminUser = User.Identity.Name;
-                objPatient.Created_by = AdminUser;
+                var UId = helper.GetByUsername(AdminUser);
+                objPatient.Created_by = UId.Id;
                 objPatient.Created_date = DateTime.Now.ToString();
-                objPatient.Modified_by = AdminUser;
+                objPatient.Modified_by = UId.Id;
                 objPatient.Modified_date = DateTime.Now.ToString();
                 if (ModelState.IsValid)
                 {
@@ -101,31 +102,6 @@ namespace Hospital_Management_System.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpGet]
-        //public ActionResult Print()
-        //{
-
-        //    DBHelper objdbhandle = new DBHelper();
-        //    List<Patient> objpatient = objdbhandle.GetAll();
-
-        //    var table = new DataTable("Example Table");
-        //    table.Columns.Add("Name", typeof(string));
-        //    table.Columns.Add("LastName", typeof(string));
-        //    table.Columns.Add("Age", typeof(int));
-        //    table.Columns.Add("Gender", typeof(string));
-        //    table.Columns.Add("dateTime", typeof(DateTime));
-        //    table.Columns.Add("InPatient", typeof(Boolean));
-
-
-        //    foreach (Patient patient in objpatient)
-        //        table.Rows.Add(patient.Name,patient.LastName,patient.Age,patient.Gender, patient.Date,patient.InPatient);
-
-        //    var pdf = table.ToPdf();
-        //    System.IO.File.WriteAllBytes(@"C:\Users\91623\Desktop\Assignment\Deepak\Hospital-Management-System\Hospital Management System\PdfViewer\report.pdf", pdf);
-        //    return PartialView("_Operations");
-
-        //}
-
         [HttpGet]
         public ActionResult Print()
         {
@@ -173,8 +149,9 @@ namespace Hospital_Management_System.Controllers
                 int count = helper.GetFullCount(searchValue);
                 return Json(new { data = patients,recordsTotal=count,recordsFiltered=count }, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch(Exception ex)
             {
+                string str = ex.Message;
                 return View();
             }
         }

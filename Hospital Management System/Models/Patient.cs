@@ -33,14 +33,21 @@ namespace Hospital_Management_System.Models
 
         [Required(ErrorMessage = "Status is required")]
         public bool InPatient { get; set; }
+
         public bool Deleted { get; set; }
-        public string Created_by { get; set; }
+
+        public int Created_by { get; set; }
 
         public string Created_date { get; set; }
 
-        public string Modified_by { get; set; }
+        public int Modified_by { get; set; }
 
         public string Modified_date { get; set; }
+
+        public string Created_Name { get; set; }
+
+        public string Modified_Name { get; set; }
+
         public Operations ActionType { get; set; }
     }
 }

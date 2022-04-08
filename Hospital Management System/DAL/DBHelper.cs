@@ -55,11 +55,20 @@ namespace Hospital_Management_System.DAL
                             Date = Convert.ToDateTime(dr["dateTime"]),
                             InPatient = Convert.ToBoolean(dr["InPatient"]),
                             Deleted = Convert.ToBoolean(dr["Deleted"]),
-                            Created_by = Convert.ToString(dr["Created_by"]),
+                            Created_by = Convert.ToInt32(dr["Created_by"]),
                             Created_date = Convert.ToString(dr["Created_date"]),
-                            Modified_by = Convert.ToString(dr["Modified_by"]),
+                            Modified_by = Convert.ToInt32(dr["Modified_by"]),
                             Modified_date = Convert.ToString(dr["Modified_date"]),
                         });
+                }
+                foreach (var n in datalist)
+                {
+
+                    var creteUser = GetByIdOfUser(n.Created_by);
+                    n.Created_Name = creteUser.Email;
+                    var Updateuser = GetByIdOfUser(n.Modified_by);
+                    n.Modified_Name = Updateuser.Email;
+
                 }
             }
             return datalist;
@@ -164,9 +173,9 @@ namespace Hospital_Management_System.DAL
                 obj.Date = Convert.ToDateTime(dt.Rows[0]["dateTime"]);
                 obj.InPatient = Convert.ToBoolean(dt.Rows[0]["InPatient"]);
                 obj.Deleted = Convert.ToBoolean(dt.Rows[0]["Deleted"]);
-                obj.Created_by = Convert.ToString(dt.Rows[0]["Created_by"]);
+                obj.Created_by = Convert.ToInt32(dt.Rows[0]["Created_by"]);
                 obj.Created_date = Convert.ToString(dt.Rows[0]["Created_date"]);
-                obj.Modified_by = Convert.ToString(dt.Rows[0]["Modified_by"]);
+                obj.Modified_by = Convert.ToInt32(dt.Rows[0]["Modified_by"]);
                 obj.Modified_date = Convert.ToString(dt.Rows[0]["Modified_date"]);           
             }
             return obj;
@@ -200,12 +209,21 @@ namespace Hospital_Management_System.DAL
                             Gender = Convert.ToString(dr["Gender"]),
                             Date = Convert.ToDateTime(dr["dateTime"]),
                             InPatient= Convert.ToBoolean(dr["InPatient"]),
-                            Created_by = Convert.ToString(dr["Created_by"]),
+                            Created_by = Convert.ToInt32(dr["Created_by"]),
                             Created_date = Convert.ToString(dr["Created_date"]),
-                            Modified_by = Convert.ToString(dr["Modified_by"]),
+                            Modified_by = Convert.ToInt32(dr["Modified_by"]),
                             Modified_date = Convert.ToString(dr["Modified_date"]),
 
                         });
+                }
+                foreach (var n in PatientList)
+                {
+
+                    var creteUser = GetByIdOfUser(n.Created_by);
+                    n.Created_Name = creteUser.Email;
+                    var Updateuser = GetByIdOfUser(n.Modified_by);
+                    n.Modified_Name = Updateuser.Email;
+
                 }
             }
             catch (Exception )
@@ -265,6 +283,8 @@ namespace Hospital_Management_System.DAL
             return count;
         }
 
+
+
         public int GetRegister(string Username, string Password)
         {
             Connection();
@@ -273,7 +293,7 @@ namespace Hospital_Management_System.DAL
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@Email", Username);
             cmd.Parameters.AddWithValue("@Password", Password);
             SqlParameter objLogin = new SqlParameter();
             objLogin.ParameterName = "@IsValid";
@@ -292,6 +312,7 @@ namespace Hospital_Management_System.DAL
             //else
             //    return false;
         }
+
         public int IsAdminCheck(string Username, string Password)
         {
             Connection();
@@ -300,7 +321,7 @@ namespace Hospital_Management_System.DAL
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@Email", Username);
             cmd.Parameters.AddWithValue("@Password", Password);
             SqlParameter objLogin = new SqlParameter();
             objLogin.ParameterName = "@IsValid";
@@ -323,7 +344,7 @@ namespace Hospital_Management_System.DAL
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.AddWithValue("@userName", Username);
+            cmd.Parameters.AddWithValue("@Email", Username);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             con.Open();
@@ -335,13 +356,48 @@ namespace Hospital_Management_System.DAL
                 {
                     obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
                     obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
-                    obj.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
+                    obj.Email = Convert.ToString(dt.Rows[0]["Email"]);
+                    obj.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
+                    obj.PhoneNumber = Convert.ToString(dt.Rows[0]["PhoneNumber"]);
+                    obj.Password = Convert.ToString(dt.Rows[0]["Password"]);
+                    obj.IsAdmin = Convert.ToInt32(dt.Rows[0]["IsAdmin"]);
+                    obj.Created_by = Convert.ToInt32(dt.Rows[0]["Created_by"]);
+                    obj.Created_date = Convert.ToString(dt.Rows[0]["Created_date"]);
+                    obj.Modified_by = Convert.ToInt32(dt.Rows[0]["Modified_by"]);
+                    obj.Modified_date = Convert.ToString(dt.Rows[0]["Modified_date"]);
+                }
+                
+            }
+            return obj;
+        }
+
+        public Registration GetByUsernameReset(string Username, string phone)
+        {
+            Connection();
+            Registration obj = new Registration();
+            SqlCommand cmd = new SqlCommand("GetByUserNameReset", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@Email", Username);
+            cmd.Parameters.AddWithValue("@phone", phone);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                sd.Fill(dt);
+                con.Close();
+                if (dt.Rows.Count > 0)
+                {
+                    obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+                    obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                    obj.Email = Convert.ToString(dt.Rows[0]["Email"]);
                     obj.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
                     obj.PhoneNumber = Convert.ToString(dt.Rows[0]["PhoneNumber"]);
                     obj.Password = Convert.ToString(dt.Rows[0]["Password"]);
                     obj.IsAdmin = Convert.ToInt32(dt.Rows[0]["IsAdmin"]);
                 }
-                
             }
             return obj;
         }
@@ -356,7 +412,7 @@ namespace Hospital_Management_System.DAL
                 cmd.Parameters.Clear();
              
                 cmd.Parameters.AddWithValue("@Name", rmodel.Name);
-                cmd.Parameters.AddWithValue("@UserName", rmodel.UserName);
+                cmd.Parameters.AddWithValue("@Email", rmodel.Email);
                 cmd.Parameters.AddWithValue("@Designation", rmodel.Designation);
                 cmd.Parameters.AddWithValue("@PhoneNumber", rmodel.PhoneNumber);
                 cmd.Parameters.AddWithValue("@Password", rmodel.Password);        
@@ -386,7 +442,6 @@ namespace Hospital_Management_System.DAL
             }
         }
 
-
         public List<Registration> GetReg(int offsetValue, int PagingSize, string search)
         {
             Connection();
@@ -411,18 +466,29 @@ namespace Hospital_Management_System.DAL
                     {
                         Id = Convert.ToInt32(dr["Id"]),
                         Name = Convert.ToString(dr["Name"]),
-                        UserName = Convert.ToString(dr["UserName"]),
+                        Email = Convert.ToString(dr["Email"]),
                         Designation = Convert.ToString(dr["Designation"]),
                         PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
                         IsAdmin = Convert.ToInt32(dr["IsAdmin"]),
-                        Created_by = Convert.ToString(dr["Created_by"]),
+                        Created_by = Convert.ToInt32(dr["Created_by"]),
                         Created_date = Convert.ToString(dr["Created_date"]),
-                        Modified_by = Convert.ToString(dr["Modified_by"]),
+                        Modified_by = Convert.ToInt32(dr["Modified_by"]),
                         Modified_date = Convert.ToString(dr["Modified_date"]),
                     });
             }
+            foreach (var n in reglist)
+            {
+                
+                var creteUser = GetByIdOfAdmin(n.Created_by);
+                n.Created_Name = creteUser.Email;
+                var Updateuser = GetByIdOfAdmin(n.Modified_by);
+                n.Modified_Name = Updateuser.Email;
+               
+            }
+            
             return reglist;
         }
+
         public List<Registration> GetUserInfo(int pageIndex, int pageSize, string searchValue)
         {
 
@@ -455,7 +521,7 @@ namespace Hospital_Management_System.DAL
                         {
                             Id = Convert.ToInt32(dr["Id"]),
                             Name = Convert.ToString(dr["Name"]),
-                            UserName = Convert.ToString(dr["UserName"]),
+                            Email = Convert.ToString(dr["Email"]),
                             Designation = Convert.ToString(dr["Designation"]),
                             PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
                             IsAdmin = Convert.ToInt32(dr["IsAdmin"]),
@@ -465,13 +531,12 @@ namespace Hospital_Management_System.DAL
             }
             return datalists;
         }
-
-        
+       
         public Registration GetByIdOfUser(int id)
         {
             Connection();
             Registration obj = new Registration();
-            SqlCommand cmd = new SqlCommand("GetByIdOfUser", con)
+            SqlCommand cmd = new SqlCommand("GetByIdOfAdmin", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -482,18 +547,52 @@ namespace Hospital_Management_System.DAL
             if (con.State == ConnectionState.Open)
             {
                 sd.Fill(dt);
-                con.Close();
+               
                 obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
                 obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
-                obj.UserName = Convert.ToString(dt.Rows[0]["UserName"]);              
+                obj.Email = Convert.ToString(dt.Rows[0]["Email"]);              
                 obj.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
                 obj.PhoneNumber = Convert.ToString(dt.Rows[0]["PhoneNumber"]);
                 obj.Password = Convert.ToString(dt.Rows[0]["Password"]);
                 obj.IsAdmin = Convert.ToInt32(dt.Rows[0]["IsAdmin"]);
-                obj.Created_by = Convert.ToString(dt.Rows[0]["Created_by"]);
+                obj.Created_by = Convert.ToInt32(dt.Rows[0]["Created_by"]);
                 obj.Created_date = Convert.ToString(dt.Rows[0]["Created_date"]);
                
             }
+            con.Close();
+            return obj;
+        }
+
+        public Registration GetByIdOfAdmin(int id)
+        {
+            Connection();
+            Registration obj = new Registration();
+            SqlCommand cmd = new SqlCommand("GetByIdOfAdmin", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@Id", id);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                sd.Fill(dt);
+
+                obj.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+                obj.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                obj.Email = Convert.ToString(dt.Rows[0]["Email"]);
+                obj.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
+                obj.PhoneNumber = Convert.ToString(dt.Rows[0]["PhoneNumber"]);
+                obj.Password = Convert.ToString(dt.Rows[0]["Password"]);
+                obj.IsAdmin = Convert.ToInt32(dt.Rows[0]["IsAdmin"]);
+                obj.Created_by = Convert.ToInt32(dt.Rows[0]["Created_by"]);
+                obj.Created_date = Convert.ToString(dt.Rows[0]["Created_date"]);
+                obj.Modified_by= Convert.ToInt32(dt.Rows[0]["Modified_by"]);
+                obj.Modified_date = Convert.ToString(dt.Rows[0]["Modified_date"]);
+
+            }
+            con.Close();
             return obj;
         }
 
@@ -507,7 +606,7 @@ namespace Hospital_Management_System.DAL
 
             cmd.Parameters.AddWithValue("@Id", obj.Id);
             cmd.Parameters.AddWithValue("@Name", obj.Name);
-            cmd.Parameters.AddWithValue("@UserName", obj.UserName);
+            cmd.Parameters.AddWithValue("@Email", obj.Email);
             cmd.Parameters.AddWithValue("@Designation", obj.Designation);
             cmd.Parameters.AddWithValue("@PhoneNumber", obj.PhoneNumber);
             cmd.Parameters.AddWithValue("@Password", obj.Password);
@@ -526,6 +625,7 @@ namespace Hospital_Management_System.DAL
             else
                 return false;
         }
+
         public List<Registration> GetAllUSers()
         {
             Connection();
@@ -549,7 +649,7 @@ namespace Hospital_Management_System.DAL
                         {
                             Id = Convert.ToInt32(dr["Id"]),
                             Name = Convert.ToString(dr["Name"]),
-                            UserName = Convert.ToString(dr["UserName"]),
+                            Email = Convert.ToString(dr["Email"]),
                             Designation = Convert.ToString(dr["Designation"]),
                             PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
                             IsAdmin = Convert.ToInt32(dr["IsAdmin"]),

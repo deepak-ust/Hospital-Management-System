@@ -16,6 +16,7 @@ namespace Hospital_Management_System.Controllers
 {
     public class UsersController : Controller
     {
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -25,21 +26,21 @@ namespace Hospital_Management_System.Controllers
         public ActionResult Login(FormCollection formCollection)
         {
             DBHelper helper = new DBHelper();
-            int IsUser = helper.GetRegister(formCollection["Username"], formCollection["Password"]);
-            int IsAdmin = helper.IsAdminCheck(formCollection["Username"], formCollection["Password"]);
+            int IsUser = helper.GetRegister(formCollection["Email"], formCollection["Password"]);
+            int IsAdmin = helper.IsAdminCheck(formCollection["Email"], formCollection["Password"]);
             if (IsUser == 1)
             {
-                FormsAuthentication.SetAuthCookie(formCollection["Username"], true);
+                FormsAuthentication.SetAuthCookie(formCollection["Email"], true);
                 return RedirectToAction("Index", "Patient");
             }
             else if(IsAdmin == 1)
             {
-                FormsAuthentication.SetAuthCookie(formCollection["Username"], true);               
+                FormsAuthentication.SetAuthCookie(formCollection["Email"], true);               
                 return RedirectToAction("Admin", "Users");
             }
             else
             {
-                TempData["LoginFail"] = "Username or password is wrong...";
+                TempData["LoginFail"] = "Email or password is wrong...";
             }
             return View();
         }
@@ -56,6 +57,58 @@ namespace Hospital_Management_System.Controllers
             return View();
         }
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(Registration objRegistration)
+        {
+            DBHelper helper = new DBHelper();
+            var isRegExist = helper.GetByUsernameReset(objRegistration.Email, objRegistration.PhoneNumber);
+            if (isRegExist.Id == 0)
+            {
+                
+                return View();
+            }
+            else
+            {
+                UpdateUserPassword(objRegistration);
+                return RedirectToAction("Login", "Users");
+        }
+            }
+            
+
+        [HttpPost]
+        public ActionResult UpdateUserPassword(Registration objRegistration)
+        {
+            bool result = false;
+            DBHelper helper = new DBHelper();
+            try
+            {
+                var dataresult = helper.GetByUsername(objRegistration.Email);
+                objRegistration.Id = dataresult.Id;
+                objRegistration.Name = dataresult.Name;
+                objRegistration.Designation = dataresult.Designation;
+                objRegistration.Password = objRegistration.Password;
+                objRegistration.IsAdmin = dataresult.IsAdmin;
+                objRegistration.Created_by = dataresult.Created_by;
+                objRegistration.Created_date = dataresult.Created_date;
+                objRegistration.Modified_by = dataresult.Id;
+                objRegistration.Modified_date = DateTime.Now.ToString();
+                result = helper.UpdateUserDetails(objRegistration);
+                ModelState.Clear();
+                return Json(result, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         public ActionResult CreateUsers()
         {
             Registration ObjRegistration = new Registration();
@@ -66,15 +119,15 @@ namespace Hospital_Management_System.Controllers
         [HttpPost]
         public ActionResult CreateUsers(Registration registration)
         {
-
+            DBHelper helper = new DBHelper();
             bool authenticated = Request.IsAuthenticated;
             var AdminUser = User.Identity.Name;
-            DBHelper helper = new DBHelper(); 
-            registration.Created_by = AdminUser;
+            var UId = helper.GetByUsername(AdminUser);           
+            registration.Created_by = UId.Id;
             registration.Created_date = DateTime.Now.ToString();
-            registration.Modified_by = AdminUser;
+            registration.Modified_by = UId.Id;
             registration.Modified_date = DateTime.Now.ToString();
-            var isRegExist = helper.GetByUsername(registration.UserName);
+            var isRegExist = helper.GetByUsername(registration.Email);
             if (isRegExist.Id == 0)
             {
                 if (ModelState.IsValid)
@@ -185,6 +238,8 @@ namespace Hospital_Management_System.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UpdateUser(Registration objRegistration)
@@ -196,11 +251,12 @@ namespace Hospital_Management_System.Controllers
                     var dataresult = helper.GetByIdOfUser(objRegistration.Id);
                     bool authenticated = Request.IsAuthenticated;
                     var AdminUser = User.Identity.Name;
+                    var UId = helper.GetByUsername(AdminUser);
                     objRegistration.Password = dataresult.Password;
                     objRegistration.IsAdmin = dataresult.IsAdmin;
                     objRegistration.Created_by = dataresult.Created_by;
                     objRegistration.Created_date = dataresult.Created_date;
-                    objRegistration.Modified_by = AdminUser;
+                    objRegistration.Modified_by = UId.Id;
                     objRegistration.Modified_date = DateTime.Now.ToString();
                     result = helper.UpdateUserDetails(objRegistration);
                     ModelState.Clear();
@@ -222,12 +278,12 @@ namespace Hospital_Management_System.Controllers
 
             var table = new DataTable("Users Information");
             table.Columns.Add("Name", typeof(string));
-            table.Columns.Add("UserName", typeof(string));
+            table.Columns.Add("Email", typeof(string));
             table.Columns.Add("Designation", typeof(string));
             table.Columns.Add("PhoneNumber", typeof(string));
             
             foreach (Registration registration in RegList)
-                table.Rows.Add(registration.Name, registration.UserName, registration.Designation, registration.PhoneNumber);
+                table.Rows.Add(registration.Name, registration.Email, registration.Designation, registration.PhoneNumber);
 
             var pdf = table.ToPdf();
             System.IO.File.WriteAllBytes(@"G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management System\PdfViewer\Users.pdf", pdf);

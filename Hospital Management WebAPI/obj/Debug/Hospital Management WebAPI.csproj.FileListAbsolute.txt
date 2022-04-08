@@ -61,6 +61,7 @@ G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Mana
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\System.Web.Mvc.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\ArrayToPdf.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\System.Linq.Dynamic.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\WebGrease.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\Microsoft.Web.Infrastructure.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\System.Web.WebPages.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\System.Web.WebPages.Razor.dll
@@ -68,6 +69,7 @@ G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Mana
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\MigraDoc.DocumentObjectModel-gdi.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\MigraDoc.Rendering-gdi.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\PdfSharp-gdi.dll
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\Antlr3.Runtime.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\System.Web.WebPages.Deployment.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\PdfSharp.Charting-gdi.dll
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\Hospital Management System.pdb
@@ -86,6 +88,7 @@ G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Mana
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\MigraDoc.DocumentObjectModel-gdi.xml
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\MigraDoc.Rendering-gdi.xml
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\PdfSharp-gdi.xml
+G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\Antlr3.Runtime.pdb
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\System.Web.WebPages.Deployment.xml
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\PdfSharp.Charting-gdi.xml
 G:\project-ust-05-12-2021\Deepak\second\Hospital-Management-System\Hospital Management WebAPI\bin\de\MigraDoc.DocumentObjectModel-gdi.resources.dll

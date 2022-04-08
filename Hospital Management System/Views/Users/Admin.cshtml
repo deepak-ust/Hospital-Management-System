@@ -1,115 +1,144 @@
-﻿
-<h2 style="color: white; font-size: xx-large; font-weight: 800; font-family: Lucida Console;margin-left:5%; ">ADMIN PANEL</h2>
+﻿<body>
+    <div class="modal fade  bd-example-modal-lg " id="RegUser" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true" style="margin-top:-73px">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document" id="Regform" style="width:94%;margin-left:3%;margin-right:3%">
 
-@*<button type="button" class="btn btn-color" style="width: 80px; margin-left: 90%; margin-top: -7%;"><a href="Logout" style="text-decoration: none; color: white;">LogOut</a></button>*@
-<div class="grid-container" style="display: flex;justify-content:center;Margin-top:7%;">
-    <div class="grid-item">
-        @*<div class="card">
-            <div class="card2" style="display: flex;justify-content:center;">*@
-                <button style="margin:auto;" onclick="Register()">
-                    REGISTER
-                </button>
-            @*</div>
-        </div>*@
+
+        </div>
     </div>
-    <div class="grid-item">
-        @*<div class="card">
-            <div class="card2" style="display: flex; justify-content: center;">*@
-                <button style="margin:auto;" onclick="location.href='@Url.Action("UserInfo", "Users")'">
-                    USER INFO
+    <nav class="navbar navbar-inverse visible-xs">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-            @*</div>
-        </div>*@
-    </div>
-    <div class="grid-item">
-        @*<div class="card">
-            <div class="card2" style="display: flex; justify-content: center;">*@ 
-                <button style="margin:auto;" onclick="location.href='@Url.Action("PatientInfo", "Users")'">
-                    PATIENTS TAB
-                </button>
-            @*</div>
-        </div>*@
-    </div>
-    @*<div class="grid-item">
-        <div class="card" >
-            <div class="card2" style="display: flex; justify-content: center;">
-                <button style="margin:auto;">
-                    Button
-                </button>
+                <a class="navbar-brand" href="#">HMC HOSPITAL</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="Admin">Dashboard</a></li>
+                    <li><a onclick="Register()">REGISTRATION</a></li>
+                    <li><a onclick="location.href='@Url.Action("UserInfo", "Users")'">USER INFORMATIION</a></li>
+                    <li><a onclick="location.href='@Url.Action("PatientInfo", "Users")'">PATIENT INFORMATION</a></li>
+                </ul>
             </div>
         </div>
-    </div>*@
-</div>
+    </nav>
 
-<div class="modal fade  bd-example-modal-lg " id="RegUser" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" data-backdrop="static" aria-hidden="true" style="margin-top:-73px">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" id="Regform" style="width:94%;margin-left:3%;margin-right:3%">
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-3 sidenav hidden-xs">
+                <h2>ABC HOSPITAL</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    @*<li class="active"><a href="Admin">Dashboard</a></li>*@
+                    <li><a onclick="Register()">REGISTRATION</a></li>
+                    <li><a onclick="location.href='@Url.Action("UserInfo", "Users")'">USER INFORMATIION</a></li>
+                    <li><a onclick="location.href='@Url.Action("PatientInfo", "Users")'">PATIENT INFORMATION</a></li>
+                </ul><br>
+            </div>
+            <br>
 
-
+            <div class="col-sm-9">
+                <div class="well" style="background-color: #5DADE2">
+                    <h4>ABC HOSPITAL MANAGEMENT SYSTEM</h4>
+                    
+                    <img src="~/images/hsm.jpg" alt="HTML5 Icon" width="128" height="275">
+                    <p>Running a business raises challenges in COVID times. We support you in the smooth running of your business by facilitating movement of goods and services, operation of shops and establishments and following break the chain in your establishments</p>
+                </div>
+                @*<div class="row">
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Users</h4>
+                            <p>1 Million</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Pages</h4>
+                            <p>100 Million</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Sessions</h4>
+                            <p>10 Million</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Bounce</h4>
+                            <p>30%</p>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="row">
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <p>Text</p>
+                            <p>Text</p>
+                            <p>Text</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <p>Text</p>
+                            <p>Text</p>
+                            <p>Text</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <p>Text</p>
+                            <p>Text</p>
+                            <p>Text</p>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="row">
+                    <div class="col-sm-8">
+                        <div class="well">
+                            <p>With a culture where relationships matter, we are focused on delivering quality health care and exemplary customer service.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <p>Text</p>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
     </div>
-</div>
+
+</body>
 
 
 <script>
 
     function Register() {
-     
-        $.get("/Users/CreateUsers", function (res) {      
+       
+        $.get("/Users/CreateUsers", function (res) {
             $("#Regform").html(res);
             $('#RegUser').modal('show');
-                  
         })
     }
+    $("li").hover(
+        function () {
+            $("li").removeClass('active');
+            $(this).addClass('active');
+        }
+    );
 
 </script>
 
 <style>
-    .grid-item{
-        display:flex;
-        margin-left:2%;
+    img {
+        width: 100%;
+        
     }
-
-    button {
-        padding: 0.8em 1.8em;
-        border: 2px solid #17C3B2;
-        position: relative;
-        overflow: hidden;
-        background-color: transparent;
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 16px;
-        transition: .3s;
-        z-index: 1;
-        font-family: inherit;
-        color: #17C3B2;
-    }
-
-        button::before {
-            content: '';
-            width: 0;
-            height: 300%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
-            background: #17C3B2;
-            transition: .5s ease;
-            display: block;
-            z-index: -1;
-        }
-
-        button:hover::before {
-            width: 105%;
-        }
-
-        button:hover {
-            color: #111;
-        }
-    .container {
-        background-color: black;
-        height: 70vh;
-        border-radius: 50px 10px;
-    }
-    .btn-color {
-        background-color: #9B59B6;
+    li:hover{
+        cursor:pointer;
+        
     }
 </style>

@@ -26,36 +26,28 @@
                         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" , @style = "margin-left:-2%" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control disable", @id = "name", @name = "name", @onkeyup = "nameValidation()", @autocomplete = "off", @style = "margin-left:10%" } })
-                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @id = "namevalidation" })</small>
+                            <small style="position:absolute;margin-left:10%;">@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @id = "namevalidation" })</small>
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-left:5%">
-                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" , @style = "margin-left: -2%;margin-right: 2%;" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control disable", @id = "username", @name = "username", @onkeyup = "UsernameValidation()", @autocomplete = "off", @style = "margin-left:8%" } })
-                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", @id = "usernamevalidation" })</small>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control disable", @id = "username", @name = "username", @onkeyup = "UsernameValidation()", @autocomplete = "off", @style = "margin-left:8%" } })
+                            <small style="position: absolute; margin-left: 8%;">@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @id = "usernamevalidation" })</small>
                         </div>
                     </div>
 
-                    @*<div class="form-group" style="margin-left:8%">
-                        @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control disable", @style = "margin-left:6%" } })
-                            @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
-
-                    <div class="form-group form-gap" style="margin-left:5%">
+                    <div class="form-group" style="margin-left:5%">
                         @Html.LabelFor(model => model.Designation, "Designation", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-8" style="margin-left:6.5%">
-                            <select class="form-control disable" style="width:104%" id="Designation" name="Designation">
-                                <option value="Select" hidden>--Select--</option>
+                            <select class="form-control disable" id="Designation" name="Designation" onchange="validateDesignation()">
+                                <option value="">--Select--</option>
                                 <option value="Nurse">Nurse</option>
                                 <option value="Doctor">Doctor</option>
                                 <option value="Receptionist">Receptionist</option>
                             </select>
-                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger", @id = "des" })</small>
+                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger", @id = "Msgdesignation" })</small>
                         </div>
                     </div>
 
@@ -63,7 +55,7 @@
                         @Html.LabelFor(model => model.PhoneNumber,"Phone Number", htmlAttributes: new { @class = "control-label col-md-2" ,@style="width:auto;"})
                         <div class="col-md-8">
                             @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control disable", @id = "phoneNumber", @name = "phoneNumber", @onkeyup = "phoneNumberValidation()", @style = "margin-left:-8%" } })
-                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger", @id = "phoneNumbervalidation" })</small>
+                            <small style="position: absolute; margin-left: -7%;">@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger", @id = "phoneNumbervalidation" })</small>
                         </div>
                     </div>
 
@@ -71,7 +63,7 @@
                         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control disable", @id = "password", @name = "password", @onkeyup = "passwordValidation()", @style = "margin-left:8%" } })
-                            <small style="position:absolute">@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @id = "passwordvalidation" })</small>
+                            <small style="position: absolute; margin-left: 7%;">@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @id = "passwordvalidations" })</small>
                         </div>
                     </div>
 
@@ -80,7 +72,7 @@
             <div class="modal-footer" style="background-color: white">
                 <input type="submit" id="RegUsers" value="REGISTER" class="btn btn-primary" />
                 <button type="button" class="btn btn-warning" id="editUsr" style="width:70px">Edit</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
             </div>
         @*}*@
             <button type="submit" class="btn btn-success" id="saveUsr" style="width: 70px; margin-top: -17%; margin-left: 69%;">Add</button>
@@ -90,17 +82,18 @@
 
 <script>
 
-    $("#Designation").change(function () {
-        var stud = $("#Designation").val();
-        $("#Designation").val(stud);
+    $("#designation").change(function () {
+        var stud = $("#designation").val();
+        $("#designation").val(stud);
     });
     $(document).ready(function () {
-         $("#Designation").val('@Model.Designation');
+
         $('#saveUsr').hide();
         var operation = '@Model.ActionType.ToString()';
         console.log(operation);
         if (operation == 'View') {
             document.getElementById("heading").innerHTML = "VIEW USERS";
+              $("#Designation").val('@Model.Designation');
             $("#saveUsr").html("Save");
             $('#saveUsr').hide();
             $('#RegUsers').hide();
@@ -110,6 +103,7 @@
         }
         else if (operation == '@Operations.Edit') {
             document.getElementById("heading").innerHTML = "EDIT USERS";
+              $("#Designation").val('@Model.Designation');
             $("#saveUsr").html("Save");
             $('.disable').attr('disabled', false);
             $('#editUsr').hide();
@@ -137,8 +131,9 @@
         nameValidation();
         UsernameValidation();
         phoneNumberValidation();
-        validateDesignation();
         passwordValidation();
+        validateDesignation();
+
         $.ajax({
             type: "POST",
             url: "/Users/CreateUsers",
@@ -190,8 +185,9 @@
         nameValidation();
         UsernameValidation();
         phoneNumberValidation();
-        validateDesignation();
         passwordValidation();
+        validateDesignation();
+
         $.ajax({
             type: "POST",
             url: "/Users/UpdateUser",
@@ -287,27 +283,25 @@
     function passwordValidation() {
 
         if ($("#password").val().length < 6) {
-            $("#passwordvalidation").html("Please enter password of length 6");
+            $("#passwordvalidations").html("Minimun length is 6");
         }
         else if ($("#password").val() == "") {
-            $("#passwordvalidation").html("Please provide password");
+            $("#passwordvalidations").html("Please provide password");
         }
         else {
-            $("#passwordvalidation").html("");
+            $("#passwordvalidations").html("");
         }
     }
 
     function validateDesignation() {
         var standard = $("#Designation").val();
-        if (standard == "Select") {
-            $("#des").html("Please select a Designation");
+        if ($("#Designation").val() == "") {
+            $("#Msgdesignation").html("Please select a Designation");
         }
-        if (standard.length <= 0) {
-            $("#des").html("Please select a Designation");
-
-            return false;
+        if ($("#Designation").val().length <= 0) {
+            $("#Msgdesignation").html("Please select a Designation");
         } else {
-            $("#des").html("");
+            $("#Msgdesignation").html("");
 
         }
     }
